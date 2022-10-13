@@ -1,0 +1,23 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = 'Zcash Ecosystem Security'
+theme = 'maverick'
+
+[permalinks]
+  pages = "/:slug"
+
+[params]
+  logo = '/static/favicon-32.png'
+  description = "Zcash Ecosystem Security Support"
+
+[menu]
+  [[menu.main]]
+    identifier = "contact"
+    name = "Contact"
+    url = "/contact/"
+    weight = "-110"
+  [[menu.main]]
+    identifier = "posts"
+    name = "Posts"
+    url = "/posts/"
+    weight = -200
