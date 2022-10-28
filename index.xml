@@ -1,4 +1,22 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 131313, Calvin Tran</copyright><lastBuildDate>Thu, 13 Oct 2022 08:22:29 -0600</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>Hello, World!</title><link>https://zecsec.com/posts/my-first-post/</link><description>&lt;p>Hi!&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 282828, Calvin Tran</copyright><lastBuildDate>Fri, 28 Oct 2022 08:13:14 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>October Update: Ywallet audited, and what's next?</title><link>https://zecsec.com/posts/october-update/</link><description>&lt;p>Hi Zcash fans! It&amp;rsquo;s time for the first monthly update on the Zcash Ecosystem
+Security grant. This October, we saw the completion of a full security audit of
+&lt;a href="https://ywallet.app/">Ywallet&lt;/a>.&lt;/p>
+&lt;p>Ywallet&amp;rsquo;s fast scanning algorithm makes it an attractive option for users facing
+long delays due to the recent high usage of the Zcash blockchain. It had also
+received the least security review among the Zcash wallets, so we
+decided to prioritize it as the first project to be audited for this grant.&lt;/p>
+&lt;p>The audit report was delivered to Ywallet&amp;rsquo;s developers today and it will be
+published for the community to see after all necessary issues have been
+appropriately remediated.&lt;/p>
+&lt;h2 id="whats-next">What&amp;rsquo;s next?&lt;/h2>
+&lt;p>In November, we will continue the focus on wallets, this time reviewing
+&lt;a href="https://github.com/adityapk00/zecwallet-light-cli">zecwallet-lite-cli&lt;/a>. This
+library and command-line tool is the basis of the popular ZecWallet-lite wallet.&lt;/p>
+&lt;p>After this, we plan to take a short detour to focus on some of the smaller and
+earlier-stage community projects, before putting our focus back on wallets to
+review ZecWallet-lite proper, Nighthawk, and others.&lt;/p>
+&lt;p>If you&amp;rsquo;d like your project to be included in our upcoming audit schedule, please
+shoot an email to &lt;a href="mailto:zecsec@defuse.ca">zecsec@defuse.ca&lt;/a> with a link to your source code repository.&lt;/p></description><author>trandcanh@gmail.com (Calvin Tran)</author><guid>https://zecsec.com/posts/october-update/</guid><pubDate>Fri, 28 Oct 2022 08:13:14 -0700</pubDate></item><item><title>Hello, World!</title><link>https://zecsec.com/posts/my-first-post/</link><description>&lt;p>Hi!&lt;/p>
 &lt;p>This is where I will be posting be posting updates on the &lt;a href="https://forum.zcashcommunity.com/t/zcash-ecosystem-security-lead/42090">Zcash Ecosystem
 Security&lt;/a>
 grant project!&lt;/p></description><author>trandcanh@gmail.com (Calvin Tran)</author><guid>https://zecsec.com/posts/my-first-post/</guid><pubDate>Thu, 13 Oct 2022 08:22:29 -0600</pubDate></item></channel></rss>
