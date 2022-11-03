@@ -12,12 +12,17 @@ theme = 'maverick'
 
 [menu]
   [[menu.main]]
+    identifier = "posts"
+    name = "Updates"
+    url = "/posts/"
+    weight = -200
+  [[menu.main]]
+    identifier = "audits"
+    name = "Audits"
+    url = "/audits/"
+    weight = "-150"
+  [[menu.main]]
     identifier = "contact"
     name = "Contact"
     url = "/contact/"
     weight = "-110"
-  [[menu.main]]
-    identifier = "posts"
-    name = "Posts"
-    url = "/posts/"
-    weight = -200
