@@ -260,7 +260,7 @@ cryptocurrencies. Users are accustomed to sending money to an address given to
 them by their counterparty; with liberated payments, they would have to add
 their counterparty as a contact on a messenger and get their wallet to send them
 a message. I believe this can be made usable, but the sheer fact it works
-differently might be enough to put at lot of users off.
+differently might be enough to put a lot of users off.
 
 Second, the privacy properties of the resulting system are only as good as the
 metadata-resistance privacy properties of the messengers used. For example, if a
