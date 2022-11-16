@@ -1,4 +1,326 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 3033, Calvin Tran</copyright><lastBuildDate>Fri, 28 Oct 2022 08:13:14 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>October Update: Ywallet audited, and what's next?</title><link>https://zecsec.com/posts/october-update/</link><description>&lt;p>Hi Zcash fans! It&amp;rsquo;s time for the first monthly update on the Zcash Ecosystem
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 161616, Calvin Tran</copyright><lastBuildDate>Tue, 15 Nov 2022 19:00:00 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>Scalable Private Money Needs Scalable Anonymous Messaging</title><link>https://zecsec.com/posts/scalable-private-money-needs-scalable-private-messaging/</link><description>&lt;p>In this post I’m going to argue that any scalable private Internet money system
+will need to rely on an equally-scalable and equally-private anonymous messaging
+system.&lt;/p>
+&lt;p>Ultimately, I will argue that the best approach to scaling private money is to
+&lt;em>directly and explicitly&lt;/em> build a scalable anonymous communication system,
+rather than proceeding through a series of ad-hoc improvements to current
+designs.&lt;/p>
+&lt;h1 id="backstory">Backstory&lt;/h1>
+&lt;p>The performance of Zcash mobile wallets has been degraded massively; this was
+caused by a huge increase in private transaction load on the network. This
+problem is not specific to Zcash—all private money systems aiming to offer
+strong privacy guarantees will face this challenge eventually. To understand
+why, we need to understand how the current best design for private Internet
+money works.&lt;/p>
+&lt;h1 id="protocol-recap">Protocol Recap&lt;/h1>
+&lt;p>When Alice wants to send Bob a payment, Alice creates a &lt;em>note&lt;/em> containing the
+value she wants to send to Bob. In her transaction, Alice posts three things to
+the public blockchain: a note commitment, a zero-knowlege proof, and a note
+ciphertext.&lt;/p>
+&lt;p>The note commitment ties the newly-created note to Bob’s secret keys, so that
+only Bob can spend the note. The zero-knowledge proof ensures that Alice is
+creating the note honestly, i.e. she’s only creating it from money she controls,
+and that she isn’t creating new money out of thin air.&lt;/p>
+&lt;p>The third part, the note ciphertext, contains all of the information Bob
+needs—along with his secret keys—to spend the value he has received from Alice.
+A key-private encryption algorithm is used to create this ciphertext, which allows
+Bob to decrypt it with his secret key while ensuring nobody—even people who know
+Bob’s address—can tell that the ciphertext belongs to Bob.&lt;/p>
+&lt;h1 id="the-performance-bottleneck">The Performance Bottleneck&lt;/h1>
+&lt;p>This design creates a scalability bottleneck: Bob has to try to decrypt every
+ciphertext on the blockchain to find the notes that belong to him. When there
+are a lot of new notes, his wallet will take a long time to get through them
+all. In current implementations, it sometimes takes &lt;em>days&lt;/em> of trial-decrypting
+to catch up with all of the transactions on the blockchain, depending on how far
+behind the wallet is.&lt;/p>
+&lt;p>This bottleneck isn’t all for nothing, it’s what gives the system its strong
+privacy guarantees.&lt;/p>
+&lt;p>The information Alice broadcasts in her transaction looks
+like random noise, so although an attacker can tell &lt;em>that&lt;/em> Alice is sending a
+transaction, the attacker can’t tell who it’s going to or what the amount is. On
+Bob’s end, an attacker can tell &lt;em>that&lt;/em> Bob’s wallet has downloaded &lt;em>all
+transactions in existence&lt;/em>, but the attacker cannot tell &lt;em>whether or not&lt;/em>, or
+&lt;em>how many&lt;/em>, transactions Bob’s wallet actually received&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>.&lt;/p>
+&lt;p>This everyone-has-to-try-to-decrypt-everything bottleneck is inherent to all
+private money designs that offer strong formal privacy guarantees. For these
+systems to scale to thousands or millions of active users, trial decryption
+needs to be replaced with something else.&lt;/p>
+&lt;h1 id="private-money-implies-anonymous-messaging">Private Money Implies Anonymous Messaging&lt;/h1>
+&lt;p>To overcome the trial-decryption bottleneck, Bob needs to be able to find out
+about his notes—the money he is receiving—in an efficient way.&lt;/p>
+&lt;p>We can show formally that solving this problem is closely related to a different
+computer science problem: that of building an anonymous messaging system (also
+known in the literature as an “anonymous communication network”).&lt;/p>
+&lt;p>To see why, we can reduce the problem of building an anonymous messaging system
+to the problem of building a private money system. That’s computer-science speak
+for using the solution to Problem A (building a private money system) to
+construct a solution for Problem B (building an anonymous messaging system);
+doing so shows that Problem A is at least as hard as Problem B, i.e. to do A you
+must do B. To build private money you must build anonymous communication.&lt;/p>
+&lt;p>Given a private money system, any two users of the system can use it to message
+each other privately and anonymously with the same privacy and anonymity
+properties as the underlying private money system. They can do this by encoding
+their messages into transaction values. If Alice wants to say “Hello” to Bob,
+she can encode her message to the ASCII values 72, 101, 108, 108, 111 and send a
+series of transactions with values 0.0072, 0.0101, 0.0108, 0.0108, 0.0111, plus
+some zero-valued transactions to hide the length of the message. Simple, right?
+Any private money system can be used as an anonymous communication system with
+only a constant-factor performance overhead.&lt;/p>
+&lt;p>What this means is that in order to build a private money system with certain
+formal privacy and scalability properties, we are &lt;em>logically required&lt;/em> to build
+an anonymous messaging system with at least those same privacy and scalability
+properties. It also means that research on the trade-offs and limitations of
+anonymous messaging systems apply to private money systems as well.&lt;/p>
+&lt;p>In the other direction, we can &lt;em>use&lt;/em> a scalable anonymous messaging system to
+overcome the trial-decryption bottleneck of our current private money designs.
+Using the anonymous messaging system, Alice can send Bob the ciphertext directly
+so that Bob doesn’t have to try to decrypt everything. When we do this, the
+privacy and scalability properties of the resulting private money system are
+&lt;em>limited&lt;/em> by the privacy and scalability properties of the anonymous
+communication system.&lt;/p>
+&lt;h1 id="what-are-our-options">What are our options?&lt;/h1>
+&lt;p>Let’s look at a few of the options we have for replacing trial decryption.
+There’s &lt;em>tons&lt;/em> of research on anonymous messaging systems, so I’m going to
+restrict my attention here to options that are already on private-money
+projects’ roadmaps or that seem promising to me.&lt;/p>
+&lt;h2 id="smarter-scanning">Smarter Scanning&lt;/h2>
+&lt;p>The option currently being pursued in Zcash is smarter scanning algorithms.
+These algorithms must still eventually try to decrypt every ciphertext, but they
+can find some of a user’s funds earlier, so that the user has some spendable
+money and can make payments faster, without waiting for the entire scan to
+complete. It won’t eliminate the long scanning times, but it will make user
+experience significantly better.&lt;/p>
+&lt;p>For more details, see
+&lt;a href="https://hackmd.io/@str4d/dagsync-graph-aware-zcash-wallets">https://hackmd.io/@str4d/dagsync-graph-aware-zcash-wallets&lt;/a>.&lt;/p>
+&lt;p>This is a good stopgap measure in the face of bricked wallets, but in the long
+term, we will need something more.&lt;/p>
+&lt;h2 id="scanning-in-the-cloud">Scanning in the Cloud&lt;/h2>
+&lt;p>Another simple approach is to retain the trial-decryption paradigm, but move it
+out of the smartphone and into the cloud, on beefier computers.&lt;/p>
+&lt;p>This would retain all of the on-chain privacy properties of current protocol
+designs, since there are no changes to the data stored on-chain. However, users’
+wallets would need to send their decryption keys to the cloud. The user’s
+privacy will only be as strong as the security of those cloud computers. (Note
+that this can be done without giving &lt;em>spend authority&lt;/em> to the cloud servers, so
+users&amp;rsquo; funds are safe.)&lt;/p>
+&lt;p>If many users share the same cloud computer for scanning, that cloud computer
+becomes an attractive target for adversaries who want to de-anonymize a mass of
+users. That risk can be reduced somewhat by giving each wallet its own isolated
+computer in the cloud, but this increases the cost and setup complexity for
+users, and doesn’t isolate users against the mass-exploitation of a common bug
+in the cloud setup.&lt;/p>
+&lt;p>Users’ privacy can be protected further at the cost of increasing CPU load on
+the servers with homomorphic-encryption-based &lt;a href="https://forum.zcashcommunity.com/t/oblivious-message-retrieval/40715">Oblivious Message Retrieval
+(OMR)&lt;/a>.&lt;/p>
+&lt;p>Cloud scanning is not a good long-term solution because it does not
+fundamentally improve the system’s scalability, it just moves it to faster CPUs
+(perhaps later onto cloud GPUs). With enough usage, even scanning in the
+cloud will not be fast enough, and will be too costly.&lt;/p>
+&lt;h2 id="fuzzy-message-detection--other-decoy-systems">Fuzzy Message Detection (&amp;amp; Other Decoy Systems)&lt;/h2>
+&lt;p>&lt;a href="https://eprint.iacr.org/2021/089">Fuzzy Message Detection&lt;/a> (FMD) is an
+intermediate approach between all-on-the-device scanning and all-in-the-cloud
+scanning.&lt;/p>
+&lt;p>With FMD, the transaction recipient (or the consensus rules in
+&lt;a href="https://protocol.penumbra.zone/main/crypto/fmd/sender-receiver.html">Penumbra’s
+case&lt;/a>)
+selects a false-positive rate and generates a detection key which is sent to the
+cloud server. The cloud server uses the detection key to find all of the user’s
+transactions, plus a collection of false positives at the chosen rate. The
+server cannot tell which transactions legitimately belong to the user or are
+false positives, so some uncertainty is created about which transactions belong
+to the wallet.&lt;/p>
+&lt;p>For a false positive rate P ∈ [0, 1], this reduces the amount of transactions
+the wallet needs to scan locally by a factor of P. For example, a 1%
+false-positive rate would make the wallet’s scanning 100x faster at the privacy
+cost of giving the server a list of 99% of all transactions which &lt;em>definitely do
+not&lt;/em> belong to the wallet.&lt;/p>
+&lt;p>Unfortunately, we need to be skeptical of FMD’s privacy guarantees.&lt;/p>
+&lt;p>The most pressing problem occurs when Alice sends transactions to Bob
+repeatedly. An adversary who compromised the FMD server can collect strong
+statistical evidence that Alice is paying Bob. For example, suppose that Alice
+sends 100 transactions to Bob and the adversary knows all of those transactions
+were created by Alice. Even for false-positive rates higher than 50% (less than
+2x speedup), if &lt;em>none&lt;/em> of those transactions were going to Bob, the chance that
+&lt;em>all&lt;/em> of them would be downloaded by Bob (as false positives) is less than 1 in
+2^100. So, if the adversary sees Bob download them all, they can be nearly
+certain Alice is sending payments to Bob, and privacy has been broken.&lt;/p>
+&lt;p>This particular attack can be mitigated with sender-side anonymity protections,
+removing the assumption that the adversary knows Alice created the transactions.
+However, other desirable privacy properties remain broken. For example, if the
+adversary wants to find out which wallet owns a particular address, they can
+send that address 100 transactions and then observe which wallet retrieves all 100
+of them.&lt;/p>
+&lt;p>These attacks are symptoms of a more fundamental problem with FMD, which is that
+decoy-based systems are incapable of ensuring formal privacy guarantees.&lt;/p>
+&lt;p>In &lt;a href="https://arxiv.org/abs/1812.05638">On Privacy Notions in Anonymous
+Communication&lt;/a>, the authors survey and
+systematize desirable formal privacy notions for anonymous messaging. The
+authors worked out the logical implications between all of the formal notions in
+their systematization. They found that all of them imply a notion called
+“sender-receiver pair unlinkability”. That means that if a system doesn’t have
+sender-receiver pair unlinkability, it doesn’t have any of the other formal
+privacy notions that they considered.&lt;/p>
+&lt;p>A simplified version of sender-receiver unlinkability is defined by a game. In
+the game, a secret bit is chosen at random. If the bit is 0, Sender 1 sends a
+message to Receiver 1 and Sender 2 sends a message to Receiver 2. If the secret
+bit is 1, the destinations are swapped; Sender 1 sends to Receiver 2 and Sender
+2 sends to Receiver 1. To win the game, i.e. to break the privacy property, the
+adversary has to guess the secret bit.&lt;/p>
+&lt;p>With FMD in this four-user scenario, either the false-positive rate is high
+enough that both receivers download both senders’ messages (meaning no
+efficiency has been gained), or one receiver fails to download one of the
+sender’s messages. Since there are no false-negatives in FMD, this means that
+the not-downloaded sender’s message was definitely not directed at that
+receiver, and the adversary learns the secret bit. For example, if Receiver 1
+&lt;em>didn’t&lt;/em> download Sender 1’s message, then we know the bit is 1, since if it was
+0, Receiver 1 would have definitely downloaded Sender 1’s message.&lt;/p>
+&lt;p>This shows that FMD cannot satisfy sender-receiver pair unlinkability, and by
+the logical implications given in the paper, cannot satisfy any of the other
+formal privacy definitions. FMD’s privacy guarantees are necessarily heuristic
+and statistical.&lt;/p>
+&lt;p>More analysis of FMD’s privacy properties against weaker privacy notions can be
+found in &lt;a href="https://arxiv.org/abs/2109.06576">The Effect of False Positives: Why Fuzzy Message Detection Leads to
+Fuzzy Privacy Guarantees&lt;/a>.&lt;/p>
+&lt;p>In addition to lackluster privacy properties, FMD is also not scalable. The FMD
+server must still process all transactions for each user, and at best it offers
+a constant factor reduction in the scanning work that wallets must perform
+locally.&lt;/p>
+&lt;h2 id="using-existing-communication-channels">Using Existing Communication Channels&lt;/h2>
+&lt;p>If two users already talk to each other over an existing secure messaging
+system, then they can send transactions over the messenger. For those
+transactions (but not others), the recipient’s wallet can avoid
+trial-decryption. This is the idea behind &lt;a href="https://github.com/zcash/zips/pull/420">liberated
+payments&lt;/a>.&lt;/p>
+&lt;p>This scales well, but has two drawbacks.&lt;/p>
+&lt;p>First, the user experience is a significant departure from what is common among
+cryptocurrencies. Users are accustomed to sending money to an address given to
+them by their counterparty; with liberated payments, they would have to add
+their counterparty as a contact on a messenger and get their wallet to send them
+a message. I believe this can be made usable, but the sheer fact it works
+differently might be enough to put at lot of users off.&lt;/p>
+&lt;p>Second, the privacy properties of the resulting system are only as good as the
+metadata-resistance privacy properties of the messengers used. For example, if a
+transaction is sent through a messenger that uses strong encryption, but the
+messenger leaks metadata about message size (identifying the message as likely
+being a liberated payment) and who the message is coming from and going to, an
+adversary watching this metadata can tell approximately who is sending payments
+to who, breaking privacy guarantees that users expect.&lt;/p>
+&lt;p>Liberated payments would work well as a short-term workaround to wallet
+performance problems for a subset of users who already have a private means to
+communicate with each other, but it would not be a good long-term solution for
+the because of these two drawbacks.&lt;/p>
+&lt;h2 id="sgx-based-approaches">SGX-based Approaches&lt;/h2>
+&lt;p>Another way to scale would be to use a trusted, private server. Using an actual
+trusted server would defeat the purpose of building a private money system (we’d
+just be building another PayPal), but Intel’s SGX technology aims to make it
+possible to approximate a trusted server in an untrusted way. This is the
+approach that &lt;a href="https://mobilecoin.com/">MobileCoin&lt;/a> takes (in combination with
+the decoy-based CryptoNote protocol).&lt;/p>
+&lt;p>Unfortunately, SGX’s security has been broken repeatedly by side-channel attacks
+against the processor
+(&lt;a href="https://www.usenix.org/conference/usenixsecurity18/presentation/bulck">some&lt;/a>
+&lt;a href="https://sgaxe.com/">recent&lt;/a>
+&lt;a href="https://ieeexplore.ieee.org/abstract/document/9152636">examples&lt;/a>). Like
+copy-protection (“DRM”), what SGX is trying to do is fundamentally impossible.
+The CPU itself needs access to the private bits in order to compute on them, so
+it can &lt;em>only&lt;/em> be a matter of &lt;em>how hard&lt;/em> it is for an attacker to access those
+bits, and how much resources they need to expend to do so. It is conceivable
+that one day SGX will attain a state where all known attacks are practically
+infeasible, but that’s currently not the case, and we don’t know when (if ever)
+that will happen.&lt;/p>
+&lt;p>In my opinion, the best way to think about SGX’s security is&amp;hellip; “If the system’s
+operators are mostly honest and aren’t too well-resourced, then you’re safe, but
+if the NSA breaks in, or anyone with serious resources wants to break the
+system, SGX will fail.” This is not a good long-term solution.&lt;/p>
+&lt;h2 id="tor">Tor&lt;/h2>
+&lt;p>Tor is by far the most widely-used anonymous communication system in existence
+today. Its focus is on providing low-latency connections at the expense of
+formal privacy guarantees.&lt;/p>
+&lt;p>Tor works by having the client select three “nodes” from the pool of available
+nodes: an entry node, a relay node, and an exit node. The client encrypts its
+message to the exit node’s key, encrypts that ciphertext to the relay node’s
+key, and encrypts that ciphertext to the entry node’s key. The entry node can
+decrypt the first layer of encryption and forward it onto the relay node, who
+can decrypt one step further and forward it onto the exit node, who decrypts the
+last layer and sends the data to the intended destination. The entry node knows
+who the user is, the exit node knows where the traffic is going, and the relay
+node prevents the entry and exit nodes from finding each other and colluding to
+see who’s-sending-what-to-who. Tor also supports onion services, which allow the
+service being connected-to to remain anonymous as well.&lt;/p>
+&lt;p>Tor can be used to build anonymous messaging, a notable example being
+&lt;a href="https://cwtch.im/">Cwtch&lt;/a>. In this way, it could be used to build an anonymous
+messaging system in support of private money.&lt;/p>
+&lt;p>However, Tor’s design explicitly trades-off worse privacy guarantees in order to
+have lower latency. This is necessary for it to be suitable for browsing web
+pages. But the low latency makes it vulnerable to timing attacks: after a client
+sends a packet, it will shortly thereafter show up at its destination. If an
+adversary is situated close to the client user (e.g. at an ISP), and also close
+to the destination server (e.g. at an Amazon datacenter), they can collect
+enough packet-timing information to statistically infer who’s talking to who. It
+is well-known and accepted that Tor’s anonymity can be broken by global passive
+adversaries using attacks like this. A &lt;a href="https://ieeexplore.ieee.org/abstract/document/9471821">recent paper
+surveys&lt;/a> different kinds
+of de-anonymization attacks on Tor.&lt;/p>
+&lt;p>Tor’s privacy properties are heuristic and are weaker than those that come
+standard with projects like Zcash&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>; they are certainly insufficient for some use
+cases of private Internet money. Therefore, extreme care needs to be taken with
+any attempt to solve payment scalability problems with Tor. We must be mindful
+that relying on Tor will mean giving up on formal privacy guarantees and will
+make the system vulnerable to global passive adversaries.&lt;/p>
+&lt;h2 id="mixnets">Mixnets&lt;/h2>
+&lt;p>As argued by the reduction given above, a private money system fundamentally
+&lt;em>is&lt;/em> an anonymous messaging system. It therefore makes sense to look towards the
+best designs for anonymous communication systems in the literature if we want to
+solve private money systems’ scalability problems.&lt;/p>
+&lt;p>This could be termed the “embrace the real problem” approach. Rather than
+working through a series of ad-hoc strategies to scaling private money, all of
+which come with their own scalability bottlenecks and privacy weaknesses, it
+would be a more effective use of resources to work directly on solving the
+&lt;em>necessary&lt;/em> problem of scaling anonymous communication.&lt;/p>
+&lt;p>State-of-the-art designs for scalable anonymous messaging use mixnets. Mixnets
+work by collecting users’ messages into batches and using a series of “mixnodes”
+to shuffle the messages before delivering them to recipients’ mailboxes. By
+shuffling messages in large batches (requiring high latency), and by using
+sufficient chaff traffic, mixnets can provide provable privacy guarantees.&lt;/p>
+&lt;p>Mixnets are not a panacea, however. Fundamental trade-offs apply, such as
+between their privacy properties, latency of messages, efficiency, and offline
+message availability. They are a newer technology, too, which hasn’t seen much
+proven deployment in practice (&lt;a href="https://nymtech.net/">Nym&lt;/a> is one example).&lt;/p>
+&lt;h1 id="conclusion">Conclusion&lt;/h1>
+&lt;p>In this post I’ve surveyed different approaches to solving private money
+systems’ scalability problems. I&amp;rsquo;ve included those that I consider plausibly
+viable as well as those on existing projects&amp;rsquo; roadmaps. A common theme among
+many of them is that they are not really scaling solutions, only making
+constant-factor improvements or moving the processing elsewhere. Most of them
+don’t offer formal privacy guarantees or, worse, have known attacks that make
+them unsuitable for Internet money. Others, like mixnets, are expensive and
+risky to implement. There is no clear winner.&lt;/p>
+&lt;p>What &lt;em>is&lt;/em> clear, though, is that scaling private payments &lt;em>is&lt;/em> scaling anonymous
+messaging.&lt;/p>
+&lt;p>We should therefore turn our attention toward the best designs available in the
+scientific literature on anonymous communication, which in my view is currently
+mixnet research.&lt;/p>
+&lt;p>It’s unlikely that we will find an off-the-shelf solution, ready to be
+implemented, that will solve all of our problems. We will need to make
+significant investments in anonymous communication science and engineering over
+the long term to make private money work. This is worth doing, because this way,
+we are embracing the real problem that lies ahead of us.&lt;/p>
+&lt;div class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1">
+&lt;p>Note that current implementations of Zcash light wallets don’t take advantage
+of these strong privacy properties, because Bob’s wallet will fetch extra
+details of just those transactions that belong to him for the sake of bandwidth
+savings. See the &lt;a href="https://zcash.readthedocs.io/en/latest/rtd_pages/wallet_threat_model.html">Zcash Wallet App Threat
+Model&lt;/a>
+for more details.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li id="fn:2">
+&lt;p>At least using the full-node implementation.&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/div></description><author>trandcanh@gmail.com (Calvin Tran)</author><guid>https://zecsec.com/posts/scalable-private-money-needs-scalable-private-messaging/</guid><pubDate>Tue, 15 Nov 2022 19:00:00 -0700</pubDate></item><item><title>October Update: Ywallet audited, and what's next?</title><link>https://zecsec.com/posts/october-update/</link><description>&lt;p>Hi Zcash fans! It&amp;rsquo;s time for the first monthly update on the Zcash Ecosystem
 Security grant. This October, we saw the completion of a full security audit of
 &lt;a href="https://ywallet.app/">Ywallet&lt;/a>.&lt;/p>
 &lt;p>Ywallet&amp;rsquo;s fast scanning algorithm makes it an attractive option for users facing
