@@ -206,8 +206,9 @@ img {
 }
 
 .animate-blink {
-    animation: opacity 1s infinite;
+    animation: opacity 50s infinite;
     opacity: 1;
+    display: none;
     // margin-left: -1%;
 }
 
