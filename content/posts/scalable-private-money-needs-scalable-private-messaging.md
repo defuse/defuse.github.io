@@ -37,7 +37,7 @@ and that she isn’t creating new money out of thin air.
 The third part, the note ciphertext, contains all of the information Bob
 needs—along with his secret keys—to spend the value he has received from Alice.
 A key-private encryption algorithm is used to create this ciphertext, which allows
-Bob to decrypt it with his secret key while ensuring nobody—even people who know
+Bob to decrypt it with his secret key, while ensuring nobody—even people who know
 Bob’s address—can tell that the ciphertext belongs to Bob.
 
 # The Performance Bottleneck
@@ -159,7 +159,7 @@ the servers with homomorphic-encryption-based [Oblivious Message Retrieval
 
 Cloud scanning is not a good long-term solution because it does not
 fundamentally improve the system’s scalability, it just moves it to faster CPUs
-(perhaps later onto cloud GPUs). With enough usage, even scanning in the
+(and perhaps later onto cloud GPUs). With enough usage, even scanning in the
 cloud will not be fast enough, and will be too costly.
 
 ## Fuzzy Message Detection (& Other Decoy Systems)
@@ -391,4 +391,4 @@ It’s unlikely that we will find an off-the-shelf solution, ready to be
 implemented, that will solve all of our problems.  We will need to make
 significant investments in anonymous communication science and engineering over
 the long term to make private money work. This is worth doing, because this way,
-we are embracing the real problem that lies ahead of us.
+we are embracing the real, unavoidable, problem that lies ahead of us.
