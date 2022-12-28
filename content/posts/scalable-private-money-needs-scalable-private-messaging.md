@@ -13,7 +13,7 @@ _directly and explicitly_ build a scalable anonymous communication system,
 rather than proceeding through a series of ad-hoc improvements to current
 designs.
 
-# Backstory
+## Backstory
 
 The performance of Zcash mobile wallets has been degraded massively; this was
 caused by a huge increase in private transaction load on the network. This
@@ -22,7 +22,7 @@ strong privacy guarantees will face this challenge eventually. To understand
 why, we need to understand how the current best design for private Internet
 money works.
 
-# Protocol Recap
+## Protocol Recap
 
 When Alice wants to send Bob a payment, Alice creates a _note_ containing the
 value she wants to send to Bob. In her transaction, Alice posts three things to
@@ -40,7 +40,7 @@ A key-private encryption algorithm is used to create this ciphertext, which allo
 Bob to decrypt it with his secret key, while ensuring nobody—even people who know
 Bob’s address—can tell that the ciphertext belongs to Bob.
 
-# The Performance Bottleneck
+## The Performance Bottleneck
 
 This design creates a scalability bottleneck: Bob has to try to decrypt every
 ciphertext on the blockchain to find the notes that belong to him. When there
@@ -72,7 +72,7 @@ systems to scale to thousands or millions of active users, trial decryption
 needs to be replaced with something else.
 
 
-# Private Money Implies Anonymous Messaging
+## Private Money Implies Anonymous Messaging
 
 To overcome the trial-decryption bottleneck, Bob needs to be able to find out
 about his notes—the money he is receiving—in an efficient way. 
@@ -112,14 +112,14 @@ privacy and scalability properties of the resulting private money system are
 _limited_ by the privacy and scalability properties of the anonymous
 communication system.
 
-# What are our options?
+## What are our options?
 
 Let’s look at a few of the options we have for replacing trial decryption.
 There’s _tons_ of research on anonymous messaging systems, so I’m going to
 restrict my attention here to options that are already on private-money
 projects’ roadmaps or that seem promising to me.
 
-## Smarter Scanning
+### Smarter Scanning
 
 The option currently being pursued in Zcash is smarter scanning algorithms.
 These algorithms must still eventually try to decrypt every ciphertext, but they
@@ -134,7 +134,7 @@ For more details, see
 This is a good stopgap measure in the face of bricked wallets, but in the long
 term, we will need something more.
 
-## Scanning in the Cloud
+### Scanning in the Cloud
 
 Another simple approach is to retain the trial-decryption paradigm, but move it
 out of the smartphone and into the cloud, on beefier computers.
@@ -162,7 +162,7 @@ fundamentally improve the system’s scalability, it just moves it to faster CPU
 (and perhaps later onto cloud GPUs). With enough usage, even scanning in the
 cloud will not be fast enough, and will be too costly.
 
-## Fuzzy Message Detection (& Other Decoy Systems)
+### Fuzzy Message Detection (& Other Decoy Systems)
 
 [Fuzzy Message Detection](https://eprint.iacr.org/2021/089) (FMD) is an
 intermediate approach between all-on-the-device scanning and all-in-the-cloud
@@ -245,7 +245,7 @@ server must still process all transactions for each user, and at best it offers
 a constant factor reduction in the scanning work that wallets must perform
 locally.
 
-## Using Existing Communication Channels
+### Using Existing Communication Channels
 
 If two users already talk to each other over an existing secure messaging
 system, then they can send transactions over the messenger. For those
@@ -275,7 +275,7 @@ performance problems for a subset of users who already have a private means to
 communicate with each other, but it would not be a good long-term solution for
 the because of these two drawbacks.
 
-## SGX-based Approaches
+### SGX-based Approaches
 
 Another way to scale would be to use a trusted, private server. Using an actual
 trusted server would defeat the purpose of building a private money system (we’d
@@ -302,7 +302,7 @@ operators are mostly honest and aren’t too well-resourced, then you’re safe,
 if the NSA breaks in, or anyone with serious resources wants to break the
 system, SGX will fail.” This is not a good long-term solution.
 
-## Tor
+### Tor
 
 Tor is by far the most widely-used anonymous communication system in existence
 today. Its focus is on providing low-latency connections at the expense of
@@ -345,7 +345,7 @@ make the system vulnerable to global passive adversaries.
 
 [^2]: At least using the full-node implementation.
 
-## Mixnets
+### Mixnets
 
 As argued by the reduction given above, a private money system fundamentally
 _is_ an anonymous messaging system. It therefore makes sense to look towards the
@@ -369,7 +369,7 @@ between their privacy properties, latency of messages, efficiency, and offline
 message availability. They are a newer technology, too, which hasn’t seen much
 proven deployment in practice ([Nym](https://nymtech.net/) is one example).
 
-# Conclusion
+## Conclusion
 
 In this post I’ve surveyed different approaches to solving private money
 systems’ scalability problems. I've included those that I consider plausibly
