@@ -1,6 +1,6 @@
 baseURL = 'https://zecsec.com/'
 languageCode = 'en-us'
-title = 'Zcash Ecosystem Security'
+title = 'ZecSec: Zcash Ecosystem Security'
 theme = 'maverick'
 
 [permalinks]
@@ -13,16 +13,27 @@ theme = 'maverick'
 [menu]
   [[menu.main]]
     identifier = "posts"
-    name = "Updates"
+    name = "Blog"
     url = "/posts/"
     weight = -200
-  [[menu.main]]
-    identifier = "audits"
-    name = "Audits"
-    url = "/audits/"
-    weight = "-150"
+#  [[menu.main]]
+#    identifier = "overview"
+#    name = "Overview"
+#    url = "/overview/"
+#    weight = "-160"
+#  [[menu.main]]
+#    identifier = "roadmap"
+#    name = "Roadmap"
+#    url = "/posts/zecsec-roadmap-for-2023/"
+#    weight = "-150"
   [[menu.main]]
     identifier = "contact"
     name = "Contact"
     url = "/contact/"
     weight = "-110"
+
+[markup]
+  [markup.tableOfContents]
+    endLevel = 2
+    ordered = true
+    startLevel = 2
