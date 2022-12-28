@@ -10,9 +10,6 @@ under the scope of the ZecSec project, as well as past audit reports, notable
 security bugs, and open security/privacy challenges in the Zcash ecosystem. You
 can think of this page as "a security auditor's guide to Zcash."
 
-If your Zcash-related project is missing from the list below, [send me a
-note]({{< ref "contact.md">}}).
-
 This page is updated quarterly. The last update was on 2023-01-01.
 
 ## ZecSec Audits
@@ -29,7 +26,7 @@ are on ZecSec's radar.
 
 ### Scalable Privacy For Wallets
 
-A challenge faced by *all* cryptocurrencies that aim to offer strong, formal
+A challenge faced by all cryptocurrencies that aim to offer strong, formal
 privacy guarantees is: how can wallets' find their funds and make their funds
 spendable quickly and efficiently?
 
@@ -81,7 +78,7 @@ projects that are written in safer languages, like Rust. Deprecating the legacy
 ``zcashd`` codebase should be a priority, to be replaced by ``zebra``. These
 risks could also be mitigated with better fuzzing of ``zcashd``'s code.
 
-### Consensus Rule Labeling
+### Easing Consensus Rule Security Review
 
 TODO
 
@@ -93,6 +90,9 @@ Time permitting, these are the projects that should receive an audit or other
 kinds of security support from ZecSec.
 
 For more details on prioritization, see our [2023 roadmap]({{< ref "zecsec-roadmap-for-2023.md">}}).
+
+If your Zcash-related project is missing from the list below, [send us a
+note]({{< ref "contact.md">}}).
 
 ### Arti
 
