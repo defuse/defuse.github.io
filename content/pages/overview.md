@@ -33,7 +33,7 @@ spendable quickly and efficiently?
 At present, Zcash uses "trial decryption", where the wallet must try to decrypt
 every transaction on the blockchain to find the ones that belong to it. There are many
 alternatives to this design with varying levels of privacy and scalability.
-We've surveyed them in our post, [Scalable Private Money Needs Scalable Anonymous Messaging]({{<ref "scalable-private-money-needs-scalable-private-messaging.md">}})
+We've surveyed them in our post, [Scalable Private Money Needs Scalable Anonymous Messaging]({{<ref "scalable-private-money-needs-scalable-private-messaging.md">}}).
 
 ### Unintentional and/or Forced Use of Transparent Transactions
 
@@ -184,6 +184,9 @@ TODO
 TODO
 https://grants.zfnd.org/proposals/1792958360-trezor-support-for-zcash-shielded-transactions
 
+Master PR:
+https://github.com/trezor/trezor-firmware/pull/2472
+
 ### Ywallet
 - Orchard impl (forthcoming in a funded grant)
 - UA impl
@@ -210,15 +213,15 @@ https://grants.zfnd.org/proposals/1792958360-trezor-support-for-zcash-shielded-t
 ### Zcash Observatory
 - https://grants.zfnd.org/proposals/21786689-zcash-observatory
 
+### Zcash Protocol Specification
+- TODO
+
 ### ZECPages (and Michael Harms' other repos)
 - michaelharms6010/zecpages
 - Its production lightwalletd server at https://lightwalletd.zecpages.com:443
   - It invites external connections on their webpage
 - (he has other zcash related repos but says they aren't worth including)
 - Testnet Faucet - https://grants.zfnd.org/proposals/2008792221-zecpages-testnet-faucet-app-development-1-year-infra
-
-### Zcash Protocol Specification
-- TODO
 
 ### ZecWallet
 - adityapk00/* TODO
@@ -236,6 +239,10 @@ https://grants.zfnd.org/proposals/1792958360-trezor-support-for-zcash-shielded-t
 
 ### Zeme Teme
 - https://zeme.team
+
+### Zemo
+
+https://forum.zcashcommunity.com/t/zemo-your-web3-inbox/41063/52
 
 ### Zephyr (Metamask-like browser extension)
 - https://forum.zcashcommunity.com/t/project-zephyr-update/40657/6
