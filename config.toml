@@ -9,6 +9,7 @@ theme = 'maverick'
 [params]
   logo = '/static/favicon-32.png'
   description = "Zcash Ecosystem Security Support"
+  
 
 [menu]
   [[menu.main]]
