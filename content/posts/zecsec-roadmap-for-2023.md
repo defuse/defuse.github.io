@@ -24,7 +24,7 @@ entire codebase.
 ### 2. Zondax
 
 Shielded hardware wallets have been a long time coming. Now, [Zondax](https://docs.zondax.ch/Zcash) is ready
-with code and PRs for shielded Zcash on Ledger hardware. Security review is
+with code and integration PRs for shielded Zcash on Ledger hardware. Security review is
 important at this early stage to ward off bugs that could put users' funds at
 risk, so we'll review their code and integrations next.
 
@@ -44,7 +44,7 @@ recent review. Next up, I'll complete the wallet audit series by auditing
 
 ### 7. ZSAs
 
-Zcash Shielded Assets (ZSAs) are on the horizon for Zcash, with the [design and implementation being provided by QEDIT](https://forum.zcashcommunity.com/t/a-proposal-for-shielded-assets-zsa-uda-for-defi-on-zcash/40520). Since ZSAs are a significant change to the Zcash protocol and its consensus rules, ZSAs should be included in scope of the audits for the network upgrade their implementation becomes a part of. However, it won't hurt to have more eyes on the code, so I plan to audit ZSAs myself as well.
+Zcash Shielded Assets (ZSAs) are on the horizon for Zcash, with the [design and implementation being provided by QEDIT](https://forum.zcashcommunity.com/t/a-proposal-for-shielded-assets-zsa-uda-for-defi-on-zcash/40520). Since ZSAs are a significant change to the Zcash protocol and its consensus rules, ZSAs should be included in the scope of the major audits of the network upgrade their implementation becomes a part of. It's always better to have more eyes on the code, so I plan to audit ZSAs myself as well.
 
 ### 8. Zephyr
 
@@ -52,8 +52,8 @@ Zcash Shielded Assets (ZSAs) are on the horizon for Zcash, with the [design and 
 is a project to build a metamask-like browser extension for Zcash. While the
 project is still unfinished, I believe that support for Zcash in the browser is
 on the critical path to adoption, so this is an important project to support.
-Additionally, browser security models are very fun and interesting and
-error-prone, so it will be worthwhile to take an early look.
+Additionally, in-browser security models are complicated and error-prone, so it
+will be worthwhile to take an early look.
 
 ### 9. Live Infrastructure
 
@@ -144,7 +144,7 @@ assist the grant committee with writing up an RFP, if desired.
 In my recently-published [Zcash Ecosystem Security Overview]({{<ref
 "overview.md">}}) page, I laid out a list of big picture security and privacy
 challenges for Zcash. The roadmap above touches on some of them, however there
-are several that I probably *won't* have dedicated time for in 2023. They
+are several that I *probably won't* have dedicated time for in 2023. They
 deserve to be highlighted anyway:
 
 ### Scalable Privacy for Wallets
@@ -181,6 +181,7 @@ risk of entire classes of security vulnerabilities that cannot exist within
 projects that are written in safer languages, like Rust. Deprecating the legacy
 ``zcashd`` codebase should be a priority, to be replaced by ``zebra``. These
 risks could also be mitigated with better fuzzing of ``zcashd``'s code.
+
 
 ## Conclusion
 
