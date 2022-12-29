@@ -1,18 +1,49 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Zcash Ecosystem Security</title>
-    <link>http://example.org/posts/</link>
-    <description>Recent content in Posts on Zcash Ecosystem Security</description>
+    <title>Posts on ZecSec: Zcash Ecosystem Security</title>
+    <link>https://zecsec.com/posts/</link>
+    <description>Recent content in Posts on ZecSec: Zcash Ecosystem Security</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 13 Oct 2022 08:22:29 -0600</lastBuildDate><atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 29 Dec 2022 07:00:00 -0700</lastBuildDate><atom:link href="https://zecsec.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Security Audit Process</title>
+      <link>https://zecsec.com/posts/security-audit-process/</link>
+      <pubDate>Thu, 29 Dec 2022 07:00:00 -0700</pubDate>
+      
+      <guid>https://zecsec.com/posts/security-audit-process/</guid>
+      <description>In this post, I&amp;rsquo;m going to shed light on the process I follow to find bugs in my audits of Zcash ecosystem software. Hopefully, this will be useful to you if you are looking to understand more about how audits work or even learning how to audit software yourself.
+The process I&amp;rsquo;m describing here should not be taken as gospel. Different security auditors follow different processes, and I often deviate from this process significantly to tailor my audits to the specific projects I am helping.</description>
+    </item>
+    
+    <item>
+      <title>Scalable Private Money Needs Scalable Anonymous Messaging</title>
+      <link>https://zecsec.com/posts/scalable-private-money-needs-scalable-private-messaging/</link>
+      <pubDate>Tue, 15 Nov 2022 19:00:00 -0700</pubDate>
+      
+      <guid>https://zecsec.com/posts/scalable-private-money-needs-scalable-private-messaging/</guid>
+      <description>In this post I’m going to argue that any scalable private Internet money system will need to rely on an equally-scalable and equally-private anonymous messaging system.
+Ultimately, I will argue that the best approach to scaling private money is to directly and explicitly build a scalable anonymous communication system, rather than proceeding through a series of ad-hoc improvements to current designs.
+Backstory The performance of Zcash mobile wallets has been degraded massively; this was caused by a huge increase in private transaction load on the network.</description>
+    </item>
+    
+    <item>
+      <title>October Update: Ywallet audited, and what&#39;s next?</title>
+      <link>https://zecsec.com/posts/october-update/</link>
+      <pubDate>Fri, 28 Oct 2022 08:13:14 -0700</pubDate>
+      
+      <guid>https://zecsec.com/posts/october-update/</guid>
+      <description>Hi Zcash fans! It&amp;rsquo;s time for the first monthly update on the Zcash Ecosystem Security grant. This October, we saw the completion of a full security audit of Ywallet.
+Ywallet&amp;rsquo;s fast scanning algorithm makes it an attractive option for users facing long delays due to the recent high usage of the Zcash blockchain. It had also received the least security review among the Zcash wallets, so we decided to prioritize it as the first project to be audited for this grant.</description>
+    </item>
+    
     <item>
       <title>Hello, World!</title>
-      <link>http://example.org/posts/my-first-post/</link>
+      <link>https://zecsec.com/posts/my-first-post/</link>
       <pubDate>Thu, 13 Oct 2022 08:22:29 -0600</pubDate>
       
-      <guid>http://example.org/posts/my-first-post/</guid>
+      <guid>https://zecsec.com/posts/my-first-post/</guid>
       <description>Hi!
 This is where I will be posting be posting updates on the Zcash Ecosystem Security grant project!</description>
     </item>
