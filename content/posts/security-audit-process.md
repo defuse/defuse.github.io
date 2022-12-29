@@ -49,7 +49,7 @@ target project, I think about what kind of project it is and try to enumerate
 all the things that could possibly go wrong with *that kind of thing*. For
 example, if it's an encryption program, I think about: weak key generation,
 nonce reuse, weak encryption algorithms, lack of authentication, side-channel
-attacks, and so on. Write all of these possibilities down. The point of this
+attacks, and so on. I write all of these possibilities down. The point of this
 exercise is to bring all of the things that *might* go wrong into your
 short-term memory so that they will stand out to you, if they actually *have*
 gone wrong, while you're reading the relevant code.
@@ -147,7 +147,13 @@ actually something an attacker's input can reach, and so on.
 
 If you're really time-crunched, you won't be able to check everything, so
 prioritize by which problems you intuitively think are most likely to be "real",
-and by which kinds of problems would be the worst for the projects' users. 
+and by which kinds of problems would be the worst for the project's users.
+
+A key thing to look for in this stage is the correctness (or incorrectness) of
+how different components of the software interface with each other. This is
+especially true when the different components were written by different people,
+e.g. if your target software uses a library, you want to carefully read that
+library's documentation and make sure it's being used correctly.
 
 At the end of this stage, you should have found the bulk of the issues which you
 can begin writing up in your report.
@@ -161,19 +167,19 @@ in much deeper and check that *everything* is correct.
 
 "Correctness" means that the code always does what it is intended to, i.e. that
 there are no bugs at all. As much as security engineers like to talk about
-"security bugs" as a distinct category from the "ordinary" kinds of bugs,
+"security bugs" as a distinct category from "ordinary" kinds of bugs,
 security is really about correctness. That's because *any* kind of bug, even
 ones that seem benign, can potentially be used by an attacker to further their
 goals.
 
-For certain kinds of code, especially cryptography and anything enforcing access
-control, there is no way to assure security except to deeply understand and
-ensure the absolute correctness of all of the relevant code. The modern way to
-do this is via formal verification, a computer-checkable proof that the code
-will always do exactly what it is intended to do. Formal verification is
-expensive to implement (but tools are getting better), and it depends on having
-a detailed specification of what the code is "supposed to do", so it is not
-always a viable option.
+For certain kinds of code, especially cryptography, parsers, and anything
+enforcing access control, there is no way to assure security except to deeply
+understand and ensure the absolute correctness of all of the relevant code. The
+modern way to do this is via formal verification, a computer-checkable proof
+that the code will always do exactly what it is intended to do. Formal
+verification is expensive to implement (but tools are getting better), and it
+depends on having a detailed specification of what the code is "supposed to do",
+so it is not always a viable option.
 
 The next best thing is for a human---the auditor---to carefully check that
 everything is correct. Based on the preceding stages, you should have a good
@@ -280,3 +286,5 @@ false-negative errors. That is, if I'm unsure about the exploitability of a
 given issue, I'll include it in my report anyway, accepting a small chance that
 I'm wrong. This saves the cost of rigorously proving the existence of the
 problem, and makes sure that nothing that could be a real issue gets dropped.
+The downside is that you might be embarrassed by reporting a bug that isn't
+real, but that's better than the alternative.
