@@ -1,18 +1,240 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 161616, Calvin Tran</copyright><lastBuildDate>Tue, 15 Nov 2022 19:00:00 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>Scalable Private Money Needs Scalable Anonymous Messaging</title><link>https://zecsec.com/posts/scalable-private-money-needs-scalable-private-messaging/</link><description>&lt;p>In this post I’m going to argue that any scalable private Internet money system
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZecSec: Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 292929, Calvin Tran</copyright><lastBuildDate>Thu, 29 Dec 2022 07:00:00 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>Security Audit Process</title><link>https://zecsec.com/posts/security-audit-process/</link><description>&lt;p>In this post, I&amp;rsquo;m going to shed light on the process I follow to find bugs in my
+audits of Zcash ecosystem software. Hopefully, this will be useful to you if you
+are looking to understand more about how audits work or even learning how to audit
+software yourself.&lt;/p>
+&lt;p>The process I&amp;rsquo;m describing here should not be taken as gospel. Different
+security auditors follow different processes, and I often deviate from this
+process significantly to tailor my audits to the specific projects I am helping.&lt;/p>
+&lt;h2 id="audit-process">Audit Process&lt;/h2>
+&lt;h3 id="scoping-and-timeboxing">Scoping and Timeboxing&lt;/h3>
+&lt;p>The first step in any audit is to understand &lt;em>what you&amp;rsquo;re auditing&lt;/em> and &lt;em>how
+long you have to audit it&lt;/em>. This is crucial, because auditor-time is an
+exceptionally rare resource, so it needs to be applied effectively and to the
+right thing.&lt;/p>
+&lt;p>In commercial engagements, the client and auditor often roughly agree on a
+timeframe and budgeting (e.g. 2 weeks of auditing at $2,000 per auditor-day),
+and have a back-and-forth discussion about the scope and sign mutual contracts
+before the engagement begins. This is an inefficiency in the process that I
+personally like to avoid, and thankfully past clients have trusted me to choose
+my own scope, prioritizing what I feel is most important for the client. A
+detailed scoping process makes sense whenever the client is already aware of
+specific kinds of risks they need to mitigate, or if multiple auditors are being
+hired to look at the same project and are to be tasked with different focus
+areas.&lt;/p>
+&lt;p>Out of this step in the process, you want to know how many days of paid time you
+have, what general categories of bugs you&amp;rsquo;ll be looking for, and if anything is
+off-limits (such as pen-testing production systems). You should also make it
+clear up front whether or not the audit report will be published, as audit firms
+are sometimes hesitant to do so, not wanting their report to be seen as a
+&amp;ldquo;guarantee of security&amp;rdquo; or &amp;ldquo;stamp or approval&amp;rdquo;, and clients may not want their
+mistakes to be publicized.&lt;/p>
+&lt;h3 id="brainstorming--target-research">Brainstorming &amp;amp; Target Research&lt;/h3>
+&lt;p>I see auditing as a creative process, so once any engagement begins, the first
+thing I do is start brainstorming. Before I look at anything specific to the
+target project, I think about what kind of project it is and try to enumerate
+all the things that could possibly go wrong with &lt;em>that kind of thing&lt;/em>. For
+example, if it&amp;rsquo;s an encryption program, I think about: weak key generation,
+nonce reuse, weak encryption algorithms, lack of authentication, side-channel
+attacks, and so on. Write all of these possibilities down. The point of this
+exercise is to bring all of the things that &lt;em>might&lt;/em> go wrong into your
+short-term memory so that they will stand out to you, if they actually &lt;em>have&lt;/em>
+gone wrong, while you&amp;rsquo;re reading the relevant code.&lt;/p>
+&lt;p>Next, I learn as much as I can about the target project without diving into
+anything too technical. I read the docs, the changelog, issues that look
+relevant to security on the issue tracker, google for past vulnerabilities, and
+read any past audit reports of the project. I build and use the project, too. As
+I am doing that, I keep expanding my brainstorm notes with new ideas that come to
+mind.&lt;/p>
+&lt;p>At the end of the brainstorming and research phase, you should have a list of
+&lt;em>potential bugs&lt;/em> and &lt;em>attacker goals&lt;/em>. Your potential-bugs list is a brainstorm
+that ideally includes all weaknesses that could possibly exist in the target
+project (e.g. weak random number generator), and your attacker-goals list is a
+brainstorm that ideally includes any goals an attacker might have (e.g. decrypt
+the data).&lt;/p>
+&lt;p>Your goal, during the audit, will be to find a set of weaknesses that an
+attacker could exploit to accomplish their goal (e.g. the random number generator
+produces weak keys, so an attacker can brute-force the key and decrypt the
+data).&lt;/p>
+&lt;h3 id="threat-modeling">Threat Modeling&lt;/h3>
+&lt;p>At this point, you have a good understanding of what the target project is, what
+weaknesses it might have, and the various ways attackers might try to attack its
+users. If time permits, you can write up a formal (or at least detailed) threat
+model for the project. If you do this right, it will help the developers
+understand the security properties of their own software that they need to
+maintain in the future, help users understand what security properties they&amp;rsquo;re
+actually getting, and speed up future audits.&lt;/p>
+&lt;p>There are many valid approaches to threat modeling, a common one is
+&lt;a href="https://en.wikipedia.org/wiki/STRIDE_(security)">STRIDE&lt;/a>, however I prefer an
+approach that I call &lt;a href="https://github.com/defuse/ictm">Invariant-Centric Threat
+Modeling&lt;/a> which puts users first, requiring
+security properties to be written in language that users can actually
+understand, and considers it a &amp;ldquo;bug&amp;rdquo; if users ever think they are getting some
+security property that they actually are not.&lt;/p>
+&lt;h3 id="source-code-review">Source Code Review&lt;/h3>
+&lt;p>Finally, the actual review process begins. I start by understanding the
+directory structure of the project (the &lt;code>tree&lt;/code> command is very helpful!).
+Then, I start reading code file-by-file. If there is an entrypoint to the
+project (i.e. &lt;code>main())&lt;/code>), I will usually start there. But generally, I will
+just read each file, in alphabetical order.&lt;/p>
+&lt;p>You might be a little surprised by the fact I read the files in alphabetical
+order. Wouldn&amp;rsquo;t it be better to &lt;em>understand&lt;/em> the program by tracing through call
+stacks, understanding how classes relate to each other by drawing UML diagrams,
+and so forth? In a time-crunched audit (as all audits are), this actually isn&amp;rsquo;t
+the best use of time. It&amp;rsquo;s important to understand how the code you&amp;rsquo;re reading
+fits in to the overall structure of the program, but if the code is well-written
+and classes and functions are well-named, you can often correctly guess how it
+fits in. In practice, I find most of my bugs in this linear scan of the code. A
+linear scan of the code also guarantees a kind of completeness: you can be sure
+that you&amp;rsquo;ve at least had your eyeballs pointed at every single line of code in
+the project.&lt;/p>
+&lt;p>For this to work, the brainstorming process mentioned above is essential.
+Without it, problems won&amp;rsquo;t &amp;ldquo;jump out&amp;rdquo; at you as you are reading through the
+code. It&amp;rsquo;s also important to &lt;em>continue&lt;/em> that same brainstorming process &lt;em>as&lt;/em> you
+read the code, making note of any new ideas potential problems that come to mind
+as you are diving deeper into the code. Make notes, like &amp;ldquo;this function returns
+-1 on error, if the caller doesn&amp;rsquo;t check it, a decryption error might be
+unnoticed, is the caller actually checking it?&amp;rdquo;, instead of getting bogged down
+confirming problems in this part of the process.&lt;/p>
+&lt;p>After the first pass of source code review, you should have an expanded set of
+notes with some potential issues, which you&amp;rsquo;ll want to check later. I use a star
+system to help prioritize which possible problems are most-worth looking into
+later, e.g. &amp;ldquo;*** it looks like it&amp;rsquo;s using &lt;code>rand()&lt;/code> to generate key!?&amp;rdquo;, &amp;ldquo;* make
+sure the caller doesn&amp;rsquo;t pass a negative number here or else this will panic&amp;rdquo;.&lt;/p>
+&lt;p>You should also be confused about a lot of things and have notes like &amp;ldquo;I don&amp;rsquo;t
+get how this works!?&amp;rdquo;, &amp;ldquo;*** wtf how can this possibly be secure!!??&amp;rdquo;. In this stage,
+we&amp;rsquo;ve been going for breadth and speed rather than depth and confirmation; this
+is normal.&lt;/p>
+&lt;p>This is a good point to pause and do even more brainstorming. Ask yourself &amp;ldquo;what
+else could go wrong?&amp;rdquo;, &amp;ldquo;could any of the more-minor problems I&amp;rsquo;ve
+identified be combined together to attack the system in bigger ways?&amp;rdquo;&lt;/p>
+&lt;h3 id="check-priority-potential-issues">Check Priority Potential Issues&lt;/h3>
+&lt;p>After reviewing most or all of the code, you should have a much better
+understanding of how the code works, where things are, and a big list of TODOs:
+possible problems and a bunch of things you&amp;rsquo;re really confused about. The next
+step is to confirm some of those potential issues. This is the part where you
+actually need to start tracing through call stacks, understanding classes'
+relationships to each other, understanding if vulnerable-looking code is
+actually something an attacker&amp;rsquo;s input can reach, and so on.&lt;/p>
+&lt;p>If you&amp;rsquo;re really time-crunched, you won&amp;rsquo;t be able to check everything, so
+prioritize by which problems you intuitively think are most likely to be &amp;ldquo;real&amp;rdquo;,
+and by which kinds of problems would be the worst for the projects&amp;rsquo; users.&lt;/p>
+&lt;p>At the end of this stage, you should have found the bulk of the issues which you
+can begin writing up in your report.&lt;/p>
+&lt;h3 id="deep-analysis-for-correctness">Deep Analysis for Correctness&lt;/h3>
+&lt;p>Following the steps above will give you a broad and efficient coverage of the
+entire project, and you will likely have found most of the bugs that will make
+it into your report. For some kinds of code, it&amp;rsquo;s unavoidably necessary to dive
+in much deeper and check that &lt;em>everything&lt;/em> is correct.&lt;/p>
+&lt;p>&amp;ldquo;Correctness&amp;rdquo; means that the code always does what it is intended to, i.e. that
+there are no bugs at all. As much as security engineers like to talk about
+&amp;ldquo;security bugs&amp;rdquo; as a distinct category from the &amp;ldquo;ordinary&amp;rdquo; kinds of bugs,
+security is really about correctness. That&amp;rsquo;s because &lt;em>any&lt;/em> kind of bug, even
+ones that seem benign, can potentially be used by an attacker to further their
+goals.&lt;/p>
+&lt;p>For certain kinds of code, especially cryptography and anything enforcing access
+control, there is no way to assure security except to deeply understand and
+ensure the absolute correctness of all of the relevant code. The modern way to
+do this is via formal verification, a computer-checkable proof that the code
+will always do exactly what it is intended to do. Formal verification is
+expensive to implement (but tools are getting better), and it depends on having
+a detailed specification of what the code is &amp;ldquo;supposed to do&amp;rdquo;, so it is not
+always a viable option.&lt;/p>
+&lt;p>The next best thing is for a human&amp;mdash;the auditor&amp;mdash;to carefully check that
+everything is correct. Based on the preceding stages, you should have a good
+idea of which parts of the target program are ultra-security-critical and are
+worthy of checking for correctness in extreme detail. The mindset to be in here
+is that of someone trying to &lt;em>prove&lt;/em> the code is correct. Unless you are
+absolutely, mathematically, convinced that the code is correct and conforms to
+its specification, you still have more work to do.&lt;/p>
+&lt;p>Doing this is extremely costly; whereas you might be able to get through a dozen
+source code files in a day of normal review, it might take an entire day of
+careful thinking to ensure the correctness of just one part of a cryptographic
+algorithm or protocol.&lt;/p>
+&lt;p>There are some tricks to avoid this, such as writing randomized tests to compare
+two implementations of cryptographic primitives against each other, but to
+whatever degree the relevant code is absolutely essential for security, you
+often have to spend a lot of time checking its correctness.&lt;/p>
+&lt;h3 id="the-writeup">The Writeup&lt;/h3>
+&lt;p>At last, it&amp;rsquo;s time to write up the report. The format I like to use is:&lt;/p>
+&lt;ol>
+&lt;li>Introduction &amp;ndash; describe the audit scope and write up the threat model for the project (if they don&amp;rsquo;t already have one).&lt;/li>
+&lt;li>Security &amp;amp; Privacy Findings &amp;ndash; list each issue that you&amp;rsquo;ve found, describing its severity and recommended prioritization, explaining it in detail, and recommend ways to fix it.&lt;/li>
+&lt;li>Recommendations &amp;ndash; make suggestions to improve the overall quality of the code and/or speed up future audits.&lt;/li>
+&lt;li>Good Things &amp;ndash; say genuine good things about the project/code, so that the report isn&amp;rsquo;t all negative.&lt;/li>
+&lt;li>Future Work &amp;ndash; list the things you couldn&amp;rsquo;t cover in this audit, but should be covered by future audits. This section will be invaluable to future auditors.&lt;/li>
+&lt;li>Conclusion &amp;ndash; summarize everything briefly.&lt;/li>
+&lt;/ol>
+&lt;h3 id="remediation--checking-the-fixes">Remediation &amp;amp; Checking the Fixes&lt;/h3>
+&lt;p>It is common for fixes to reported security bugs to be incomplete or incorrect,
+so it&amp;rsquo;s important to evaluate the fixes to the bugs you have reported. A really
+common pattern is for developers to &amp;ldquo;block the exploit&amp;rdquo;, i.e. prevent one way of
+exploiting the issue you described, without fixing the actual underlying
+problem. I like to remain available to the developers of the projects I audit
+until I&amp;rsquo;ve confirmed that all of the issues are fixed or we&amp;rsquo;ve mutually agreed a
+fix is unnecessary or is safe to de-prioritize.&lt;/p>
+&lt;h2 id="tooling--automation">Tooling &amp;amp; Automation&lt;/h2>
+&lt;p>What I&amp;rsquo;ve described above is for a manual security review. Sometimes it&amp;rsquo;s
+useful to use tools to assist with the audit process. However, I personally
+haven&amp;rsquo;t found much success using security-specific tooling in my audits.
+Anything an XSS or SQL injection scanner might find would definitely be found in
+the manual review I would be doing anyway.&lt;/p>
+&lt;p>There are some exceptions, where automation and tooling is really helpful:&lt;/p>
+&lt;h3 id="unit-integration-and-regression-tests">Unit, Integration, and Regression Tests&lt;/h3>
+&lt;p>A unit test or integration test of a software&amp;rsquo;s security property is worth a
+thousand reviews, because it can be run automatically upon every change to the
+software, perpetually ensuring that the property is satisfied.&lt;/p>
+&lt;p>It might feel stupid, but make sure all the basic tests are in place, like &amp;ldquo;try
+to decrypt the file with the wrong password&amp;rdquo; or &amp;ldquo;make the software connect to a
+server with a self-signed certificate.&amp;rdquo; Even stupid tests will catch bugs
+sometimes.&lt;/p>
+&lt;p>Think about all the edge cases the target software might encounter, and
+recommend that all of those edge cases be tested.&lt;/p>
+&lt;p>Whenever a security bug is found, do the best you can to test for the presence
+of that-or-similar bugs, so that if it ever gets re-introduced, it will be caught quickly.&lt;/p>
+&lt;h3 id="dependency-update-checkers">Dependency Update Checkers&lt;/h3>
+&lt;p>Tools like &lt;code>cargo audit&lt;/code>, &lt;code>./gradlew dependencyCheckAnalyze&lt;/code>, &lt;code>npm outdated&lt;/code> are invaluable for finding dependencies that are out of date or have
+known vulnerabilities. These kinds of tools are available for most languages and
+platforms, use them!&lt;/p>
+&lt;h3 id="fuzzing">Fuzzing&lt;/h3>
+&lt;p>Fuzzing is the process of using various types of algorithms to generate &amp;ldquo;random&amp;rdquo;
+input to throw at your program to try to find bugs and crashes.
+Counter-intuitively, fuzzing can be &lt;a href="https://lcamtuf.coredump.cx/afl/">incredibly successful at finding
+bugs&lt;/a>, especially in projects written in
+unsafe languages like C/C++.&lt;/p>
+&lt;p>You can also &amp;ldquo;fuzz&amp;rdquo; implementations of cryptographic algorithms against each
+other. If two implementations of a cipher or hash function, say, are supposed
+to be equivalent, you can find differences between them by throwing the same
+random data at both, as long as any &amp;ldquo;bug&amp;rdquo; occurs with a sufficiently high
+probability.&lt;/p>
+&lt;h2 id="to-write-exploits-or-not">To Write Exploits, or Not?&lt;/h2>
+&lt;p>So far, I&amp;rsquo;ve written about how to find bugs, but what about exploiting them?
+Exploitation is often the funnest part of security work, but it often isn&amp;rsquo;t
+necessary. If the client understands the bug and is going to fix it, then it
+usually isn&amp;rsquo;t worth the time to develop an exploit.&lt;/p>
+&lt;p>The two exceptions are: (a) if the client doesn&amp;rsquo;t acknowledge the existence of a
+bug and you need to prove it&amp;rsquo;s real, you need to write an exploit, and (b) if
+you&amp;rsquo;ve got a severe bug on your hands, and you need to understand its
+consequences or exploitability more-precisely, it can be beneficial to write an
+exploit.&lt;/p>
+&lt;p>I personally prefer to make false-positive errors in my security work than
+false-negative errors. That is, if I&amp;rsquo;m unsure about the exploitability of a
+given issue, I&amp;rsquo;ll include it in my report anyway, accepting a small chance that
+I&amp;rsquo;m wrong. This saves the cost of rigorously proving the existence of the
+problem, and makes sure that nothing that could be a real issue gets dropped.&lt;/p></description><author>trandcanh@gmail.com (Calvin Tran)</author><guid>https://zecsec.com/posts/security-audit-process/</guid><pubDate>Thu, 29 Dec 2022 07:00:00 -0700</pubDate></item><item><title>Scalable Private Money Needs Scalable Anonymous Messaging</title><link>https://zecsec.com/posts/scalable-private-money-needs-scalable-private-messaging/</link><description>&lt;p>In this post I’m going to argue that any scalable private Internet money system
 will need to rely on an equally-scalable and equally-private anonymous messaging
 system.&lt;/p>
 &lt;p>Ultimately, I will argue that the best approach to scaling private money is to
 &lt;em>directly and explicitly&lt;/em> build a scalable anonymous communication system,
 rather than proceeding through a series of ad-hoc improvements to current
 designs.&lt;/p>
-&lt;h1 id="backstory">Backstory&lt;/h1>
+&lt;h2 id="backstory">Backstory&lt;/h2>
 &lt;p>The performance of Zcash mobile wallets has been degraded massively; this was
 caused by a huge increase in private transaction load on the network. This
 problem is not specific to Zcash—all private money systems aiming to offer
 strong privacy guarantees will face this challenge eventually. To understand
 why, we need to understand how the current best design for private Internet
 money works.&lt;/p>
-&lt;h1 id="protocol-recap">Protocol Recap&lt;/h1>
+&lt;h2 id="protocol-recap">Protocol Recap&lt;/h2>
 &lt;p>When Alice wants to send Bob a payment, Alice creates a &lt;em>note&lt;/em> containing the
 value she wants to send to Bob. In her transaction, Alice posts three things to
 the public blockchain: a note commitment, a zero-knowlege proof, and a note
@@ -26,7 +248,7 @@ needs—along with his secret keys—to spend the value he has received from Ali
 A key-private encryption algorithm is used to create this ciphertext, which allows
 Bob to decrypt it with his secret key, while ensuring nobody—even people who know
 Bob’s address—can tell that the ciphertext belongs to Bob.&lt;/p>
-&lt;h1 id="the-performance-bottleneck">The Performance Bottleneck&lt;/h1>
+&lt;h2 id="the-performance-bottleneck">The Performance Bottleneck&lt;/h2>
 &lt;p>This design creates a scalability bottleneck: Bob has to try to decrypt every
 ciphertext on the blockchain to find the notes that belong to him. When there
 are a lot of new notes, his wallet will take a long time to get through them
@@ -45,7 +267,7 @@ transactions in existence&lt;/em>, but the attacker cannot tell &lt;em>whether o
 private money designs that offer strong formal privacy guarantees. For these
 systems to scale to thousands or millions of active users, trial decryption
 needs to be replaced with something else.&lt;/p>
-&lt;h1 id="private-money-implies-anonymous-messaging">Private Money Implies Anonymous Messaging&lt;/h1>
+&lt;h2 id="private-money-implies-anonymous-messaging">Private Money Implies Anonymous Messaging&lt;/h2>
 &lt;p>To overcome the trial-decryption bottleneck, Bob needs to be able to find out
 about his notes—the money he is receiving—in an efficient way.&lt;/p>
 &lt;p>We can show formally that solving this problem is closely related to a different
@@ -78,12 +300,12 @@ so that Bob doesn’t have to try to decrypt everything. When we do this, the
 privacy and scalability properties of the resulting private money system are
 &lt;em>limited&lt;/em> by the privacy and scalability properties of the anonymous
 communication system.&lt;/p>
-&lt;h1 id="what-are-our-options">What are our options?&lt;/h1>
+&lt;h2 id="what-are-our-options">What are our options?&lt;/h2>
 &lt;p>Let’s look at a few of the options we have for replacing trial decryption.
 There’s &lt;em>tons&lt;/em> of research on anonymous messaging systems, so I’m going to
 restrict my attention here to options that are already on private-money
 projects’ roadmaps or that seem promising to me.&lt;/p>
-&lt;h2 id="smarter-scanning">Smarter Scanning&lt;/h2>
+&lt;h3 id="smarter-scanning">Smarter Scanning&lt;/h3>
 &lt;p>The option currently being pursued in Zcash is smarter scanning algorithms.
 These algorithms must still eventually try to decrypt every ciphertext, but they
 can find some of a user’s funds earlier, so that the user has some spendable
@@ -94,7 +316,7 @@ experience significantly better.&lt;/p>
 &lt;a href="https://hackmd.io/@str4d/dagsync-graph-aware-zcash-wallets">https://hackmd.io/@str4d/dagsync-graph-aware-zcash-wallets&lt;/a>.&lt;/p>
 &lt;p>This is a good stopgap measure in the face of bricked wallets, but in the long
 term, we will need something more.&lt;/p>
-&lt;h2 id="scanning-in-the-cloud">Scanning in the Cloud&lt;/h2>
+&lt;h3 id="scanning-in-the-cloud">Scanning in the Cloud&lt;/h3>
 &lt;p>Another simple approach is to retain the trial-decryption paradigm, but move it
 out of the smartphone and into the cloud, on beefier computers.&lt;/p>
 &lt;p>This would retain all of the on-chain privacy properties of current protocol
@@ -116,7 +338,7 @@ the servers with homomorphic-encryption-based &lt;a href="https://forum.zcashcom
 fundamentally improve the system’s scalability, it just moves it to faster CPUs
 (and perhaps later onto cloud GPUs). With enough usage, even scanning in the
 cloud will not be fast enough, and will be too costly.&lt;/p>
-&lt;h2 id="fuzzy-message-detection--other-decoy-systems">Fuzzy Message Detection (&amp;amp; Other Decoy Systems)&lt;/h2>
+&lt;h3 id="fuzzy-message-detection--other-decoy-systems">Fuzzy Message Detection (&amp;amp; Other Decoy Systems)&lt;/h3>
 &lt;p>&lt;a href="https://eprint.iacr.org/2021/089">Fuzzy Message Detection&lt;/a> (FMD) is an
 intermediate approach between all-on-the-device scanning and all-in-the-cloud
 scanning.&lt;/p>
@@ -185,7 +407,7 @@ Fuzzy Privacy Guarantees&lt;/a>.&lt;/p>
 server must still process all transactions for each user, and at best it offers
 a constant factor reduction in the scanning work that wallets must perform
 locally.&lt;/p>
-&lt;h2 id="using-existing-communication-channels">Using Existing Communication Channels&lt;/h2>
+&lt;h3 id="using-existing-communication-channels">Using Existing Communication Channels&lt;/h3>
 &lt;p>If two users already talk to each other over an existing secure messaging
 system, then they can send transactions over the messenger. For those
 transactions (but not others), the recipient’s wallet can avoid
@@ -209,7 +431,7 @@ to who, breaking privacy guarantees that users expect.&lt;/p>
 performance problems for a subset of users who already have a private means to
 communicate with each other, but it would not be a good long-term solution for
 the because of these two drawbacks.&lt;/p>
-&lt;h2 id="sgx-based-approaches">SGX-based Approaches&lt;/h2>
+&lt;h3 id="sgx-based-approaches">SGX-based Approaches&lt;/h3>
 &lt;p>Another way to scale would be to use a trusted, private server. Using an actual
 trusted server would defeat the purpose of building a private money system (we’d
 just be building another PayPal), but Intel’s SGX technology aims to make it
@@ -232,7 +454,7 @@ that will happen.&lt;/p>
 operators are mostly honest and aren’t too well-resourced, then you’re safe, but
 if the NSA breaks in, or anyone with serious resources wants to break the
 system, SGX will fail.” This is not a good long-term solution.&lt;/p>
-&lt;h2 id="tor">Tor&lt;/h2>
+&lt;h3 id="tor">Tor&lt;/h3>
 &lt;p>Tor is by far the most widely-used anonymous communication system in existence
 today. Its focus is on providing low-latency connections at the expense of
 formal privacy guarantees.&lt;/p>
@@ -267,7 +489,7 @@ cases of private Internet money. Therefore, extreme care needs to be taken with
 any attempt to solve payment scalability problems with Tor. We must be mindful
 that relying on Tor will mean giving up on formal privacy guarantees and will
 make the system vulnerable to global passive adversaries.&lt;/p>
-&lt;h2 id="mixnets">Mixnets&lt;/h2>
+&lt;h3 id="mixnets">Mixnets&lt;/h3>
 &lt;p>As argued by the reduction given above, a private money system fundamentally
 &lt;em>is&lt;/em> an anonymous messaging system. It therefore makes sense to look towards the
 best designs for anonymous communication systems in the literature if we want to
@@ -286,7 +508,7 @@ sufficient chaff traffic, mixnets can provide provable privacy guarantees.&lt;/p
 between their privacy properties, latency of messages, efficiency, and offline
 message availability. They are a newer technology, too, which hasn’t seen much
 proven deployment in practice (&lt;a href="https://nymtech.net/">Nym&lt;/a> is one example).&lt;/p>
-&lt;h1 id="conclusion">Conclusion&lt;/h1>
+&lt;h2 id="conclusion">Conclusion&lt;/h2>
 &lt;p>In this post I’ve surveyed different approaches to solving private money
 systems’ scalability problems. I&amp;rsquo;ve included those that I consider plausibly
 viable as well as those on existing projects&amp;rsquo; roadmaps. A common theme among
