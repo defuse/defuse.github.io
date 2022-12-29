@@ -77,7 +77,7 @@ my best to accommodate you!
 ## Security Side-Projects
 
 In addition to security audits, there are a number of "side projects" I hope to
-work on to improve Zcash's security.
+work on to support Zcash's security.
 
 ### Wallet Edge Cases
 
@@ -90,7 +90,7 @@ have.
 
 The first step towards improving wallet testing is to enumerate all such edge
 cases. With a complete list of edge cases, the quality of existing wallet tests
-can be measured by determining which edge cases are covered, and which are not. 
+can be measured by determining which edge cases are covered and which are not. 
 
 In 2023 I hope to release a nearly-complete edge case list, which can then be
 used by wallet authors to improve their tests.
@@ -109,7 +109,7 @@ The kind of support projects can get this way includes:
 - Getting answers to technical questions about the Zcash protocol.
 - Anything else security- or -privacy-related, really!
 
-In addition to supporting Zcash projects themselves, I am will also be available
+In addition to supporting Zcash projects themselves, I will also be available
 to the Zcash Grant Committee to support their decision-making by providing
 technical or security-related input.
 
@@ -166,13 +166,17 @@ transparently, with consent, whenever they wish to do so. However, the high
 transparent usage might be a sign that some users misunderstand the privacy
 level provided by transparent transactions, or that users are forced into making
 parts of their transactions transparent by third-parties who do not fully
-support shielded addresses.
+support shielded addresses. 
 
-In our view, this problem should be tackled with (a) research into how
+I know of at least one anecdote where someone put themselves at risk by using a
+transparent address, because they thought "Zcash is private."
+
+In my view, this problem should be tackled with (a) research into how
 frequently users misunderstand the privacy properties of using transparent
 addresses, (b) UX design within wallets that communicates privacy levels clearly
-and simply, and (c) community pushes and more engineering effort to increase
-shielded support.
+and simply, (c) support requests from the community to third parties and extra
+engineering effort to increase shielded adoption, (d) an eventual removal of
+transparent addresses, replaced by the use of viewing keys.
 
 ### Mitigating C++ Memory Corruption Bug Risk in Zcashd
 
@@ -180,8 +184,8 @@ The main fullnode implementation of Zcash is written in C++, which puts it at
 risk of entire classes of security vulnerabilities that cannot exist within
 projects that are written in safer languages, like Rust. Deprecating the legacy
 ``zcashd`` codebase should be a priority, to be replaced by ``zebra``. These
-risks could also be mitigated with better fuzzing of ``zcashd``'s code.
-
+risks could also be mitigated with better fuzzing of ``zcashd``'s code, but it's
+probably better to get rid of the C++ code entirely.
 
 ## Conclusion
 
