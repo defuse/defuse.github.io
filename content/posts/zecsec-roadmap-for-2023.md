@@ -1,7 +1,7 @@
 ---
 title: "ZecSec Roadmap for 2023"
 date: 2022-12-28T11:00:00-07:00
-draft: false
+draft: true
 ---
 
 Happy New Year Zcash!
