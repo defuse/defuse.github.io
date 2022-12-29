@@ -5,3 +5,7 @@ draft: true
 ---
 
 TODO
+
+- the process itself
+- tooling
+- exploit dev (issue verification)

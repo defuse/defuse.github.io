@@ -399,13 +399,6 @@ vulnerable to a birthday attack, which would have made it possible to
 counterfeit funds. The bug was [identified and fixed prior to Zcash's
 launch](https://electriccoin.co/blog/fixing-zcash-vulns/).
 
-### Miscellanious Bugs & Security Announcements
-
-- https://electriccoin.co/blog/nu5-activation-and-halo-arc-release-delayed-for-remediation-of-consensus-bug/
-- https://electriccoin.co/blog/security-announcement-2017-04-13/
-- https://electriccoin.co/blog/security-announcement-2017-04-12/
-- https://electriccoin.co/blog/security-announcement-2016-11-22/
-
 ### ZecWallet-Lite TLS Authentication Bug
 
 Sarah Jamie Lewis [discovered that a previous version of ZecWallet-Lite was not
@@ -423,6 +416,14 @@ ZecWallet [optionally uses a "wormhole" service to allow a companion smartphone 
 Electric Coin Co engaged in a project to [fuzz ``zcashd``'s C++ codebase in an
 automated way using
 Kubernetes](https://electriccoin.co/blog/fuzzing-zcash-with-kubernetes/).
+
+### Miscellanious Bugs & Security Announcements
+
+- https://electriccoin.co/blog/nu5-activation-and-halo-arc-release-delayed-for-remediation-of-consensus-bug/
+- https://electriccoin.co/blog/security-announcement-2017-04-13/
+- https://electriccoin.co/blog/security-announcement-2017-04-12/
+- https://electriccoin.co/blog/security-announcement-2016-11-22/
+
 
 ### Academic Papers Analyzing Zcash
 
@@ -443,5 +444,9 @@ Zcash has been investigated in several academic works, linked below:
 - [Anonymity Analysis of Bitcoin, Zcash, and Ethereum](https://ieeexplore.ieee.org/abstract/document/9389894)
 - [An Analysis of Anonymity in the Zcash Cryptocurrency](https://deepblue.lib.umich.edu/handle/2027.42/143130)
 - [Modeling the Block Verification Time of Zcash](https://ieeexplore.ieee.org/abstract/document/9583684)
+- [A Comparative Study of Privacy-Preserving Cryptocurrencies: Monero and ZCash](http://www.dgalindo.es/mscprojects/sofie.pdf)
+- [Exploring the use of Zcash cryptocurrency for illicit or criminal purposes](https://www.rand.org/pubs/research_reports/RR4418.html)
+- [PING and REJECT: The Impact of Side-Channels on Zcash Privacy](https://crypto.stanford.edu/timings/pingreject.pdf)
+- [A Review of Zcash as a Cryptocurrency Platform Aimed Towards Maintaining Privacy Between All Parties](https://static1.squarespace.com/static/553d790de4b08ceb08ab88fd/t/60022ff3652b4632bc8d632b/1610756084528/Zcash_SciPaper.pdf)
 
 If you know of Zcash-related security research that's missing from this list, please [send us a note]({{<ref "contact.md">}}).
