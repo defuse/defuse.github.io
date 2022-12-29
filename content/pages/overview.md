@@ -337,7 +337,7 @@ In 2022, [the design of the Halo2 proving system was audited by Mary Maller](htt
 
 ZecSec performed an audit of Ywallet (*report forthcoming*) and zecwallet-lite-cli (*report forthcoming*).
 
-## Notable Past Security Bugs and Other Security Research
+## Notable Security Bugs and Other Security Research
 
 Secure systems can only be built by learning from mistakes. Here is a list of
 notable bugs and other security research that we can learn from to make Zcash a
@@ -443,9 +443,5 @@ Zcash has been investigated in several academic works, linked below:
 - [Anonymity Analysis of Bitcoin, Zcash, and Ethereum](https://ieeexplore.ieee.org/abstract/document/9389894)
 - [An Analysis of Anonymity in the Zcash Cryptocurrency](https://deepblue.lib.umich.edu/handle/2027.42/143130)
 - [Modeling the Block Verification Time of Zcash](https://ieeexplore.ieee.org/abstract/document/9583684)
-
-- TODO: find those papers analyzing privacy
-	- https://electriccoin.co/blog/new-research-on-shielded-ecosystem/
-
 
 If you know of Zcash-related security research that's missing from this list, please [send us a note]({{<ref "contact.md">}}).
