@@ -52,7 +52,7 @@ target project, I think about what kind of project it is and try to enumerate
 all the things that could possibly go wrong with &lt;em&gt;that kind of thing&lt;/em&gt;. For
 example, if it&amp;rsquo;s an encryption program, I think about: weak key generation,
 nonce reuse, weak encryption algorithms, lack of authentication, side-channel
-attacks, and so on. Write all of these possibilities down. The point of this
+attacks, and so on. I write all of these possibilities down. The point of this
 exercise is to bring all of the things that &lt;em&gt;might&lt;/em&gt; go wrong into your
 short-term memory so that they will stand out to you, if they actually &lt;em&gt;have&lt;/em&gt;
 gone wrong, while you&amp;rsquo;re reading the relevant code.&lt;/p&gt;
@@ -134,7 +134,12 @@ relationships to each other, understanding if vulnerable-looking code is
 actually something an attacker&amp;rsquo;s input can reach, and so on.&lt;/p&gt;
 &lt;p&gt;If you&amp;rsquo;re really time-crunched, you won&amp;rsquo;t be able to check everything, so
 prioritize by which problems you intuitively think are most likely to be &amp;ldquo;real&amp;rdquo;,
-and by which kinds of problems would be the worst for the projects&amp;rsquo; users.&lt;/p&gt;
+and by which kinds of problems would be the worst for the project&amp;rsquo;s users.&lt;/p&gt;
+&lt;p&gt;A key thing to look for in this stage is the correctness (or incorrectness) of
+how different components of the software interface with each other. This is
+especially true when the different components were written by different people,
+e.g. if your target software uses a library, you want to carefully read that
+library&amp;rsquo;s documentation and make sure it&amp;rsquo;s being used correctly.&lt;/p&gt;
 &lt;p&gt;At the end of this stage, you should have found the bulk of the issues which you
 can begin writing up in your report.&lt;/p&gt;
 &lt;h3 id=&#34;deep-analysis-for-correctness&#34;&gt;Deep Analysis for Correctness&lt;/h3&gt;
@@ -144,18 +149,18 @@ it into your report. For some kinds of code, it&amp;rsquo;s unavoidably necessar
 in much deeper and check that &lt;em&gt;everything&lt;/em&gt; is correct.&lt;/p&gt;
 &lt;p&gt;&amp;ldquo;Correctness&amp;rdquo; means that the code always does what it is intended to, i.e. that
 there are no bugs at all. As much as security engineers like to talk about
-&amp;ldquo;security bugs&amp;rdquo; as a distinct category from the &amp;ldquo;ordinary&amp;rdquo; kinds of bugs,
+&amp;ldquo;security bugs&amp;rdquo; as a distinct category from &amp;ldquo;ordinary&amp;rdquo; kinds of bugs,
 security is really about correctness. That&amp;rsquo;s because &lt;em&gt;any&lt;/em&gt; kind of bug, even
 ones that seem benign, can potentially be used by an attacker to further their
 goals.&lt;/p&gt;
-&lt;p&gt;For certain kinds of code, especially cryptography and anything enforcing access
-control, there is no way to assure security except to deeply understand and
-ensure the absolute correctness of all of the relevant code. The modern way to
-do this is via formal verification, a computer-checkable proof that the code
-will always do exactly what it is intended to do. Formal verification is
-expensive to implement (but tools are getting better), and it depends on having
-a detailed specification of what the code is &amp;ldquo;supposed to do&amp;rdquo;, so it is not
-always a viable option.&lt;/p&gt;
+&lt;p&gt;For certain kinds of code, especially cryptography, parsers, and anything
+enforcing access control, there is no way to assure security except to deeply
+understand and ensure the absolute correctness of all of the relevant code. The
+modern way to do this is via formal verification, a computer-checkable proof
+that the code will always do exactly what it is intended to do. Formal
+verification is expensive to implement (but tools are getting better), and it
+depends on having a detailed specification of what the code is &amp;ldquo;supposed to do&amp;rdquo;,
+so it is not always a viable option.&lt;/p&gt;
 &lt;p&gt;The next best thing is for a human&amp;mdash;the auditor&amp;mdash;to carefully check that
 everything is correct. Based on the preceding stages, you should have a good
 idea of which parts of the target program are ultra-security-critical and are
@@ -237,7 +242,9 @@ exploit.&lt;/p&gt;
 false-negative errors. That is, if I&amp;rsquo;m unsure about the exploitability of a
 given issue, I&amp;rsquo;ll include it in my report anyway, accepting a small chance that
 I&amp;rsquo;m wrong. This saves the cost of rigorously proving the existence of the
-problem, and makes sure that nothing that could be a real issue gets dropped.&lt;/p&gt;
+problem, and makes sure that nothing that could be a real issue gets dropped.
+The downside is that you might be embarrassed by reporting a bug that isn&amp;rsquo;t
+real, but that&amp;rsquo;s better than the alternative.&lt;/p&gt;
 </description>
       <author>trandcanh@gmail.com (Calvin Tran)</author>
       <guid>https://zecsec.com/posts/security-audit-process/</guid>
