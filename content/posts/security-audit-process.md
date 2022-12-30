@@ -6,8 +6,8 @@ draft: false
 
 In this post, I'm going to shed light on the process I follow to find bugs in my
 audits of Zcash ecosystem software. Hopefully, this will be useful to you if you
-are looking to understand more about how audits work or even learning how to audit
-software yourself.
+are looking to understand more about how audits work or are even learning how to
+audit software yourself.
 
 The process I'm describing here should not be taken as gospel.  Different
 security auditors follow different processes, and I often deviate from this
