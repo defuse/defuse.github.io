@@ -1,6 +1,7 @@
 ---
 title: "Scalable Private Money Needs Scalable Anonymous Messaging"
 date: 2022-11-15T19:00:00-07:00
+author: "Taylor Hornby"
 draft: false
 ---
 

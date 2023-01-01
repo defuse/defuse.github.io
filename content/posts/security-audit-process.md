@@ -1,12 +1,13 @@
 ---
 title: "Security Audit Process"
 date: 2022-12-29T07:00:00-07:00
+author: "Taylor Hornby"
 draft: false
 ---
 
 In this post, I'm going to shed light on the process I follow to find bugs in my
 audits of Zcash ecosystem software. Hopefully, this will be useful to you if you
-are looking to understand more about how audits work or are even learning how to
+are looking to understand more about how audits work or even learning how to
 audit software yourself.
 
 The process I'm describing here should not be taken as gospel.  Different
@@ -114,9 +115,9 @@ the project.
 For this to work, the brainstorming process mentioned above is essential.
 Without it, problems won't "jump out" at you as you are reading through the
 code. It's also important to *continue* that same brainstorming process *as* you
-read the code, making note of any new ideas potential problems that come to mind
-as you are diving deeper into the code. Make notes, like "this function returns
--1 on error, if the caller doesn't check it, a decryption error might be
+read the code, making note of any new ideas for potential problems that come to
+mind as you are diving deeper into the code. Make notes, like "this function
+returns -1 on error, if the caller doesn't check it, a decryption error might be
 unnoticed, is the caller actually checking it?", instead of getting bogged down
 confirming problems in this part of the process.
 

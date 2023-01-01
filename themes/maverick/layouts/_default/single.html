@@ -8,7 +8,6 @@
     {{ partial "header.html" . }}
     <section>
       <h2 class="post">{{ .Title }}</h2>
-      {{ .Content }}
       {{ if eq .Section "posts" }}
       <div class="post-date">
         <span class="g time">{{.Date.Format "January 2, 2006"}} </span> &#8729;
@@ -18,8 +17,12 @@
         <a href="{{ .Permalink }}">{{ $tag | urlize }}</a>
         {{- end -}} {{- end -}}
         {{ end }}
+        {{ if .Params.author }}
+          By {{ .Params.author }}
+        {{ end }}
       </div>
       {{ end }}
+      {{ .Content }}
     </section>
     {{ if eq .Section "posts" }}
     <div id="comments">

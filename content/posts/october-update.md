@@ -1,6 +1,7 @@
 ---
 title: "October Update: Ywallet audited, and what's next?"
 date: 2022-10-28T08:13:14-07:00
+author: "Taylor Hornby"
 draft: false
 ---
 

@@ -2,7 +2,7 @@
 title: "Zcash Ecosystem Security Overview"
 date: 2022-12-28T11:00:00-07:00
 slug: "overview"
-draft: true
+draft: false
 ---
 
 This page serves as an overview of the Zcash ecosystem from a security

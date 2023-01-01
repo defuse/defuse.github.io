@@ -9,7 +9,7 @@ theme = 'maverick'
 [params]
   logo = '/static/favicon-32.png'
   description = "Zcash Ecosystem Security Support"
-  
+
 
 [menu]
   [[menu.main]]
@@ -17,16 +17,16 @@ theme = 'maverick'
     name = "Blog"
     url = "/posts/"
     weight = -200
-#  [[menu.main]]
-#    identifier = "overview"
-#    name = "Overview"
-#    url = "/overview/"
-#    weight = "-160"
-#  [[menu.main]]
-#    identifier = "roadmap"
-#    name = "Roadmap"
-#    url = "/posts/zecsec-roadmap-for-2023/"
-#    weight = "-150"
+  [[menu.main]]
+    identifier = "overview"
+    name = "Overview"
+    url = "/overview/"
+    weight = "-160"
+  [[menu.main]]
+    identifier = "roadmap"
+    name = "Roadmap"
+    url = "/posts/zecsec-roadmap-for-2023/"
+    weight = "-150"
   [[menu.main]]
     identifier = "contact"
     name = "Contact"
