@@ -8,8 +8,8 @@ draft: false
 Happy New Year Zcash!
 
 For me, the days leading up to the new year are always a time of reflection and
-planning. In that spirit, I've laid out a roadmap for the ZecSec project in
-2023.
+planning. In that spirit, I've laid out a tentative roadmap for the ZecSec
+project in 2023.
 
 ## Upcoming Audits
 

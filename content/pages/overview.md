@@ -65,7 +65,7 @@ transparent addresses, replaced by the use of viewing keys.
 A popular use case for Zcash's memo field is sending messages. However, Zcash's
 memo field currently lacks several properties that are required for secure
 messaging. For example, it is not signed, so wallets cannot be sure of messages'
-origins, and it is not forward-secure, so if keys are compromised all past
+origins, and it is not forward-secure, so if keys are compromised, all past
 messages can be decrypted.
 
 We would like to see the memo field extended with more features so that it is
@@ -88,7 +88,7 @@ rules. As a result, a large portion of audit time is used inefficiently, spent
 finding and understanding consensus rule code.
 
 The efficiency of future consensus rule audits can be improved by labeling the
-locations of all consensus rules in the code. Electric Coin Co has already
+locations of all consensus rules in the code. Electric Coin Company has already
 [started on this project](https://github.com/zcash/zcash/pull/5912). Labeling
 more consensus rules is on [ZecSec's 2023 roadmap]({{<ref
 "zecsec-roadmap-for-2023.md">}}), but hopefully all maintainers of consensus
@@ -101,7 +101,7 @@ projects that are currently used, are in development, or run important
 infrastructure for the community. Listed below are all of the projects that are
 potentially in scope. 
 
-Note that security support has not yet been "rolled out" to many of these
+Note that security support has not yet been "rolled out" to most of these
 projects yet!  For more details on prioritization, see our [2023 roadmap]({{<
 ref "zecsec-roadmap-for-2023.md">}}). If your Zcash-related project is missing
 from the list below, [send us a note]({{< ref "contact.md">}}).
@@ -132,9 +132,9 @@ The work done for this grant is to be repurposed to support BTCPay instead.
 
 - https://forum.zcashcommunity.com/t/coinpayments-integration/39094 (superseded by the BTCPay grant)
 
-### Electric Coin Co Projects
+### Electric Coin Company Projects
 
-Electric Coin Co maintains many essential parts of the Zcash ecosystem:
+Electric Coin Company maintains many essential parts of the Zcash ecosystem:
 
 - [zcashd](https://github.com/zcash/zcash)
 - [librustzcash](https://github.com/zcash/librustzcash) (and many of its cryptographic dependencies)
@@ -197,7 +197,8 @@ It's unclear what their current status is (the website is throwing SSL errors).
 ### Nighthawk
 
 Nighthawk is an Android and iOS app for Zcash, originally built off of Electric
-Coin Co's demo ("dogfooding") app codebases, which uses Electric Coin Co's SDKs.
+Coin Company's demo ("dogfooding") app codebases, which uses Electric Coin
+Company's SDKs.
 
 Nighthawk has a number of components that are security-relevant:
 
@@ -205,7 +206,7 @@ Nighthawk has a number of components that are security-relevant:
 - [zcashblockexplorer.com](https://zcashblockexplorer.com) is running [nighthawk-apps/zcash-explorer](https://github.com/nighthawk-apps/zcash-explorer)
 - [nighthawk-apps/nighthawk-wallet-android](https://github.com/nighthawk-apps/nighthawk-wallet-android) is the android wallet.
 - [nighthawk-apps/zcash-ios-wallet](https://github.com/nighthawk-apps/zcash-ios-wallet) is the iOS wallet.
-- Various forks of Electric Coin Co repos: [nighthawk-apps/bip39](https://github.com/nighthawk-apps/bip39), [nighthawk-apps/zcash-android-wallet-sdk](https://github.com/nighthawk-apps/zcash-android-wallet-sdk), [nighthawk-apps/lightwalletd](https://github.com/nighthawk-apps/lightwalletd).
+- Various forks of Electric Coin Company repos: [nighthawk-apps/bip39](https://github.com/nighthawk-apps/bip39), [nighthawk-apps/zcash-android-wallet-sdk](https://github.com/nighthawk-apps/zcash-android-wallet-sdk), [nighthawk-apps/lightwalletd](https://github.com/nighthawk-apps/lightwalletd).
 
 
 #### Approved Grants
@@ -236,7 +237,7 @@ cryptocurrency payments. A grant was approved to integrate Zcash.
 
 ### Proof of Stake Design
 
-Electric Coin Co has proposed that Zcash transitions to Proof of Stake (PoS) in
+Electric Coin Company has proposed that Zcash transitions to Proof of Stake (PoS) in
 the near future. It is an open question which PoS design will be selected and
 what its security properties will be.
 
@@ -252,10 +253,11 @@ ended up moving to Tor out of a need for better performance.
 
 ### renZEC
 
-renZEC is an ERC20 token representing units of ZEC on the Ethereum Blockchain. A
-[currently-centralized bridge](https://github.com/renproject/ren/wiki/Phases) is
-used to maintain the peg between renZEC and ZEC.  A grant was approved to
-bootstrap liquidity for trading renZEC.
+Ren is a project that bridges between blockchains, producing, for example,
+renZEC as an ERC20 token representing units of ZEC on the Ethereum Blockchain. A
+[currently-centralized bridge](https://github.com/renproject/ren/wiki/Phases)
+holds funds and is used to maintain the peg between chains.  A grant was
+approved to bootstrap liquidity for trading renZEC.
 
 #### Approved Grants
 
@@ -302,7 +304,7 @@ The code for shielded Zcash is in [this pull request](https://github.com/trezor/
 
 ### Ywallet
 
-Ywallet is a Zcash and [Ycash](https://y.cash/) wallet built independently from the Electric Coin Co SDKs.
+Ywallet is a Zcash and [Ycash](https://y.cash/) wallet built independently from the Electric Coin Company SDKs.
 
 ### Approved Grants
 
@@ -368,7 +370,7 @@ reporting telemetry on the p2p network topology and other data.
 
 The [Zcash Protocol Specification](https://zips.z.cash/protocol/protocol.pdf)
 describes the Zcash protocol and its consensus rules. It is maintained by
-Electric Coin Co.
+Electric Coin Company.
 
 ### ZECPages
 
@@ -532,7 +534,7 @@ In 2019, [TrailOfBits audited ZecWallet](https://github.com/trailofbits/publicat
 
 ### 2020
 
-In 2020, [TrailOfBits audited Zcash Heartwood](https://electriccoin.co/blog/heartwood-security-assessment-turns-up-no-major-issues/), [NCC Group audited Zcash Canopy](https://electriccoin.co/blog/canopy-security-assessment-complete/), and [Electric Coin Co performed an internal audit of their wallets](https://electriccoin.co/blog/ecc-wallet-threat-model-and-security-assessment-results/).
+In 2020, [TrailOfBits audited Zcash Heartwood](https://electriccoin.co/blog/heartwood-security-assessment-turns-up-no-major-issues/), [NCC Group audited Zcash Canopy](https://electriccoin.co/blog/canopy-security-assessment-complete/), and [Electric Coin Company performed an internal audit of their wallets](https://electriccoin.co/blog/ecc-wallet-threat-model-and-security-assessment-results/).
 
 ### 2021
 
@@ -620,7 +622,7 @@ ZecWallet [optionally uses a "wormhole" service to allow a companion smartphone 
 
 ### Fuzzing ``zcashd`` with Kubernetes
 
-Electric Coin Co engaged in a project to [fuzz ``zcashd``'s C++ codebase in an
+Electric Coin Company engaged in a project to [fuzz ``zcashd``'s C++ codebase in an
 automated way using
 Kubernetes](https://electriccoin.co/blog/fuzzing-zcash-with-kubernetes/).
 
@@ -641,7 +643,7 @@ Zcash has been investigated in several academic works, linked below:
 - [Blockchain Access Privacy: Challenges and Directions](https://ieeexplore.ieee.org/abstract/document/8425613)
 - [Security and privacy of mobile wallet users in Bitcoin, Dash, Monero, and Zcash](https://www.sciencedirect.com/science/article/abs/pii/S1574119218307181)
 - [A Look into Privacy-Preserving Blockchains](https://ieeexplore.ieee.org/abstract/document/9035235)
-- [On the linkability of Zcash transactions](https://arxiv.org/abs/1712.01210) ([Electric Coin Co's response](https://electriccoin.co/blog/new-research-on-shielded-ecosystem/))
+- [On the linkability of Zcash transactions](https://arxiv.org/abs/1712.01210) ([Electric Coin Company's response](https://electriccoin.co/blog/new-research-on-shielded-ecosystem/))
 - [An Empirical Analysis of Anonymity in Zcash](https://www.usenix.org/conference/usenixsecurity18/presentation/kappos&lang=en)
 - [Extending the Anonymity of Zcash](https://arxiv.org/abs/1902.07337)
 - [Deanonymization and Linkability of Cryptocurrency Transactions Based on Network Analysis](https://ieeexplore.ieee.org/abstract/document/8806723)
