@@ -80,22 +80,6 @@ my best to accommodate you!
 In addition to security audits, there are a number of "side projects" I hope to
 work on to support Zcash's security.
 
-### Wallet Edge Cases
-
-A recommendation I've made in all of my wallet audits so far is to implement
-better integration testing of wallets' state management in the face of edge
-cases like reorgs, transactions failing to be mined, and other rare-but-possible
-occurrences. Bugs in handling these kinds of edge cases could leave wallets in
-invalid states, causing them to break or confuse users about how much funds they
-have.
-
-The first step towards improving wallet testing is to enumerate all such edge
-cases. With a complete list of edge cases, the quality of existing wallet tests
-can be measured by determining which edge cases are covered and which are not. 
-
-In 2023 I hope to release a nearly-complete edge case list, which can then be
-used by wallet authors to improve their tests.
-
 ### Office Hours and Other Security Assistance for Projects
 
 Anyone working in the Zcash ecosystem can now set up a private meeting with me
@@ -114,6 +98,22 @@ In addition to supporting Zcash projects themselves, I will also be available
 to the Zcash Grant Committee to support their decision-making by providing
 technical or security-related input.
 
+### Wallet Edge Cases
+
+A recommendation I've made in all of my wallet audits so far is to implement
+better integration testing of wallets' state management in the face of edge
+cases like reorgs, transactions failing to be mined, and other rare-but-possible
+occurrences. Bugs in handling these kinds of edge cases could leave wallets in
+invalid states, causing them to break or confuse users about how much funds they
+have.
+
+The first step towards improving wallet testing is to enumerate all such edge
+cases. With a complete list of edge cases, the quality of existing wallet tests
+can be measured by determining which edge cases are covered and which are not. 
+
+In 2023 I hope to release a nearly-complete edge case list, which can then be
+used by wallet authors to improve their tests.
+
 ### Consensus Rule Labeling
 
 A security engineer entering the Zcash ecosystem for the first time is faced
@@ -122,7 +122,7 @@ rules. As a result, a large portion of audit time is used inefficiently, spent
 finding and understanding consensus rule code.
 
 The efficiency of future consensus rule audits can be improved by labeling the
-locations of all consensus rules in the code. Electric Coin Co has already
+locations of all consensus rules in the code. Electric Coin Company has already
 [started on this project](https://github.com/zcash/zcash/pull/5912), and in 2023
 I hope to advance it by labeling more consensus rules and [writing a linter for
 the rule labeling format](https://github.com/zcash/zcash/issues/6011).
@@ -165,8 +165,8 @@ Usage of transparent transactions on the Zcash blockchain remains high.
 Transparent addresses and transactions offer users the ability to transact
 transparently, with consent, whenever they wish to do so. However, the high
 transparent usage might be a sign that some users misunderstand the privacy
-level provided by transparent transactions, or that users are forced into making
-parts of their transactions transparent by third-parties who do not fully
+level provided by transparent transactions or that users are forced into making
+parts of their transactions transparent, i.e. by third-parties who do not fully
 support shielded addresses. 
 
 I know of at least one anecdote where someone put themselves at risk by using a
@@ -200,4 +200,4 @@ Of course, all of these plans are subject to change in case new higher-priority
 risks or projects appear, but this should give the community a good sense for
 what to expect in the coming year.
 
-Let's make the new year Zcash's best year ever!
+Let's make the new year Zcash's best year yet!
