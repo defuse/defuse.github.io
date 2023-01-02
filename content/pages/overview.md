@@ -1,6 +1,6 @@
 ---
 title: "Zcash Ecosystem Security Overview"
-date: 2022-12-28T11:00:00-07:00
+date: 2023-01-02T11:00:00-07:00
 slug: "overview"
 draft: false
 ---
@@ -99,197 +99,403 @@ rule code will be able to contribute to this project.
 ZecSec aims to eventually provide security support for all Zcash-tangential
 projects that are currently used, are in development, or run important
 infrastructure for the community. Listed below are all of the projects that are
-potentially in scope.
+potentially in scope. 
 
-For more details on prioritization, see our [2023 roadmap]({{< ref "zecsec-roadmap-for-2023.md">}}). If your Zcash-related project is missing from the list below, [send us a note]({{< ref "contact.md">}}).
+Note that security support has not yet been "rolled out" to many of these
+projects yet!  For more details on prioritization, see our [2023 roadmap]({{<
+ref "zecsec-roadmap-for-2023.md">}}). If your Zcash-related project is missing
+from the list below, [send us a note]({{< ref "contact.md">}}).
 
 ### Arti
 
-TODO
+Arti is a Tor library written in pure Rust. It may soon be adopted by various
+Zcash wallets to improve wallet privacy in various ways.
+
+#### Approved Grants
+
+- https://forum.zcashcommunity.com/t/arti-a-pure-rust-tor-implementation-for-zcash-and-beyond/38776
+
+
+#### Proposed Grants
+
+- https://forum.zcashcommunity.com/t/arti-year-ii-funding-plan-onion-services-and-more/41387
 
 ### CoinPayments Zcash Integration
 
-TODO
+A grant was funded to add Zcash support into CoinPayments. Unfortunately the work was never picked up by CoinPayments:
 
-https://grants.zfnd.org/proposals/721236325-coinpayments-integration
+> Hi everyone, CoinPayments has informed us that they are scrapping their plans for the new platform which was the driver behind this grant to add shielded support. They are going to continue to support Zcash payments on the platform, but this means the work @hanh has done toward the integration will not be implemented.
+
+The work done for this grant is to be repurposed to support BTCPay instead.
+
+#### Approved Grants
+
+- https://forum.zcashcommunity.com/t/coinpayments-integration/39094 (superseded by the BTCPay grant)
 
 ### Electric Coin Co Projects
 
-- lightwalletd -- has received no third-party security review
-- Wallet App Threat Model
+Electric Coin Co maintains many essential parts of the Zcash ecosystem:
+
+- [zcashd](https://github.com/zcash/zcash)
+- [librustzcash](https://github.com/zcash/librustzcash) (and many of its cryptographic dependencies)
+- [lightwalletd](https://github.com/zcash/lightwalletd)
+- [iOS Wallet SDK](https://github.com/zcash/ZcashLightClientKit)
+- [Android Wallet SDK](https://github.com/zcash/zcash-android-wallet-sdk)
+- ["Secant" Wallet iOS](https://github.com/zcash/secant-ios-wallet)
+- ["Secant" Wallet Android](https://github.com/zcash/secant-android-wallet)
+- [Wallet App Threat Model](https://zcash.readthedocs.io/en/latest/rtd_pages/wallet_threat_model.html)
+- and many more...
 
 ### ElectrumZ
 
-TODO
+A grant was funded to make a fork of the [Electrum](https://electrum.org/)
+wallet with support for Zcash. 
+#### Approved Grants
+
+- https://forum.zcashcommunity.com/t/electrum-fork-for-zcash/30994
 
 ### Elemental ZEC - Zcash UI Component Kit and Payment
 
-TODO
+This grant aims to build frontend code making it easier for merchants to
+interact with Zcash. They are also building a watch-only wallet in node.js to
+serve as a backend in place of proper BTCPay integration.
+
+[Project website (docs)](https://elementalzcash.com/)
+
+#### Approved Grants
 
 https://grants.zfnd.org/proposals/648795356-elemental-zec-zcash-ui-component-kit-and-payment-processor
 
-### Free2z
+### Free2Z
 
-TODO
+[Free2Z](https://free2z.cash) is a blogging and donation platform built around Zcash.
+
+#### Approved Grants
 
 https://zcashgrants.org/gallery/25215916-53ea-4041-a3b2-6d00c487917d/24075557/
 
-### FROST / multisig
-	- TODO
+### FROST
+
+[FROST](https://zfnd.org/frost/) is a multiparty signature scheme, [in the
+process of being standardized](https://zfnd.org/frost/), that one day can be
+used to implement shielded multisig for Zcash. Its development is supported by
+the Zcash Foundation.
+
 ### Ledger support for Transparent Zcash
-	- See "Zondax" below for sheilded support.
-### moeda.casa
-	- TODO
-	- https://grants.zfnd.org/proposals/1868138724-moeda-casa-smart-brazilian-fiat-to-crypto-over-zcash
+
+Ledger maintains support for transparent Zcash in their hardware wallet offerings. See "Zondax" below for support for shielded Zcash on Ledger.
+
+### Moeda.casa
+
+Moeda.casa is some kind of crypto<->fiat exchange platform targeting Brazil.
+It's unclear what their current status is (the website is throwing SSL errors).
+
+#### Approved Grants
+
+- https://grants.zfnd.org/proposals/1868138724-moeda-casa-smart-brazilian-fiat-to-crypto-over-zcash
+
 ### Nighthawk
-	- Production lightwalletd instances (TODO: list the domains)
-	- nighthawk-apps/zcash-explorer
-		- and zcashblockexplorer.com -- production instance
-	- nighthawk-apps/nighthawk-wallet-android -- Android wallet
-	- nighthawk-apps/zcash-ios-wallet  -- iOS wallet
-	- Left out a bunch of forks (unmodified) including but not limited to:
-		- nighthawk-apps/bip39 (unmodified fork of a bip39 library)
-		-  nighthawk-apps/zcash-android-wallet-sdk (safe to ignore, no modifications from upstream)
-		- nighthawk-apps/lightwalletd
-		- It's probably a good idea to periodically check these for having changes from upstream (note this list is incomplete)
-### Oblivious Message Retreival (OMR)
-	- TODO
+
+Nighthawk is an Android and iOS app for Zcash, originally built off of Electric
+Coin Co's demo ("dogfooding") app codebases, which uses Electric Coin Co's SDKs.
+
+Nighthawk has a number of components that are security-relevant:
+
+- Production lightwalletd instances for wallets to connect to.
+- [zcashblockexplorer.com](https://zcashblockexplorer.com) is running [nighthawk-apps/zcash-explorer](https://github.com/nighthawk-apps/zcash-explorer)
+- [nighthawk-apps/nighthawk-wallet-android](https://github.com/nighthawk-apps/nighthawk-wallet-android) is the android wallet.
+- [nighthawk-apps/zcash-ios-wallet](https://github.com/nighthawk-apps/zcash-ios-wallet) is the iOS wallet.
+- Various forks of Electric Coin Co repos: [nighthawk-apps/bip39](https://github.com/nighthawk-apps/bip39), [nighthawk-apps/zcash-android-wallet-sdk](https://github.com/nighthawk-apps/zcash-android-wallet-sdk), [nighthawk-apps/lightwalletd](https://github.com/nighthawk-apps/lightwalletd).
+
+
+#### Approved Grants
+
+- https://forum.zcashcommunity.com/t/nighthawk-wallet-design-development-grant/39017
+- https://forum.zcashcommunity.com/t/2-years-of-lightwalletd-infra-hosting-maintenance/38126
+- https://forum.zcashcommunity.com/t/zcash-block-explorer-grant/38141
+- https://grants.zfnd.org/proposals/68882602
+
+### Oblivious Message Retrieval (OMR)
+
+[Oblivious Message Retrieval](https://eprint.iacr.org/2021/1256.pdf) is a
+homomorphic-encryption based approach to the "trial decryption" transaction
+scanning problem. A grant was awarded to build a prototype of the system.
+
+#### Approved Grants
+
+- https://forum.zcashcommunity.com/t/oblivious-message-retrieval/40715
+
 ### Payment Gateway with BTCPay
-	- TODO
+
+[BTCPay](https://btcpayserver.org/) is a self-hosted server for accepting
+cryptocurrency payments. A grant was approved to integrate Zcash.
+
+#### Approved Grants
+
+- https://forum.zcashcommunity.com/t/payment-gateway-btc-pay/40207
+
 ### Proof of Stake Design
 
-TODO
+Electric Coin Co has proposed that Zcash transitions to Proof of Stake (PoS) in
+the near future. It is an open question which PoS design will be selected and
+what its security properties will be.
 
 ### Quiet (formerly known as Zbay)
 
-https://www.tryquiet.org/
+[https://www.tryquiet.org/](Quiet), formerly known as Zbay, was a project that
+attempted to use the memo field as a secure communication layer. The project
+ended up moving to Tor out of a need for better performance.
 
-TODO does this even use Zcash at all anymore? Doesn't look like it.
+#### Approved Grants
 
-If it doesn't, take on some responsiblity for sec/performance marketing to bring it back.
+- https://forum.zcashcommunity.com/t/zbay-applied-for-a-zf-grant-any-feedback-on-our-proposal/36584
 
 ### renZEC
-	- TODO
-	- https://grants.zfnd.org/proposals/118814097-bootstrapping-liquidity-for-renzec-on-binance-smart-chain
+
+renZEC is an ERC20 token representing units of ZEC on the Ethereum Blockchain. A
+[currently-centralized bridge](https://github.com/renproject/ren/wiki/Phases) is
+used to maintain the peg between renZEC and ZEC.  A grant was approved to
+bootstrap liquidity for trading renZEC.
+
+#### Approved Grants
+
+- https://grants.zfnd.org/proposals/118814097-bootstrapping-liquidity-for-renzec-on-binance-smart-chain
 
 ### Stagnum (Zcash Node Hardware)
-	- "Zcash Node - RFP for portable device for running Zcashd nodes"
-	- TODO: find repos
-	- https://zcashgrants.org/gallery/25215916-53ea-4041-a3b2-6d00c487917d/31829236/
+
+Stagnum is a team that was approved for a grant to build a hardware device for easily running a Zcash fullnode.
+
+#### Approved Grants
+
+- https://zcashgrants.org/gallery/25215916-53ea-4041-a3b2-6d00c487917d/31829236/
 
 ### Telegram Anti-Scam Bot
-	- TODO
-	- https://zcashgrants.org/gallery/25215916-53ea-4041-a3b2-6d00c487917d/30972940/
+
+This is a bot that can be used within Telegram channels to kick out accounts
+that are obvious scammers. It uses simple matching against the accounts'
+usernames to kick out accounts that follow common scam patterns.
+
+#### Approved Grants
+
+- https://forum.zcashcommunity.com/t/zcash-anti-scam-telegram-bot-grant/42845
 
 ### Thorchain Integration
-	- TODO
 
-### Trezor Support for Transparent Zcash
+Thorchain is a decentralized exchainge (DEX). A grant was approved to integrate
+Zcash into Thorchain and their wallets.
 
-TODO
+#### Approved Grants
 
-### Trezor Support for Shielded Zcash
+- https://forum.zcashcommunity.com/t/zcash-thorchain-integration-grant/39564
 
-TODO
-https://grants.zfnd.org/proposals/1792958360-trezor-support-for-zcash-shielded-transactions
+### Trezor Support for Transparent & Shielded Zcash
 
-Master PR:
-https://github.com/trezor/trezor-firmware/pull/2472
+Trezor has long maintained support for transparent Zcash in their hardware
+wallets. More recently, they were awarded a grant to integrate with shielded
+Zcash.
+
+The code for shielded Zcash is in [this pull request](https://github.com/trezor/trezor-firmware/pull/2472).
+
+#### Approved Grants
+
+- https://forum.zcashcommunity.com/t/trezor-support-for-zcash-shielded-transactions/39420
 
 ### Ywallet
-- Orchard impl (forthcoming in a funded grant)
-- UA impl
-- He also wrote a cold wallet: https://grants.zfnd.org/proposals/643943131-cold-wallet
-  - Maybe break this out into its own item?
+
+Ywallet is a Zcash and [Ycash](https://y.cash/) wallet built independently from the Electric Coin Co SDKs.
+
+### Approved Grants
+
+- https://forum.zcashcommunity.com/t/ywallet-warp-sync/42620
+- https://forum.zcashcommunity.com/t/orchard-and-ua-for-ywallet/43061
+- https://forum.zcashcommunity.com/t/cold-wallet/38664
 
 ### Zboard
-- TODO
+
+Zboard is a reddit-like social media platform built on Zcash's memo field. At
+the time of writing, the website is not functional, presenting an error on the
+homepage.
+
+#### Approved Grants
+
 - https://grants.zfnd.org/proposals/1854600060-zboard-global-decentralized-news-hub
 
 ### Zcash Blockchain Infrastructure Grant
-- TODO
 
-### Zcash Community Forum
-- https://forum.zcashcommunity.com/
-- Deserves an audit, may be used to discus vulnerability information, etc.
+This is a grant to write containers and deployment infrastructure for Zcash full
+notes. The project's github is [zbitech](https://github.com/zbitech).
+
+#### Approved Grants
+
+- https://forum.zcashcommunity.com/t/grant-idea-zcash-blockchain-infrastructure-zbi/40514
+
+### Zcash Community Forums
+
+The [Zcash Community Forums](https://forum.zcashcommunity.com/) are hosted by
+the Zcash Foundation, they are a central hub of discussion among the Zcash
+community.
 
 ### Zcash Foundation Projects
-- TODO
+
+The Zcash Foundation maintains several projects central to the Zcash ecosystem:
+
+- [ZcashFoundation/zebra](https://github.com/ZcashFoundation/zebra)
+- [ZcashFoundation/frost](https://github.com/ZcashFoundation/frost)
 
 ### Zcash Media
-- Just watch their content and ensure technical / privacy accuracy
+
+Zcash Media is a project by 37 Laines (37L) that produces interviews and
+educational videos on the topic of Zcash.
+
+#### Approved Grants
+
+- https://forum.zcashcommunity.com/t/zcash-media-launch-plan/41138
+
+#### Proposed Grants
+
+- https://forum.zcashcommunity.com/t/zcash-media-2022-2023/42246
 
 ### Zcash Observatory
+
+Zcash Observatory is a project to augment zcashd with code for observing and
+reporting telemetry on the p2p network topology and other data.
+
+#### Approved Grants
+
 - https://grants.zfnd.org/proposals/21786689-zcash-observatory
 
 ### Zcash Protocol Specification
-- TODO
 
-### ZECPages (and Michael Harms' other repos)
-- michaelharms6010/zecpages
-- Its production lightwalletd server at https://lightwalletd.zecpages.com:443
-  - It invites external connections on their webpage
-- (he has other zcash related repos but says they aren't worth including)
-- Testnet Faucet - https://grants.zfnd.org/proposals/2008792221-zecpages-testnet-faucet-app-development-1-year-infra
+The [Zcash Protocol Specification](https://zips.z.cash/protocol/protocol.pdf)
+describes the Zcash protocol and its consensus rules. It is maintained by
+Electric Coin Co.
 
-### ZecWallet
-- adityapk00/* TODO
-- zecwalletco/zecwallet-mobile TODO WHAT IS THIS??
-- Production lightwalletd instances (TODO: list the domains)
-- TODO: find/audit their orchard impl (recent grant)
-- There are many many individual grants, if you're trying to list them all!
-- Orchard Grant: https://zcashgrants.org/gallery/25215916-53ea-4041-a3b2-6d00c487917d/26631279/
+### ZECPages
 
-### ZecWear - merch - https://zecwear.com/
-- TODO
+[ZECPages](https://zecpages.com) is a public message board built on Zcash's memo
+field. It runs a production lightwalletd server at
+``lightwalletd.zecpages.com:443`` and its code is on github at
+[michaelharms6010/zecpages](https://github.com/michaelharms6010/zecpages).
+Michael Harms has also received a grant to run a testnet faucet, linked below.
 
-### ZEGA - "A command line encrypted-file-sharing CLI using ZecWallet light client."
-- https://github.com/wh00hw/ZEGA
+#### Approved Grants
+
+- https://forum.zcashcommunity.com/t/1-year-of-zecpages-servers/38823
+- https://grants.zfnd.org/proposals/2008792221-zecpages-testnet-faucet-app-development-1-year-infra
+
+### ZecWallet and ZecWallet-Lite
+
+[ZecWallet](https://zecwallet.co/fullnode.html) is a UI+fullnode package for
+Windows, Mac, and Linux. [ZecWallet-Lite](https://zecwallet.co/index.html) is a
+Zcash light wallet. The authors of the wallets maintain [a fork of
+lightwalletd](https://github.com/adityapk00/lightwalletd) with additional
+features such as a price API and transaction spam filtering. They also run
+production lightwalletd instances for ZecWallet-Lite wallets.
+
+#### Approved Grants
+
+- https://forum.zcashcommunity.com/t/add-orchard-to-zecwallet-mobile-and-desktop-apps/42134
+- Many others (to be listed!)
+
+### ZecWear
+
+[ZecWear](https://zecwear.com) is a Zcash clothing and merch store.
+
+### ZEGA
+
+ZEGA describes itself as "a command line encrypted-file-sharing CLI using
+ZecWallet light client." The code lives at
+[wh00hw/ZEGA](https://github.com/wh00hw/ZEGA).
 
 ### Zeme Teme
-- https://zeme.team
+
+[Zeme Team](https://zeme.team) is a website for sharing Zcash-related memes.
+
+#### Approved Grants
+
+- https://forum.zcashcommunity.com/t/zeme-team-marketing-made-viral-for-zcash/38912
 
 ### Zemo
 
-https://forum.zcashcommunity.com/t/zemo-your-web3-inbox/41063/52
+Zemo is a proposed messaging app that would be built on the Zcash blockchain.
 
-### Zephyr (Metamask-like browser extension)
-- https://forum.zcashcommunity.com/t/project-zephyr-update/40657/6
-- TODO
+#### Proposed Grants
 
-### ZGo (Point of Sale) https://zgo.cash/ https://twitter.com/ZGoCashApp
-- TODO where is their code? I couldn't find their github
-- https://zcashgrants.org/gallery/25215916-53ea-4041-a3b2-6d00c487917d/25974825/
+- https://forum.zcashcommunity.com/t/zemo-your-web3-inbox/41063/15
+
+### Zephyr
+
+Zephyr is a still-in-development metamask-like browser extension for Zcash.
+
+#### Approved Grants
+
+- https://forum.zcashcommunity.com/t/zephyr-a-metamask-style-browser-extension-for-zcash/39112
+- https://forum.zcashcommunity.com/t/project-zephyr-update/40657 (update thread)
+
+### ZGo
+
+[ZGo](https://zgo.cash/) is a point-of-sale tool for Zcash. The project's
+twitter account is [ZGoCashApp](https://twitter.com/ZGoCashApp).
+
+#### Approved Grants
+
+- https://forum.zcashcommunity.com/t/zgo-the-zcash-register/41885
 
 ### Ziggurat
-- TODO: list repos
-- TODO: read up on all grant proposals
-- Latest one includes red teaming on testnet: https://zcashgrants.org/gallery/25215916-53ea-4041-a3b2-6d00c487917d/33263916/
-- 2.0: https://zcashgrants.org/gallery/25215916-53ea-4041-a3b2-6d00c487917d/23814137/
+
+Ziggurat is a security-focused project investigating Zcash's peer-to-peer
+network. Their main offering is a fuzzer of the p2p protocol which has proven
+successful at finding bugs and inconsistencies in the zcashd node's behavior.
+The project is being expanded from single-node testing into a tool that can
+actually crawl the network, and their latest grant proposes "red team" tests of
+testnet.
+
+### Approved Grants
+
+- https://forum.zcashcommunity.com/t/ziggurat-the-zcash-network-stability-framework/38758
+- https://forum.zcashcommunity.com/t/ziggurat-2-0/41201
+- https://forum.zcashcommunity.com/t/ziggurat-3-0/43350
 
 ### ZingoLabs' wallet (zingolabs on github):
-- zingolib (library and CLI interface, similar to zecwallet-lite-cli)
-- zingo-mobile (the moble apps proper)
-- zingo (a fork of zecwallet-lite ?)
-- Their orchard implementation: https://forum.zcashcommunity.com/t/implement-orchard/42706
-- TODO: see other grants for better understanding
-- Orchard Rust Library and user-facing library
-  - https://zcashgrants.org/gallery/25215916-53ea-4041-a3b2-6d00c487917d/32468187/
+
+[ZingoLabs](https://github.com/zingolabs) is a team in the process of developing
+Zcash software, including a wallet. Their notable GitHub repos are:
+
+- [zingolib](https://github.com/zingolabs/zingolib) -- a library and command-line interface
+- [zingo-mobile](https://github.com/zingolabs/zingo-mobile) -- the mobile apps themselves.
+- [zingo](https://zingolabs/zingo) -- a fork of zecwallet-lite
+
+#### Approved Grants
+
+- https://forum.zcashcommunity.com/t/implement-orchard/42706
 
 ### ZIPs
-	- TODO: various community-authored zips
+
+Changes to the Zcash protocol are described using [Zcash Improvement Proposals](https://zips.z.cash/).
 
 ### Zondax (Zcash Ledger App)
-- zondax/ledger-zcash -- the main ledger app
-- zondax/zindexer -- no idea what this is but it has a "z"
-- zondax/ledger-zcash-rs -- rust library used by the ledger app
-- zondax/zxtestrunner -- no idea but it has a "z"
-- TODO: find the PRs they have submitted to various repos for integration
+
+Zondax is the team building shielded support for Ledger hardware wallets. Their
+code lives in the [zondax](https://github.com/zondax) GitHub Org, with the main
+implementation being in
+[zondax/ledger-zcash](https://github.com/zondax/ledger-zcash).
+
+#### Approved Grants
+
+- https://forum.zcashcommunity.com/t/hw-wallets-z-transactions/34867/24
 - https://grants.zfnd.org/proposals/310598051-new-zcash-ledger-app-integration
 
-### ZSAs -- by QEDIT
-- Everything is linked here: https://forum.zcashcommunity.com/t/grant-update-zcash-shielded-assets-monthly-updates/41153
-- TODO break out all the links to ZIP PRs
+### ZSAs
+
+Zcash Shielded Assets (ZSAs) is an extension to the Zcash protocol that, once
+implemented, will allow shielded transactions to support different asset types,
+e.g. BTC-on-ZEC. The designs and implementations are being provided by QEDIT, funded through a grant.
+
+Links to the draft ZIP specifications and the implementation code can be found in [this forum comment](https://forum.zcashcommunity.com/t/grant-update-zcash-shielded-assets-monthly-updates/41153/18?u=earthrise).
+
+#### Approved Grants
+
+- https://forum.zcashcommunity.com/t/grant-update-zcash-shielded-assets-monthly-updates/41153
 - https://zcashgrants.org/gallery/25215916-53ea-4041-a3b2-6d00c487917d/33106640/
 
 ## List of Security Audits
