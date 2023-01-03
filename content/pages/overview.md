@@ -1,6 +1,6 @@
 ---
 title: "Zcash Ecosystem Security Overview"
-date: 2023-01-02T11:00:00-07:00
+date: 2023-01-03T11:00:00-07:00
 slug: "overview"
 draft: false
 ---
@@ -19,7 +19,7 @@ This page is updated quarterly. The last update was on 2023-01-01.
 
 So far, the ZecSec project has completed the following security audits:
 
-- Ywallet: *report forthcoming*.
+- [Ywallet Security and Privacy Analysis]({{<ref "ywallet-audit-published.md">}})
 - zecwallet-lite-cli and adityapk00's modifications to lightwalletd: *report forthcoming*.
 
 ## Highlighting Open Problems and Challenges

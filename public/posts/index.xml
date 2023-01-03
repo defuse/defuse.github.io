@@ -6,7 +6,27 @@
     <description>Recent content in Posts on ZecSec: Zcash Ecosystem Security</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 29 Dec 2022 07:00:00 -0700</lastBuildDate><atom:link href="https://zecsec.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 Jan 2023 07:00:00 -0700</lastBuildDate><atom:link href="https://zecsec.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>YWallet Audit Results Published</title>
+      <link>https://zecsec.com/posts/ywallet-audit-published/</link>
+      <pubDate>Tue, 03 Jan 2023 07:00:00 -0700</pubDate>
+      
+      <guid>https://zecsec.com/posts/ywallet-audit-published/</guid>
+      <description>Download the full YWallet Security and Privacy Analysis Report (PDF)</description>
+    </item>
+    
+    <item>
+      <title>ZecSec Roadmap for 2023</title>
+      <link>https://zecsec.com/posts/zecsec-roadmap-for-2023/</link>
+      <pubDate>Mon, 02 Jan 2023 11:00:00 -0700</pubDate>
+      
+      <guid>https://zecsec.com/posts/zecsec-roadmap-for-2023/</guid>
+      <description>Happy New Year Zcash!
+For me, the days leading up to the new year are always a time of reflection and planning. In that spirit, I&amp;rsquo;ve laid out a tentative roadmap for the ZecSec project in 2023.
+Upcoming Audits 1. Lightwalletd All Zcash light wallets rely on the lightwalletd project to obtain transaction information and to broadcast transactions to the network. Despite its central importance to the Zcash ecosystem, it has never been subjected to a third-party audit.</description>
+    </item>
+    
     <item>
       <title>Security Audit Process</title>
       <link>https://zecsec.com/posts/security-audit-process/</link>

@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Liste - https://zecsec.com/">
+    <title>Security Audit Process | ZecSec: Zcash Ecosystem Security</title>
+    <meta name="description" content="Zcash Ecosystem Security Support">
+    <meta property="og:title" content="Security Audit Process" />
+<meta property="og:description" content="In this post, I&rsquo;m going to shed light on the process I follow to find bugs in my audits of Zcash ecosystem software. Hopefully, this will be useful to you if you are looking to understand more about how audits work or even learning how to audit software yourself.
+The process I&rsquo;m describing here should not be taken as gospel. Different security auditors follow different processes, and I often deviate from this process significantly to tailor my audits to the specific projects I am helping." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zecsec.com/posts/security-audit-process/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-12-29T07:00:00-07:00" />
+<meta property="article:modified_time" content="2022-12-29T07:00:00-07:00" />
+
+    <meta itemprop="name" content="Security Audit Process">
+<meta itemprop="description" content="In this post, I&rsquo;m going to shed light on the process I follow to find bugs in my audits of Zcash ecosystem software. Hopefully, this will be useful to you if you are looking to understand more about how audits work or even learning how to audit software yourself.
+The process I&rsquo;m describing here should not be taken as gospel. Different security auditors follow different processes, and I often deviate from this process significantly to tailor my audits to the specific projects I am helping."><meta itemprop="datePublished" content="2022-12-29T07:00:00-07:00" />
+<meta itemprop="dateModified" content="2022-12-29T07:00:00-07:00" />
+<meta itemprop="wordCount" content="2634">
+<meta itemprop="keywords" content="" />
+    
+    <link rel="canonical" href="https://zecsec.com/posts/security-audit-process/">
+    <link rel="shortcut icon" type="image/png" href="/favicon-32.png">
+    <link rel="shortcut icon" sizes="32x32" href="/favicon-32.png">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link href="https://www.google-analytics.com" rel="preconnect" crossorigin>
+    <link rel="alternate" type="application/atom+xml" title="ZecSec: Zcash Ecosystem Security" href="https://zecsec.com//atom.xml" />
+    <link rel="alternate" type="application/json" title="ZecSec: Zcash Ecosystem Security" href="https://zecsec.com//feed.json" />
+    <link rel="shortcut icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=">
+    
+    <style>*,:after,:before{box-sizing:border-box;padding:0}body{font:1rem/1.5 '-apple-system',BlinkMacSystemFont,avenir next,avenir,helvetica,helvetica neue,ubuntu,roboto,noto,segoe ui,arial,sans-serif;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;padding:2rem;background:#f5f5f5;color:#000}.skip-link{position:absolute;top:-40px;left:0;background:#eee;z-index:100}.skip-link:focus{top:0}h1,h2,h3,h4,h5,strong,b{font-size:inherit;font-weight:600}h2{font-size:1.5em}h3{font-size:1.2em;color:#454545}header{line-height:2;padding-bottom:1.5rem}.link{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-decoration:none}.time{font-variant-numeric:tabular-nums;white-space:nowrap}blockquote{border-left:5px solid #eee;padding-left:1rem;margin:0}a,a:visited{color:inherit}a:hover,a.heading-link{text-decoration:none}pre{padding:.5rem;overflow:auto;overflow-x:scroll;overflow-wrap:normal}code,pre{font-family:San Francisco Mono,Monaco,consolas,lucida console,dejavu sans mono,bitstream vera sans mono,monospace;font-size:normal;font-size:small;background:#eee}code{margin:.1rem;border:none}ul{list-style-type:square}ul,ol{padding-left:1.2rem}.list{line-height:2;list-style-type:none;padding-left:0}.list li{padding-bottom:.1rem}.meta{color:#777}.content{max-width:70ch;margin:0 auto}header{line-height:2;display:flex;justify-content:space-between;padding-bottom:1rem}header a{text-decoration:none}header ul{list-style-type:none;padding:0}header li,header a{display:inline}h2.post{padding-top:.5rem}header ul a:first-child{padding-left:1rem}.nav{height:1px;background:#000;content:'';max-width:10%}.list li{display:flex;align-items:baseline}.list li time{flex:initial}.hr-list{margin-top:0;margin-bottom:0;margin-right:.5rem;margin-left:.5rem;height:1px;border:0;border-bottom:1px dotted #ccc;flex:1 0 1rem}.m,hr{border:0;margin:3rem 0}img{max-width:100%;height:auto}h2.post{margin-bottom:0}.post-date{margin:0% 0;color:#9a9a9a}.index-date{color:#9a9a9a}.animate-blink{animation:opacity 50s infinite;opacity:1;display:none}@keyframes opacity{0%{opacity:1}50%{opacity:.5}100%{opacity:0}}.tags{display:flex;justify-content:space-between}.tags ul{padding:0;margin:0}.tags li{display:inline}.avatar{height:120px;width:120px;position:relative;margin:-10px 0 0 15px;float:right;border-radius:50%}</style>
+  
+    
+  
+  
+  <script type="application/ld+json">
+  {
+      "@context": "http://schema.org",
+      "@type": "BlogPosting",
+      "articleSection": "posts",
+      "name": "Security Audit Process",
+      "headline": "Security Audit Process",
+      "alternativeHeadline": "",
+      "description": "In this post, I\u0026rsquo;m going to shed light on the process I follow to find bugs in my audits of Zcash ecosystem software. Hopefully, this will be useful to you if you are looking to understand more about how audits work or even learning how to audit software yourself.\nThe process I\u0026rsquo;m describing here should not be taken as gospel. Different security auditors follow different processes, and I often deviate from this process significantly to tailor my audits to the specific projects I am helping.",
+      "inLanguage": "en-us",
+      "isFamilyFriendly": "true",
+      "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https:\/\/zecsec.com\/posts\/security-audit-process\/"
+      },
+      "author" : {
+          "@type": "Person",
+          "name": "Taylor Hornby"
+      },
+      "creator" : {
+          "@type": "Person",
+          "name": "Taylor Hornby"
+      },
+      "accountablePerson" : {
+          "@type": "Person",
+          "name": "Taylor Hornby"
+      },
+      "copyrightHolder" : "ZecSec: Zcash Ecosystem Security",
+      "copyrightYear" : "2022",
+      "dateCreated": "2022-12-29T07:00:00.00Z",
+      "datePublished": "2022-12-29T07:00:00.00Z",
+      "dateModified": "2022-12-29T07:00:00.00Z",
+      "publisher":{
+          "@type":"Organization",
+          "name": "ZecSec: Zcash Ecosystem Security",
+          "url": "https://zecsec.com/",
+          "logo": {
+              "@type": "ImageObject",
+              "url": "https:\/\/zecsec.com\/static\/favicon-32.png",
+              "width":"32",
+              "height":"32"
+          }
+      },
+      "image": "https://zecsec.com/static/favicon-32.png",
+      "url" : "https:\/\/zecsec.com\/posts\/security-audit-process\/",
+      "wordCount" : "2634",
+      "genre" : [ ],
+      "keywords" : [ ]
+  }
+  </script>
+  
+  
+  </head>
+<body>
+  <a class="skip-link" href="#main">Skip to main</a>
+  <main id="main">
+  <div class="content">
+    <header>
+<p style="padding: 0;margin: 0;">
+  <a href="/">
+    <b>ZecSec: Zcash Ecosystem Security</b>
+    <span class="text-stone-500 animate-blink">▮</span>
+  </a>
+</p>
+<ul style="padding: 0;margin: 0;">
+  
+  
+  <li class="">
+    <a href="/posts/"><span>Blog</span></a>
+    
+  <li class="">
+    <a href="/overview/"><span>Overview</span></a>
+    
+  <li class="">
+    <a href="/posts/zecsec-roadmap-for-2023/"><span>Roadmap</span></a>
+    
+  <li class="">
+    <a href="/contact/"><span>Contact</span></a>
+    
+  </li>
+</ul>
+</header>
+<hr class="hr-list" style="padding: 0;margin: 0;">
+    <section>
+      <h2 class="post">Security Audit Process</h2>
+      
+      <div class="post-date">
+        <span class="g time">December 29, 2022 </span> &#8729;
+         
+        
+          By Taylor Hornby
+        
+      </div>
+      
+      <p>In this post, I&rsquo;m going to shed light on the process I follow to find bugs in my
+audits of Zcash ecosystem software. Hopefully, this will be useful to you if you
+are looking to understand more about how audits work or even learning how to
+audit software yourself.</p>
+<p>The process I&rsquo;m describing here should not be taken as gospel.  Different
+security auditors follow different processes, and I often deviate from this
+process significantly to tailor my audits to the specific projects I am helping.</p>
+<h2 id="audit-process">Audit Process</h2>
+<h3 id="scoping-and-timeboxing">Scoping and Timeboxing</h3>
+<p>The first step in any audit is to understand <em>what you&rsquo;re auditing</em> and <em>how
+long you have to audit it</em>. This is crucial, because auditor-time is an
+exceptionally rare resource, so it needs to be applied effectively and to the
+right thing.</p>
+<p>In commercial engagements, the client and auditor often roughly agree on a
+timeframe and budgeting (e.g. 2 weeks of auditing at $2,000 per auditor-day),
+and have a back-and-forth discussion about the scope and sign mutual contracts
+before the engagement begins. This is an inefficiency in the process that I
+personally like to avoid, and thankfully past clients have trusted me to choose
+my own scope, prioritizing what I feel is most important for the client. A
+detailed scoping process makes sense whenever the client is already aware of
+specific kinds of risks they need to mitigate, or if multiple auditors are being
+hired to look at the same project and are to be tasked with different focus
+areas.</p>
+<p>Out of this step in the process, you want to know how many days of paid time you
+have, what general categories of bugs you&rsquo;ll be looking for, and if anything is
+off-limits (such as pen-testing production systems). You should also make it
+clear up front whether or not the audit report will be published, as audit firms
+are sometimes hesitant to do so, not wanting their report to be seen as a
+&ldquo;guarantee of security&rdquo; or &ldquo;stamp or approval&rdquo;, and clients may not want their
+mistakes to be publicized.</p>
+<h3 id="brainstorming--target-research">Brainstorming &amp; Target Research</h3>
+<p>I see auditing as a creative process, so once any engagement begins, the first
+thing I do is start brainstorming. Before I look at anything specific to the
+target project, I think about what kind of project it is and try to enumerate
+all the things that could possibly go wrong with <em>that kind of thing</em>. For
+example, if it&rsquo;s an encryption program, I think about: weak key generation,
+nonce reuse, weak encryption algorithms, lack of authentication, side-channel
+attacks, and so on. I write all of these possibilities down. The point of this
+exercise is to bring all of the things that <em>might</em> go wrong into your
+short-term memory so that they will stand out to you, if they actually <em>have</em>
+gone wrong, while you&rsquo;re reading the relevant code.</p>
+<p>Next, I learn as much as I can about the target project without diving into
+anything too technical. I read the docs, the changelog, issues that look
+relevant to security on the issue tracker, google for past vulnerabilities, and
+read any past audit reports of the project. I build and use the project, too. As
+I am doing that, I keep expanding my brainstorm notes with new ideas that come to
+mind.</p>
+<p>At the end of the brainstorming and research phase, you should have a list of
+<em>potential bugs</em> and <em>attacker goals</em>. Your potential-bugs list is a brainstorm
+that ideally includes all weaknesses that could possibly exist in the target
+project (e.g. weak random number generator), and your attacker-goals list is a
+brainstorm that ideally includes any goals an attacker might have (e.g.  decrypt
+the data).</p>
+<p>Your goal, during the audit, will be to find a set of weaknesses that an
+attacker could exploit to accomplish their goal (e.g. the random number generator
+produces weak keys, so an attacker can brute-force the key and decrypt the
+data).</p>
+<h3 id="threat-modeling">Threat Modeling</h3>
+<p>At this point, you have a good understanding of what the target project is, what
+weaknesses it might have, and the various ways attackers might try to attack its
+users. If time permits, you can write up a formal (or at least detailed) threat
+model for the project. If you do this right, it will help the developers
+understand the security properties of their own software that they need to
+maintain in the future, help users understand what security properties they&rsquo;re
+actually getting, and speed up future audits.</p>
+<p>There are many valid approaches to threat modeling, a common one is
+<a href="https://en.wikipedia.org/wiki/STRIDE_(security)">STRIDE</a>, however I prefer an
+approach that I call <a href="https://github.com/defuse/ictm">Invariant-Centric Threat
+Modeling</a> which puts users first, requiring
+security properties to be written in language that users can actually
+understand, and considers it a &ldquo;bug&rdquo; if users ever think they are getting some
+security property that they actually are not.</p>
+<h3 id="source-code-review">Source Code Review</h3>
+<p>Finally, the actual review process begins. I start by understanding the
+directory structure of the project (the <code>tree</code> command is very helpful!).
+Then, I start reading code file-by-file. If there is an entrypoint to the
+project (i.e. <code>main())</code>), I will usually start there. But generally, I will
+just read each file, in alphabetical order.</p>
+<p>You might be a little surprised by the fact I read the files in alphabetical
+order. Wouldn&rsquo;t it be better to <em>understand</em> the program by tracing through call
+stacks, understanding how classes relate to each other by drawing UML diagrams,
+and so forth?  In a time-crunched audit (as all audits are), this actually isn&rsquo;t
+the best use of time. It&rsquo;s important to understand how the code you&rsquo;re reading
+fits in to the overall structure of the program, but if the code is well-written
+and classes and functions are well-named, you can often correctly guess how it
+fits in. In practice, I find most of my bugs in this linear scan of the code. A
+linear scan of the code also guarantees a kind of completeness: you can be sure
+that you&rsquo;ve at least had your eyeballs pointed at every single line of code in
+the project.</p>
+<p>For this to work, the brainstorming process mentioned above is essential.
+Without it, problems won&rsquo;t &ldquo;jump out&rdquo; at you as you are reading through the
+code. It&rsquo;s also important to <em>continue</em> that same brainstorming process <em>as</em> you
+read the code, making note of any new ideas for potential problems that come to
+mind as you are diving deeper into the code. Make notes, like &ldquo;this function
+returns -1 on error, if the caller doesn&rsquo;t check it, a decryption error might be
+unnoticed, is the caller actually checking it?&rdquo;, instead of getting bogged down
+confirming problems in this part of the process.</p>
+<p>After the first pass of source code review, you should have an expanded set of
+notes with some potential issues, which you&rsquo;ll want to check later. I use a star
+system to help prioritize which possible problems are most-worth looking into
+later, e.g. &ldquo;*** it looks like it&rsquo;s using <code>rand()</code> to generate key!?&rdquo;, &ldquo;* make
+sure the caller doesn&rsquo;t pass a negative number here or else this will panic&rdquo;.</p>
+<p>You should also be confused about a lot of things and have notes like &ldquo;I don&rsquo;t
+get how this works!?&rdquo;, &ldquo;*** wtf how can this possibly be secure!!??&rdquo;. In this stage,
+we&rsquo;ve been going for breadth and speed rather than depth and confirmation; this
+is normal.</p>
+<p>This is a good point to pause and do even more brainstorming. Ask yourself &ldquo;what
+else could go wrong?&rdquo;, &ldquo;could any of the more-minor problems I&rsquo;ve
+identified be combined together to attack the system in bigger ways?&rdquo;</p>
+<h3 id="check-priority-potential-issues">Check Priority Potential Issues</h3>
+<p>After reviewing most or all of the code, you should have a much better
+understanding of how the code works, where things are, and a big list of TODOs:
+possible problems and a bunch of things you&rsquo;re really confused about. The next
+step is to confirm some of those potential issues. This is the part where you
+actually need to start tracing through call stacks, understanding classes'
+relationships to each other, understanding if vulnerable-looking code is
+actually something an attacker&rsquo;s input can reach, and so on.</p>
+<p>If you&rsquo;re really time-crunched, you won&rsquo;t be able to check everything, so
+prioritize by which problems you intuitively think are most likely to be &ldquo;real&rdquo;,
+and by which kinds of problems would be the worst for the project&rsquo;s users.</p>
+<p>A key thing to look for in this stage is the correctness (or incorrectness) of
+how different components of the software interface with each other. This is
+especially true when the different components were written by different people,
+e.g. if your target software uses a library, you want to carefully read that
+library&rsquo;s documentation and make sure it&rsquo;s being used correctly.</p>
+<p>At the end of this stage, you should have found the bulk of the issues which you
+can begin writing up in your report.</p>
+<h3 id="deep-analysis-for-correctness">Deep Analysis for Correctness</h3>
+<p>Following the steps above will give you a broad and efficient coverage of the
+entire project, and you will likely have found most of the bugs that will make
+it into your report. For some kinds of code, it&rsquo;s unavoidably necessary to dive
+in much deeper and check that <em>everything</em> is correct.</p>
+<p>&ldquo;Correctness&rdquo; means that the code always does what it is intended to, i.e. that
+there are no bugs at all. As much as security engineers like to talk about
+&ldquo;security bugs&rdquo; as a distinct category from &ldquo;ordinary&rdquo; kinds of bugs,
+security is really about correctness. That&rsquo;s because <em>any</em> kind of bug, even
+ones that seem benign, can potentially be used by an attacker to further their
+goals.</p>
+<p>For certain kinds of code, especially cryptography, parsers, and anything
+enforcing access control, there is no way to assure security except to deeply
+understand and ensure the absolute correctness of all of the relevant code. The
+modern way to do this is via formal verification, a computer-checkable proof
+that the code will always do exactly what it is intended to do. Formal
+verification is expensive to implement (but tools are getting better), and it
+depends on having a detailed specification of what the code is &ldquo;supposed to do&rdquo;,
+so it is not always a viable option.</p>
+<p>The next best thing is for a human&mdash;the auditor&mdash;to carefully check that
+everything is correct. Based on the preceding stages, you should have a good
+idea of which parts of the target program are ultra-security-critical and are
+worthy of checking for correctness in extreme detail. The mindset to be in here
+is that of someone trying to <em>prove</em> the code is correct. Unless you are
+absolutely, mathematically, convinced that the code is correct and conforms to
+its specification, you still have more work to do.</p>
+<p>Doing this is extremely costly; whereas you might be able to get through a dozen
+source code files in a day of normal review, it might take an entire day of
+careful thinking to ensure the correctness of just one part of a cryptographic
+algorithm or protocol.</p>
+<p>There are some tricks to avoid this, such as writing randomized tests to compare
+two implementations of cryptographic primitives against each other, but to
+whatever degree the relevant code is absolutely essential for security, you
+often have to spend a lot of time checking its correctness.</p>
+<h3 id="the-writeup">The Writeup</h3>
+<p>At last, it&rsquo;s time to write up the report. The format I like to use is:</p>
+<ol>
+<li>Introduction &ndash; describe the audit scope and write up the threat model for the project (if they don&rsquo;t already have one).</li>
+<li>Security &amp; Privacy Findings &ndash; list each issue that you&rsquo;ve found, describing its severity and recommended prioritization, explaining it in detail, and recommend ways to fix it.</li>
+<li>Recommendations &ndash; make suggestions to improve the overall quality of the code and/or speed up future audits.</li>
+<li>Good Things &ndash; say genuine good things about the project/code, so that the report isn&rsquo;t all negative.</li>
+<li>Future Work &ndash; list the things you couldn&rsquo;t cover in this audit, but should be covered by future audits. This section will be invaluable to future auditors.</li>
+<li>Conclusion &ndash; summarize everything briefly.</li>
+</ol>
+<h3 id="remediation--checking-the-fixes">Remediation &amp; Checking the Fixes</h3>
+<p>It is common for fixes to reported security bugs to be incomplete or incorrect,
+so it&rsquo;s important to evaluate the fixes to the bugs you have reported. A really
+common pattern is for developers to &ldquo;block the exploit&rdquo;, i.e. prevent one way of
+exploiting the issue you described, without fixing the actual underlying
+problem. I like to remain available to the developers of the projects I audit
+until I&rsquo;ve confirmed that all of the issues are fixed or we&rsquo;ve mutually agreed a
+fix is unnecessary or is safe to de-prioritize.</p>
+<h2 id="tooling--automation">Tooling &amp; Automation</h2>
+<p>What I&rsquo;ve described above is for a manual security review. Sometimes it&rsquo;s
+useful to use tools to assist with the audit process. However, I personally
+haven&rsquo;t found much success using security-specific tooling in my audits.
+Anything an XSS or SQL injection scanner might find would definitely be found in
+the manual review I would be doing anyway.</p>
+<p>There are some exceptions, where automation and tooling is really helpful:</p>
+<h3 id="unit-integration-and-regression-tests">Unit, Integration, and Regression Tests</h3>
+<p>A unit test or integration test of a software&rsquo;s security property is worth a
+thousand reviews, because it can be run automatically upon every change to the
+software, perpetually ensuring that the property is satisfied.</p>
+<p>It might feel stupid, but make sure all the basic tests are in place, like &ldquo;try
+to decrypt the file with the wrong password&rdquo; or &ldquo;make the software connect to a
+server with a self-signed certificate.&rdquo; Even stupid tests will catch bugs
+sometimes.</p>
+<p>Think about all the edge cases the target software might encounter, and
+recommend that all of those edge cases be tested.</p>
+<p>Whenever a security bug is found, do the best you can to test for the presence
+of that-or-similar bugs, so that if it ever gets re-introduced, it will be caught quickly.</p>
+<h3 id="dependency-update-checkers">Dependency Update Checkers</h3>
+<p>Tools like <code>cargo audit</code>, <code>./gradlew dependencyCheckAnalyze</code>, <code>npm outdated</code> are invaluable for finding dependencies that are out of date or have
+known vulnerabilities. These kinds of tools are available for most languages and
+platforms, use them!</p>
+<h3 id="fuzzing">Fuzzing</h3>
+<p>Fuzzing is the process of using various types of algorithms to generate &ldquo;random&rdquo;
+input to throw at your program to try to find bugs and crashes.
+Counter-intuitively, fuzzing can be <a href="https://lcamtuf.coredump.cx/afl/">incredibly successful at finding
+bugs</a>, especially in projects written in
+unsafe languages like C/C++.</p>
+<p>You can also &ldquo;fuzz&rdquo; implementations of cryptographic algorithms against each
+other. If two implementations of a cipher or hash function, say, are supposed
+to be equivalent, you can find differences between them by throwing the same
+random data at both, as long as any &ldquo;bug&rdquo; occurs with a sufficiently high
+probability.</p>
+<h2 id="to-write-exploits-or-not">To Write Exploits, or Not?</h2>
+<p>So far, I&rsquo;ve written about how to find bugs, but what about exploiting them?
+Exploitation is often the funnest part of security work, but it often isn&rsquo;t
+necessary. If the client understands the bug and is going to fix it, then it
+usually isn&rsquo;t worth the time to develop an exploit.</p>
+<p>The two exceptions are: (a) if the client doesn&rsquo;t acknowledge the existence of a
+bug and you need to prove it&rsquo;s real, you need to write an exploit, and (b) if
+you&rsquo;ve got a severe bug on your hands, and you need to understand its
+consequences or exploitability more-precisely, it can be beneficial to write an
+exploit.</p>
+<p>I personally prefer to make false-positive errors in my security work than
+false-negative errors. That is, if I&rsquo;m unsure about the exploitability of a
+given issue, I&rsquo;ll include it in my report anyway, accepting a small chance that
+I&rsquo;m wrong. This saves the cost of rigorously proving the existence of the
+problem, and makes sure that nothing that could be a real issue gets dropped.
+The downside is that you might be embarrassed by reporting a bug that isn&rsquo;t
+real, but that&rsquo;s better than the alternative.</p>
+
+    </section>
+    
+    <div id="comments">
+      <script src="https://utteranc.es/client.js"
+    repo=
+    issue-term="pathname"
+    theme=
+    crossorigin="anonymous"
+    async>
+</script>
+
+    </div>
+    
+  </div>
+</main>
+</body>
+</html>

@@ -6,19 +6,184 @@
     <link>https://zecsec.com/</link>
     
     <language>en</language>
-    <copyright>Copyright 292929, Calvin Tran</copyright>
-    <lastBuildDate>Thu, 29 Dec 2022 07:00:00 -0700</lastBuildDate>
+    <copyright>Copyright 3033, Calvin Tran</copyright>
+    <lastBuildDate>Tue, 03 Jan 2023 07:00:00 -0700</lastBuildDate>
     <generator>Hugo - gohugo.io</generator>
     <docs>http://cyber.harvard.edu/rss/rss.html</docs>
     <atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/>
+    
+    <item>
+      <title>YWallet Audit Results Published</title>
+      <link>https://zecsec.com/posts/ywallet-audit-published/</link>
+      <description>&lt;p&gt;&lt;a href=&#34;https://zecsec.com/audits/YWalletAuditReport-FINAL-v3.pdf&#34;&gt;&lt;strong&gt;Download the full YWallet Security and Privacy Analysis Report (PDF)&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+      <author>trandcanh@gmail.com (Calvin Tran)</author>
+      <guid>https://zecsec.com/posts/ywallet-audit-published/</guid>
+      <pubDate>Tue, 03 Jan 2023 07:00:00 -0700</pubDate>
+    </item>
+    
+    <item>
+      <title>ZecSec Roadmap for 2023</title>
+      <link>https://zecsec.com/posts/zecsec-roadmap-for-2023/</link>
+      <description>&lt;p&gt;Happy New Year Zcash!&lt;/p&gt;
+&lt;p&gt;For me, the days leading up to the new year are always a time of reflection and
+planning. In that spirit, I&amp;rsquo;ve laid out a tentative roadmap for the ZecSec
+project in 2023.&lt;/p&gt;
+&lt;h2 id=&#34;upcoming-audits&#34;&gt;Upcoming Audits&lt;/h2&gt;
+&lt;h3 id=&#34;1-lightwalletd&#34;&gt;1. Lightwalletd&lt;/h3&gt;
+&lt;p&gt;All Zcash light wallets rely on the
+&lt;a href=&#34;https://github.com/zcash/lightwalletd&#34;&gt;lightwalletd&lt;/a&gt; project to obtain
+transaction information and to broadcast transactions to the network.  Despite
+its central importance to the Zcash ecosystem, it has never been subjected to a
+third-party audit. I&amp;rsquo;ll begin the year with a thorough security review of its
+entire codebase.&lt;/p&gt;
+&lt;h3 id=&#34;2-zondax&#34;&gt;2. Zondax&lt;/h3&gt;
+&lt;p&gt;Shielded hardware wallets have been a long time coming. Now, &lt;a href=&#34;https://docs.zondax.ch/Zcash&#34;&gt;Zondax&lt;/a&gt; is ready
+with code and integration PRs for shielded Zcash on Ledger hardware. Security review is
+important at this early stage to ward off bugs that could put users&amp;rsquo; funds at
+risk, so we&amp;rsquo;ll review their code and integrations next.&lt;/p&gt;
+&lt;h3 id=&#34;3-trezor-shielded&#34;&gt;3. Trezor Shielded&lt;/h3&gt;
+&lt;p&gt;I am also excited to audit &lt;a href=&#34;https://github.com/trezor/trezor-firmware/pull/2472&#34;&gt;Trezor&amp;rsquo;s support for Zcash shielded
+transactions&lt;/a&gt;. Having the
+two major hardware wallet vendors supporting shielded transactions will be a
+major milestone for Zcash!&lt;/p&gt;
+&lt;h3 id=&#34;456-completing-a-round-of-wallet-audits&#34;&gt;4,5,6. Completing a Round of Wallet Audits&lt;/h3&gt;
+&lt;p&gt;In 2022, I began a series of wallet audits by reviewing &lt;a href=&#34;https://ywallet.app/&#34;&gt;Ywallet&lt;/a&gt; and
+&lt;a href=&#34;https://github.com/adityapk00/zecwallet-light-cli&#34;&gt;zecwallet-lite-cli&lt;/a&gt;, two widely-used wallet codebases which had not received
+recent review. Next up, I&amp;rsquo;ll complete the wallet audit series by auditing
+&lt;a href=&#34;https://zecwallet.co/&#34;&gt;ZecWallet-Lite&lt;/a&gt;, &lt;a href=&#34;https://nighthawkwallet.com/&#34;&gt;Nighthawk&lt;/a&gt;, and the wallet in development by &lt;a href=&#34;https://github.com/zingolabs&#34;&gt;ZingoLabs&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;7-zsas&#34;&gt;7. ZSAs&lt;/h3&gt;
+&lt;p&gt;Zcash Shielded Assets (ZSAs) are on the horizon for Zcash, with the &lt;a href=&#34;https://forum.zcashcommunity.com/t/a-proposal-for-shielded-assets-zsa-uda-for-defi-on-zcash/40520&#34;&gt;design and implementation being provided by QEDIT&lt;/a&gt;. Since ZSAs are a significant change to the Zcash protocol and its consensus rules, ZSAs should be included in the scope of the major audits of the network upgrade their implementation becomes a part of. It&amp;rsquo;s always better to have more eyes on the code, so I plan to audit ZSAs myself as well.&lt;/p&gt;
+&lt;h3 id=&#34;8-zephyr&#34;&gt;8. Zephyr&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://forum.zcashcommunity.com/t/project-zephyr-update-march22/41118&#34;&gt;Zephyr&lt;/a&gt;
+is a project to build a metamask-like browser extension for Zcash. While the
+project is still unfinished, I believe that support for Zcash in the browser is
+on the critical path to adoption, so this is an important project to support.
+Additionally, in-browser security models are complicated and error-prone, so it
+will be worthwhile to take an early look.&lt;/p&gt;
+&lt;h3 id=&#34;9-live-infrastructure&#34;&gt;9. Live Infrastructure&lt;/h3&gt;
+&lt;p&gt;The Zcash ecosystem depends on live running infrastructure such as various
+lightwalletd instances, the community forums, block explorers, and more. Zcash
+users&amp;rsquo; security depends on the security of this infrastructure. Throughout the
+year I will be offering security review and penetration tests to the maintainers
+of this infrastructure.&lt;/p&gt;
+&lt;h3 id=&#34;9-other&#34;&gt;9. Other&lt;/h3&gt;
+&lt;p&gt;Several smaller-yet-popular projects like &lt;a href=&#34;https://free2z.cash/docs/&#34;&gt;Free2z&lt;/a&gt;
+and &lt;a href=&#34;https://zecpages.com/z/all&#34;&gt;ZECpages&lt;/a&gt; are also deserving of security
+review. Time permitting, I would like to perform some shorter audits of projects
+like these alongside the longer audits listed above.&lt;/p&gt;
+&lt;p&gt;If you don&amp;rsquo;t see your project on this list, but you feel like you could benefit
+from an audit in 2023, please &lt;a href=&#34;https://zecsec.com/contact/&#34;&gt;reach out&lt;/a&gt; and I will do
+my best to accommodate you!&lt;/p&gt;
+&lt;h2 id=&#34;security-side-projects&#34;&gt;Security Side-Projects&lt;/h2&gt;
+&lt;p&gt;In addition to security audits, there are a number of &amp;ldquo;side projects&amp;rdquo; I hope to
+work on to support Zcash&amp;rsquo;s security.&lt;/p&gt;
+&lt;h3 id=&#34;office-hours-and-other-security-assistance-for-projects&#34;&gt;Office Hours and Other Security Assistance for Projects&lt;/h3&gt;
+&lt;p&gt;Anyone working in the Zcash ecosystem can now set up a private meeting with me
+using &lt;a href=&#34;https://calendly.com/zecsec/zcash-security-meeting&#34;&gt;my Calendly&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The kind of support projects can get this way includes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Getting early security feedback on designs and code.&lt;/li&gt;
+&lt;li&gt;Help with responding to vulnerability reports.&lt;/li&gt;
+&lt;li&gt;Incident response for attacks on infrastructure.&lt;/li&gt;
+&lt;li&gt;Secure UX review of API designs and user interfaces.&lt;/li&gt;
+&lt;li&gt;Getting answers to technical questions about the Zcash protocol.&lt;/li&gt;
+&lt;li&gt;Anything else security- or -privacy-related, really!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In addition to supporting Zcash projects themselves, I will also be available
+to the Zcash Grant Committee to support their decision-making by providing
+technical or security-related input.&lt;/p&gt;
+&lt;h3 id=&#34;wallet-edge-cases&#34;&gt;Wallet Edge Cases&lt;/h3&gt;
+&lt;p&gt;A recommendation I&amp;rsquo;ve made in all of my wallet audits so far is to implement
+better integration testing of wallets&amp;rsquo; state management in the face of edge
+cases like reorgs, transactions failing to be mined, and other rare-but-possible
+occurrences. Bugs in handling these kinds of edge cases could leave wallets in
+invalid states, causing them to break or confuse users about how much funds they
+have.&lt;/p&gt;
+&lt;p&gt;The first step towards improving wallet testing is to enumerate all such edge
+cases. With a complete list of edge cases, the quality of existing wallet tests
+can be measured by determining which edge cases are covered and which are not.&lt;/p&gt;
+&lt;p&gt;In 2023 I hope to release a nearly-complete edge case list, which can then be
+used by wallet authors to improve their tests.&lt;/p&gt;
+&lt;h3 id=&#34;consensus-rule-labeling&#34;&gt;Consensus Rule Labeling&lt;/h3&gt;
+&lt;p&gt;A security engineer entering the Zcash ecosystem for the first time is faced
+with the daunting task of &lt;em&gt;finding&lt;/em&gt; the code that implements Zcash&amp;rsquo;s consensus
+rules. As a result, a large portion of audit time is used inefficiently, spent
+finding and understanding consensus rule code.&lt;/p&gt;
+&lt;p&gt;The efficiency of future consensus rule audits can be improved by labeling the
+locations of all consensus rules in the code. Electric Coin Company has already
+&lt;a href=&#34;https://github.com/zcash/zcash/pull/5912&#34;&gt;started on this project&lt;/a&gt;, and in 2023
+I hope to advance it by labeling more consensus rules and &lt;a href=&#34;https://github.com/zcash/zcash/issues/6011&#34;&gt;writing a linter for
+the rule labeling format&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;secure-messaging-over-memos&#34;&gt;Secure Messaging Over Memos&lt;/h3&gt;
+&lt;p&gt;A popular use case for Zcash&amp;rsquo;s memo field is sending messages. However, Zcash&amp;rsquo;s
+memo field currently lacks several properties that are required for secure
+messaging. For example, it is not signed, so wallets cannot be sure of messages&#39;
+origins, and it is not forward-secure, so if keys are compromised all past
+messages can be decrypted.&lt;/p&gt;
+&lt;p&gt;In 2023, I hope to produce some design sketches that, if implemented, would make
+it easier to build Signal-like secure messaging on top of Zcash. This project is
+also a good candidate for a Zcash Community Grant RFP; I will be available to
+assist the grant committee with writing up an RFP, if desired.&lt;/p&gt;
+&lt;h2 id=&#34;whats-left-out&#34;&gt;What&amp;rsquo;s Left Out?&lt;/h2&gt;
+&lt;p&gt;In my recently-published &lt;a href=&#34;https://zecsec.com/overview/&#34;&gt;Zcash Ecosystem Security Overview&lt;/a&gt; page, I laid out a list of big picture security and privacy
+challenges for Zcash. The roadmap above touches on some of them, however there
+are several that I &lt;em&gt;probably won&amp;rsquo;t&lt;/em&gt; have dedicated time for in 2023. They
+deserve to be highlighted anyway:&lt;/p&gt;
+&lt;h3 id=&#34;scalable-privacy-for-wallets&#34;&gt;Scalable Privacy for Wallets&lt;/h3&gt;
+&lt;p&gt;A challenge faced by all cryptocurrencies that aim to offer strong, formal
+privacy guarantees is: how can wallets&amp;rsquo; find their funds and make their funds
+spendable quickly and efficiently?&lt;/p&gt;
+&lt;p&gt;At present, Zcash uses &amp;ldquo;trial decryption&amp;rdquo;, where the wallet must try to decrypt
+every transaction on the blockchain to find the ones that belong to it. There are many
+alternatives to this design with varying levels of privacy and scalability.
+I&amp;rsquo;ve surveyed them in my post, &lt;a href=&#34;https://zecsec.com/posts/scalable-private-money-needs-scalable-private-messaging/&#34;&gt;Scalable Private Money Needs Scalable Anonymous Messaging&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;unintentional-andor-forced-use-of-transparent-transactions&#34;&gt;Unintentional and/or Forced Use of Transparent Transactions&lt;/h3&gt;
+&lt;p&gt;Usage of transparent transactions on the Zcash blockchain remains high.
+Transparent addresses and transactions offer users the ability to transact
+transparently, with consent, whenever they wish to do so. However, the high
+transparent usage might be a sign that some users misunderstand the privacy
+level provided by transparent transactions or that users are forced into making
+parts of their transactions transparent, i.e. by third-parties who do not fully
+support shielded addresses.&lt;/p&gt;
+&lt;p&gt;I know of at least one anecdote where someone put themselves at risk by using a
+transparent address, because they thought &amp;ldquo;Zcash is private.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;In my view, this problem should be tackled with (a) research into how
+frequently users misunderstand the privacy properties of using transparent
+addresses, (b) UX design within wallets that communicates privacy levels clearly
+and simply, (c) support requests from the community to third parties and extra
+engineering effort to increase shielded adoption, (d) an eventual removal of
+transparent addresses, replaced by the use of viewing keys.&lt;/p&gt;
+&lt;h3 id=&#34;mitigating-c-memory-corruption-bug-risk-in-zcashd&#34;&gt;Mitigating C++ Memory Corruption Bug Risk in Zcashd&lt;/h3&gt;
+&lt;p&gt;The main fullnode implementation of Zcash is written in C++, which puts it at
+risk of entire classes of security vulnerabilities that cannot exist within
+projects that are written in safer languages, like Rust. Deprecating the legacy
+&lt;code&gt;zcashd&lt;/code&gt; codebase should be a priority, to be replaced by &lt;code&gt;zebra&lt;/code&gt;. These
+risks could also be mitigated with better fuzzing of &lt;code&gt;zcashd&lt;/code&gt;&amp;rsquo;s code, but it&amp;rsquo;s
+probably better to get rid of the C++ code entirely.&lt;/p&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;m looking forward to a productive year of security audits in 2023. Along with
+the audits, I&amp;rsquo;m planning several side projects in support of Zcash&amp;rsquo;s security
+like writing up better guidance for wallet testing, being more available to all
+projects in office hours, working to label consensus rules, and exploring
+improvements to the memo field for better secure messaging.&lt;/p&gt;
+&lt;p&gt;Of course, all of these plans are subject to change in case new higher-priority
+risks or projects appear, but this should give the community a good sense for
+what to expect in the coming year.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s make the new year Zcash&amp;rsquo;s best year yet!&lt;/p&gt;
+</description>
+      <author>trandcanh@gmail.com (Calvin Tran)</author>
+      <guid>https://zecsec.com/posts/zecsec-roadmap-for-2023/</guid>
+      <pubDate>Mon, 02 Jan 2023 11:00:00 -0700</pubDate>
+    </item>
     
     <item>
       <title>Security Audit Process</title>
       <link>https://zecsec.com/posts/security-audit-process/</link>
       <description>&lt;p&gt;In this post, I&amp;rsquo;m going to shed light on the process I follow to find bugs in my
 audits of Zcash ecosystem software. Hopefully, this will be useful to you if you
-are looking to understand more about how audits work or even learning how to audit
-software yourself.&lt;/p&gt;
+are looking to understand more about how audits work or even learning how to
+audit software yourself.&lt;/p&gt;
 &lt;p&gt;The process I&amp;rsquo;m describing here should not be taken as gospel.  Different
 security auditors follow different processes, and I often deviate from this
 process significantly to tailor my audits to the specific projects I am helping.&lt;/p&gt;
@@ -107,9 +272,9 @@ the project.&lt;/p&gt;
 &lt;p&gt;For this to work, the brainstorming process mentioned above is essential.
 Without it, problems won&amp;rsquo;t &amp;ldquo;jump out&amp;rdquo; at you as you are reading through the
 code. It&amp;rsquo;s also important to &lt;em&gt;continue&lt;/em&gt; that same brainstorming process &lt;em&gt;as&lt;/em&gt; you
-read the code, making note of any new ideas potential problems that come to mind
-as you are diving deeper into the code. Make notes, like &amp;ldquo;this function returns
--1 on error, if the caller doesn&amp;rsquo;t check it, a decryption error might be
+read the code, making note of any new ideas for potential problems that come to
+mind as you are diving deeper into the code. Make notes, like &amp;ldquo;this function
+returns -1 on error, if the caller doesn&amp;rsquo;t check it, a decryption error might be
 unnoticed, is the caller actually checking it?&amp;rdquo;, instead of getting bogged down
 confirming problems in this part of the process.&lt;/p&gt;
 &lt;p&gt;After the first pass of source code review, you should have an expanded set of

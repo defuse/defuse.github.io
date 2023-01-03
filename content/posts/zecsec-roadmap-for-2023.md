@@ -1,6 +1,6 @@
 ---
 title: "ZecSec Roadmap for 2023"
-date: 2023-01-02T11:00:00-07:00
+date: 2023-01-03T11:08:00-07:00
 author: "Taylor Hornby"
 draft: false
 ---
