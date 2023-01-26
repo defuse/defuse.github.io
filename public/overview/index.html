@@ -12,14 +12,14 @@
 This page is updated quarterly. The last update was on 2023-01-01." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://zecsec.com/overview/" /><meta property="article:section" content="pages" />
-<meta property="article:published_time" content="2023-01-02T11:00:00-07:00" />
-<meta property="article:modified_time" content="2023-01-02T11:00:00-07:00" />
+<meta property="article:published_time" content="2023-01-03T11:00:00-07:00" />
+<meta property="article:modified_time" content="2023-01-03T11:00:00-07:00" />
 
     <meta itemprop="name" content="Zcash Ecosystem Security Overview">
 <meta itemprop="description" content="This page serves as an overview of the Zcash ecosystem from a security auditor&rsquo;s point of view. It lists all of the projects that are intended to fall under the scope of the ZecSec project, as well as past audit reports, notable security bugs, and open security/privacy challenges in the Zcash ecosystem. You can think of this page as &ldquo;a security auditor&rsquo;s guide to Zcash.&rdquo;
-This page is updated quarterly. The last update was on 2023-01-01."><meta itemprop="datePublished" content="2023-01-02T11:00:00-07:00" />
-<meta itemprop="dateModified" content="2023-01-02T11:00:00-07:00" />
-<meta itemprop="wordCount" content="3039">
+This page is updated quarterly. The last update was on 2023-01-01."><meta itemprop="datePublished" content="2023-01-03T11:00:00-07:00" />
+<meta itemprop="dateModified" content="2023-01-03T11:00:00-07:00" />
+<meta itemprop="wordCount" content="3122">
 <meta itemprop="keywords" content="" />
     
     <link rel="canonical" href="https://zecsec.com/overview/">
@@ -65,9 +65,9 @@ This page is updated quarterly. The last update was on 2023-01-01."><meta itempr
       },
       "copyrightHolder" : "ZecSec: Zcash Ecosystem Security",
       "copyrightYear" : "2023",
-      "dateCreated": "2023-01-02T11:00:00.00Z",
-      "datePublished": "2023-01-02T11:00:00.00Z",
-      "dateModified": "2023-01-02T11:00:00.00Z",
+      "dateCreated": "2023-01-03T11:00:00.00Z",
+      "datePublished": "2023-01-03T11:00:00.00Z",
+      "dateModified": "2023-01-03T11:00:00.00Z",
       "publisher":{
           "@type":"Organization",
           "name": "ZecSec: Zcash Ecosystem Security",
@@ -81,7 +81,7 @@ This page is updated quarterly. The last update was on 2023-01-01."><meta itempr
       },
       "image": "https://zecsec.com/static/favicon-32.png",
       "url" : "https:\/\/zecsec.com\/overview\/",
-      "wordCount" : "3039",
+      "wordCount" : "3122",
       "genre" : [ ],
       "keywords" : [ ]
   }
@@ -309,6 +309,8 @@ cryptocurrency payments. A grant was approved to integrate Zcash.</p>
 <ul>
 <li><a href="https://forum.zcashcommunity.com/t/payment-gateway-btc-pay/40207">https://forum.zcashcommunity.com/t/payment-gateway-btc-pay/40207</a></li>
 </ul>
+<h3 id="paywithzcash">paywithz.cash</h3>
+<p>A list of stores and services that accept Zcash is maintained at <a href="https://paywithz.cash/">paywithz.cash</a>.</p>
 <h3 id="proof-of-stake-design">Proof of Stake Design</h3>
 <p>Electric Coin Company has proposed that Zcash transitions to Proof of Stake (PoS) in
 the near future. It is an open question which PoS design will be selected and
@@ -584,6 +586,13 @@ to the concept that as long as transaction fees are cheap, it is inexpensive to
 fill up blocks on the Zcash blockchain. It was assigned CVE-2019-1636 by its
 initial reporter.  It is currently being mitigated by the rollout of a new
 transaction fee structure, specified in <a href="https://zips.z.cash/zip-0317">ZIP-317</a>.</p>
+<h3 id="faerie-gold-attack">Faerie Gold Attack</h3>
+<p>In the original design of Zerocash, it was possible for an attacker to send a
+victim user two notes with identical nullifiiers. As a result, the victim&rsquo;s
+wallet would be tricked into thinking it could spend both notes, when in fact it
+would only be able to spend one of them. The details of the attack and the fix are
+<a href="https://zips.z.cash/protocol/protocol.pdf#faeriegold">described in the Zcash protocol
+specification</a>.</p>
 <h3 id="internalh-collision-vulnerability">InternalH Collision Vulnerability</h3>
 <p>In the original <a href="https://eprint.iacr.org/2014/349">Zerocash paper</a> that Zcash
 was based on, a 128-bit hash was used to build a commitment scheme. This was

@@ -8,16 +8,20 @@
     <title>YWallet Audit Results Published | ZecSec: Zcash Ecosystem Security</title>
     <meta name="description" content="Zcash Ecosystem Security Support">
     <meta property="og:title" content="YWallet Audit Results Published" />
-<meta property="og:description" content="Download the full YWallet Security and Privacy Analysis Report (PDF)" />
+<meta property="og:description" content="In October of last year, I reviewed YWallet for security and privacy issues. This was the first audit I performed for the Zcash Ecosystem Security grant.
+Today, the final report is being made available to the Zcash community at the link below.
+The audit found one high-severity issue, two medium-severity issues, and several low-severity issues. At this point in time, all issues have been remediated or deemed to be safe to de-prioritize relative to other work." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://zecsec.com/posts/ywallet-audit-published/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-01-03T07:00:00-07:00" />
 <meta property="article:modified_time" content="2023-01-03T07:00:00-07:00" />
 
     <meta itemprop="name" content="YWallet Audit Results Published">
-<meta itemprop="description" content="Download the full YWallet Security and Privacy Analysis Report (PDF)"><meta itemprop="datePublished" content="2023-01-03T07:00:00-07:00" />
+<meta itemprop="description" content="In October of last year, I reviewed YWallet for security and privacy issues. This was the first audit I performed for the Zcash Ecosystem Security grant.
+Today, the final report is being made available to the Zcash community at the link below.
+The audit found one high-severity issue, two medium-severity issues, and several low-severity issues. At this point in time, all issues have been remediated or deemed to be safe to de-prioritize relative to other work."><meta itemprop="datePublished" content="2023-01-03T07:00:00-07:00" />
 <meta itemprop="dateModified" content="2023-01-03T07:00:00-07:00" />
-<meta itemprop="wordCount" content="10">
+<meta itemprop="wordCount" content="216">
 <meta itemprop="keywords" content="" />
     
     <link rel="canonical" href="https://zecsec.com/posts/ywallet-audit-published/">
@@ -42,7 +46,7 @@
       "name": "YWallet Audit Results Published",
       "headline": "YWallet Audit Results Published",
       "alternativeHeadline": "",
-      "description": "Download the full YWallet Security and Privacy Analysis Report (PDF)",
+      "description": "In October of last year, I reviewed YWallet for security and privacy issues. This was the first audit I performed for the Zcash Ecosystem Security grant.\nToday, the final report is being made available to the Zcash community at the link below.\nThe audit found one high-severity issue, two medium-severity issues, and several low-severity issues. At this point in time, all issues have been remediated or deemed to be safe to de-prioritize relative to other work.",
       "inLanguage": "en-us",
       "isFamilyFriendly": "true",
       "mainEntityOfPage": {
@@ -79,7 +83,7 @@
       },
       "image": "https://zecsec.com/static/favicon-32.png",
       "url" : "https:\/\/zecsec.com\/posts\/ywallet-audit-published\/",
-      "wordCount" : "10",
+      "wordCount" : "216",
       "genre" : [ ],
       "keywords" : [ ]
   }
@@ -128,7 +132,26 @@
         
       </div>
       
-      <p><a href="/audits/YWalletAuditReport-FINAL-v3.pdf"><strong>Download the full YWallet Security and Privacy Analysis Report (PDF)</strong></a></p>
+      <p>In October of last year, I reviewed <a href="https://ywallet.app/">YWallet</a> for security
+and privacy issues. This was the first audit I performed for the Zcash Ecosystem
+Security grant.</p>
+<p>Today, the final report is being made available to the Zcash community at the
+link below.</p>
+<p>The audit found one high-severity issue, two medium-severity issues, and several
+low-severity issues. At this point in time, all issues have been remediated or
+deemed to be safe to de-prioritize relative to other work.</p>
+<p>The high-severity issue was a problem with the way the wallet stored users'
+contact lists in transaction memos. An attacker who knew a user&rsquo;s address could
+modify the user&rsquo;s contact list by sending them specially-crafted memos.  This
+made it possible to carry out a man-in-the-middle between two users using
+YWallet to chat with each other. The problem has been mitigated by only allowing
+contact list updates from memos in transactions that were signed by the same
+wallet. See the full report for details of the medium- and low-severity issues.</p>
+<p>The report highlights the general need for a memo signing standard as well as a
+more-comprehensive suite of tests for Zcash wallets. These are priorities in my
+<a href="https://zecsec.com/posts/zecsec-roadmap-for-2023/">2023 roadmap</a>.</p>
+<p>Thanks to Ywallet&rsquo;s author hanh for quick feedback on the report and fast bug fixes.</p>
+<p><a href="/audits/YWalletAuditReport-FINALv3.pdf"><strong>YWallet Security and Privacy Analysis Report (PDF)</strong></a></p>
 
     </section>
     

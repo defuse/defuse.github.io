@@ -6,21 +6,11 @@
     <link>https://zecsec.com/</link>
     
     <language>en</language>
-    <copyright>Copyright 3033, Calvin Tran</copyright>
-    <lastBuildDate>Tue, 03 Jan 2023 07:00:00 -0700</lastBuildDate>
+    <copyright>Copyright 262626, Calvin Tran</copyright>
+    <lastBuildDate>Tue, 03 Jan 2023 11:08:00 -0700</lastBuildDate>
     <generator>Hugo - gohugo.io</generator>
     <docs>http://cyber.harvard.edu/rss/rss.html</docs>
     <atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/>
-    
-    <item>
-      <title>YWallet Audit Results Published</title>
-      <link>https://zecsec.com/posts/ywallet-audit-published/</link>
-      <description>&lt;p&gt;&lt;a href=&#34;https://zecsec.com/audits/YWalletAuditReport-FINAL-v3.pdf&#34;&gt;&lt;strong&gt;Download the full YWallet Security and Privacy Analysis Report (PDF)&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
-</description>
-      <author>trandcanh@gmail.com (Calvin Tran)</author>
-      <guid>https://zecsec.com/posts/ywallet-audit-published/</guid>
-      <pubDate>Tue, 03 Jan 2023 07:00:00 -0700</pubDate>
-    </item>
     
     <item>
       <title>ZecSec Roadmap for 2023</title>
@@ -174,7 +164,36 @@ what to expect in the coming year.&lt;/p&gt;
 </description>
       <author>trandcanh@gmail.com (Calvin Tran)</author>
       <guid>https://zecsec.com/posts/zecsec-roadmap-for-2023/</guid>
-      <pubDate>Mon, 02 Jan 2023 11:00:00 -0700</pubDate>
+      <pubDate>Tue, 03 Jan 2023 11:08:00 -0700</pubDate>
+    </item>
+    
+    <item>
+      <title>YWallet Audit Results Published</title>
+      <link>https://zecsec.com/posts/ywallet-audit-published/</link>
+      <description>&lt;p&gt;In October of last year, I reviewed &lt;a href=&#34;https://ywallet.app/&#34;&gt;YWallet&lt;/a&gt; for security
+and privacy issues. This was the first audit I performed for the Zcash Ecosystem
+Security grant.&lt;/p&gt;
+&lt;p&gt;Today, the final report is being made available to the Zcash community at the
+link below.&lt;/p&gt;
+&lt;p&gt;The audit found one high-severity issue, two medium-severity issues, and several
+low-severity issues. At this point in time, all issues have been remediated or
+deemed to be safe to de-prioritize relative to other work.&lt;/p&gt;
+&lt;p&gt;The high-severity issue was a problem with the way the wallet stored users&#39;
+contact lists in transaction memos. An attacker who knew a user&amp;rsquo;s address could
+modify the user&amp;rsquo;s contact list by sending them specially-crafted memos.  This
+made it possible to carry out a man-in-the-middle between two users using
+YWallet to chat with each other. The problem has been mitigated by only allowing
+contact list updates from memos in transactions that were signed by the same
+wallet. See the full report for details of the medium- and low-severity issues.&lt;/p&gt;
+&lt;p&gt;The report highlights the general need for a memo signing standard as well as a
+more-comprehensive suite of tests for Zcash wallets. These are priorities in my
+&lt;a href=&#34;https://zecsec.com/posts/zecsec-roadmap-for-2023/&#34;&gt;2023 roadmap&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Thanks to Ywallet&amp;rsquo;s author hanh for quick feedback on the report and fast bug fixes.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://zecsec.com/audits/YWalletAuditReport-FINALv3.pdf&#34;&gt;&lt;strong&gt;YWallet Security and Privacy Analysis Report (PDF)&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+      <author>trandcanh@gmail.com (Calvin Tran)</author>
+      <guid>https://zecsec.com/posts/ywallet-audit-published/</guid>
+      <pubDate>Tue, 03 Jan 2023 07:00:00 -0700</pubDate>
     </item>
     
     <item>

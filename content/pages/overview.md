@@ -235,6 +235,10 @@ cryptocurrency payments. A grant was approved to integrate Zcash.
 
 - https://forum.zcashcommunity.com/t/payment-gateway-btc-pay/40207
 
+### paywithz.cash
+
+A list of stores and services that accept Zcash is maintained at [paywithz.cash](https://paywithz.cash/).
+
 ### Proof of Stake Design
 
 Electric Coin Company has proposed that Zcash transitions to Proof of Stake (PoS) in
@@ -599,6 +603,15 @@ to the concept that as long as transaction fees are cheap, it is inexpensive to
 fill up blocks on the Zcash blockchain. It was assigned CVE-2019-1636 by its
 initial reporter.  It is currently being mitigated by the rollout of a new
 transaction fee structure, specified in [ZIP-317](https://zips.z.cash/zip-0317).
+
+### Faerie Gold Attack
+
+In the original design of Zerocash, it was possible for an attacker to send a
+victim user two notes with identical nullifiiers. As a result, the victim's
+wallet would be tricked into thinking it could spend both notes, when in fact it
+would only be able to spend one of them. The details of the attack and the fix are
+[described in the Zcash protocol
+specification](https://zips.z.cash/protocol/protocol.pdf#faeriegold).
 
 ### InternalH Collision Vulnerability
 

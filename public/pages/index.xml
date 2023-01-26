@@ -6,11 +6,11 @@
     <description>Recent content in Pages on ZecSec: Zcash Ecosystem Security</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 02 Jan 2023 11:00:00 -0700</lastBuildDate><atom:link href="https://zecsec.com/pages/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 Jan 2023 11:00:00 -0700</lastBuildDate><atom:link href="https://zecsec.com/pages/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Zcash Ecosystem Security Overview</title>
       <link>https://zecsec.com/overview/</link>
-      <pubDate>Mon, 02 Jan 2023 11:00:00 -0700</pubDate>
+      <pubDate>Tue, 03 Jan 2023 11:00:00 -0700</pubDate>
       
       <guid>https://zecsec.com/overview/</guid>
       <description>This page serves as an overview of the Zcash ecosystem from a security auditor&amp;rsquo;s point of view. It lists all of the projects that are intended to fall under the scope of the ZecSec project, as well as past audit reports, notable security bugs, and open security/privacy challenges in the Zcash ecosystem. You can think of this page as &amp;ldquo;a security auditor&amp;rsquo;s guide to Zcash.&amp;rdquo;
