@@ -271,10 +271,25 @@ being a liberated payment) and who the message is coming from and going to, an
 adversary watching this metadata can tell approximately who is sending payments
 to who, breaking privacy guarantees that users expect.
 
-Liberated payments would work well as a short-term workaround to wallet
-performance problems for a subset of users who already have a private means to
-communicate with each other, but it would not be a good long-term solution for
-the because of these two drawbacks.
+Liberated payments would work great for use cases where users are making
+payments to a website, for example sending funds to an exchange, buying
+something from an online store, or donating to a charity. In this case, any
+attackers monitoring the user's Internet connection are already aware that there
+is some kind of relationship between the user and the website they have visited.
+If the payment information is sent through the same encrypted connection that
+the user's browser is already using to communicate with the website, the fact a
+payment is being made can be kept secret. If the payment information is sent
+through a separate connection (e.g. from the user's smartphone wallet, with the
+payment being made by scanning a QR code in a desktop browser), the fact a
+payment was made will be leaked, but this might not matter for some use cases,
+like if the website is a store and the attacker is already pretty sure that the
+user is going to buy something.
+
+So, liberated payments would work well as a workaround to wallet performance
+problems for payments to websites and for a subset of users who already have a
+private means to communicate with each other, but it may not be a good long-term
+solution because of the metadata-privacy weaknesses in existing private
+messengers and because it requires users to learn a new UX.
 
 ### SGX-based Approaches
 
@@ -296,12 +311,17 @@ it can _only_ be a matter of _how hard_ it is for an attacker to access those
 bits, and how much resources they need to expend to do so. It is conceivable
 that one day SGX will attain a state where all known attacks are practically
 infeasible, but that’s currently not the case, and we don’t know when (if ever)
-that will happen.
+that will happen. The *variety* of methods that have recently been used to break
+SGX and alternatives like ARM TrustZone is good evidence that there are still
+more vulnerabilities waiting to be found, so we should expect researchers to
+develop more attacks in the coming years.
 
-In my opinion, the best way to think about SGX’s security is... “If the system’s
+In my opinion, the best way to think about SGX’s security is: “If the system’s
 operators are mostly honest and aren’t too well-resourced, then you’re safe, but
 if the NSA breaks in, or anyone with serious resources wants to break the
-system, SGX will fail.” This is not a good long-term solution.
+system, SGX will fail.” This is not a good long-term solution, at least not
+until SGX or an equivalent technology has proven itself to resist all kinds of
+attacks for a number of years.
 
 ### Tor
 
@@ -333,16 +353,18 @@ adversary is situated close to the client user (e.g. at an ISP), and also close
 to the destination server (e.g. at an Amazon datacenter), they can collect
 enough packet-timing information to statistically infer who’s talking to who. It
 is well-known and accepted that Tor’s anonymity can be broken by global passive
-adversaries using attacks like this. A [recent paper
-surveys](https://ieeexplore.ieee.org/abstract/document/9471821) different kinds
-of de-anonymization attacks on Tor.
+adversaries, and adversaries situated at both endpoints, using attacks like
+this. A [recent paper](https://ieeexplore.ieee.org/abstract/document/9471821)
+surveys different kinds of de-anonymization attacks on Tor.
 
 Tor’s privacy properties are heuristic and are weaker than those that come
 standard with projects like Zcash[^2]; they are certainly insufficient for some use
 cases of private Internet money. Therefore, extreme care needs to be taken with
 any attempt to solve payment scalability problems with Tor. We must be mindful
 that relying on Tor will mean giving up on formal privacy guarantees and will
-make the system vulnerable to global passive adversaries.
+make the system vulnerable to global passive adversaries, as well as adversaries
+that are capable of monitoring the traffic of the set of wallets they are
+interested in.
 
 [^2]: At least using the full-node implementation.
 
@@ -375,10 +397,10 @@ proven deployment in practice ([Nym](https://nymtech.net/) is one example).
 In this post I’ve surveyed different approaches to solving private money
 systems’ scalability problems. I've included those that I consider plausibly
 viable as well as those on existing projects' roadmaps. A common theme among
-many of them is that they are not really scaling solutions, only making
-constant-factor improvements or moving the processing elsewhere. Most of them
-don’t offer formal privacy guarantees or, worse, have known attacks that make
-them unsuitable for Internet money. Others, like mixnets, are expensive and
+many of them is that they are not asymptotic scaling solutions, only making
+constant-factor improvements or moving the processing to faster computers. Most
+of them don’t offer formal privacy guarantees or, worse, have known attacks that
+make them unsuitable for Internet money. Others, like mixnets, are expensive and
 risky to implement.  There is no clear winner.
 
 What _is_ clear, though, is that scaling private payments _is_ scaling anonymous
@@ -393,3 +415,5 @@ implemented, that will solve all of our problems.  We will need to make
 significant investments in anonymous communication science and engineering over
 the long term to make private money work. This is worth doing, because this way,
 we are embracing the real, unavoidable, problem that lies ahead of us.
+
+(Some updates to this article were made on 2023-02-16.)
