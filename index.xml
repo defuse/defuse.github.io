@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZecSec: Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 272727, Calvin Tran</copyright><lastBuildDate>Fri, 27 Jan 2023 01:00:00 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>ZecSec's Q4 2022 Transparency Report</title><link>https://zecsec.com/posts/2022-q4-transparency-report/</link><description>&lt;p>In order to ensure accountability and to help the Zcash community understand how
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZecSec: Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 161616, Calvin Tran</copyright><lastBuildDate>Fri, 27 Jan 2023 01:00:00 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>ZecSec's Q4 2022 Transparency Report</title><link>https://zecsec.com/posts/2022-q4-transparency-report/</link><description>&lt;p>In order to ensure accountability and to help the Zcash community understand how
 its funds are being spent, the ZecSec project will be posting quarterly
 transparency reports.&lt;/p>
 &lt;p>Note that some of these reports may be delayed, and some information may be
@@ -721,10 +721,24 @@ messenger leaks metadata about message size (identifying the message as likely
 being a liberated payment) and who the message is coming from and going to, an
 adversary watching this metadata can tell approximately who is sending payments
 to who, breaking privacy guarantees that users expect.&lt;/p>
-&lt;p>Liberated payments would work well as a short-term workaround to wallet
-performance problems for a subset of users who already have a private means to
-communicate with each other, but it would not be a good long-term solution for
-the because of these two drawbacks.&lt;/p>
+&lt;p>Liberated payments would work great for use cases where users are making
+payments to a website, for example sending funds to an exchange, buying
+something from an online store, or donating to a charity. In this case, any
+attackers monitoring the user&amp;rsquo;s Internet connection are already aware that there
+is some kind of relationship between the user and the website they have visited.
+If the payment information is sent through the same encrypted connection that
+the user&amp;rsquo;s browser is already using to communicate with the website, the fact a
+payment is being made can be kept secret. If the payment information is sent
+through a separate connection (e.g. from the user&amp;rsquo;s smartphone wallet, with the
+payment being made by scanning a QR code in a desktop browser), the fact a
+payment was made will be leaked, but this might not matter for some use cases,
+like if the website is a store and the attacker is already pretty sure that the
+user is going to buy something.&lt;/p>
+&lt;p>So, liberated payments would work well as a workaround to wallet performance
+problems for payments to websites and for a subset of users who already have a
+private means to communicate with each other, but it may not be a good long-term
+solution because of the metadata-privacy weaknesses in existing private
+messengers and because it requires users to learn a new UX.&lt;/p>
 &lt;h3 id="sgx-based-approaches">SGX-based Approaches&lt;/h3>
 &lt;p>Another way to scale would be to use a trusted, private server. Using an actual
 trusted server would defeat the purpose of building a private money system (we’d
@@ -743,11 +757,16 @@ it can &lt;em>only&lt;/em> be a matter of &lt;em>how hard&lt;/em> it is for an a
 bits, and how much resources they need to expend to do so. It is conceivable
 that one day SGX will attain a state where all known attacks are practically
 infeasible, but that’s currently not the case, and we don’t know when (if ever)
-that will happen.&lt;/p>
-&lt;p>In my opinion, the best way to think about SGX’s security is&amp;hellip; “If the system’s
+that will happen. The &lt;em>variety&lt;/em> of methods that have recently been used to break
+SGX and alternatives like ARM TrustZone is good evidence that there are still
+more vulnerabilities waiting to be found, so we should expect researchers to
+develop more attacks in the coming years.&lt;/p>
+&lt;p>In my opinion, the best way to think about SGX’s security is: “If the system’s
 operators are mostly honest and aren’t too well-resourced, then you’re safe, but
 if the NSA breaks in, or anyone with serious resources wants to break the
-system, SGX will fail.” This is not a good long-term solution.&lt;/p>
+system, SGX will fail.” This is not a good long-term solution, at least not
+until SGX or an equivalent technology has proven itself to resist all kinds of
+attacks for a number of years.&lt;/p>
 &lt;h3 id="tor">Tor&lt;/h3>
 &lt;p>Tor is by far the most widely-used anonymous communication system in existence
 today. Its focus is on providing low-latency connections at the expense of
@@ -774,15 +793,17 @@ adversary is situated close to the client user (e.g. at an ISP), and also close
 to the destination server (e.g. at an Amazon datacenter), they can collect
 enough packet-timing information to statistically infer who’s talking to who. It
 is well-known and accepted that Tor’s anonymity can be broken by global passive
-adversaries using attacks like this. A &lt;a href="https://ieeexplore.ieee.org/abstract/document/9471821">recent paper
-surveys&lt;/a> different kinds
-of de-anonymization attacks on Tor.&lt;/p>
+adversaries, and adversaries situated at both endpoints, using attacks like
+this. A &lt;a href="https://ieeexplore.ieee.org/abstract/document/9471821">recent paper&lt;/a>
+surveys different kinds of de-anonymization attacks on Tor.&lt;/p>
 &lt;p>Tor’s privacy properties are heuristic and are weaker than those that come
 standard with projects like Zcash&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>; they are certainly insufficient for some use
 cases of private Internet money. Therefore, extreme care needs to be taken with
 any attempt to solve payment scalability problems with Tor. We must be mindful
 that relying on Tor will mean giving up on formal privacy guarantees and will
-make the system vulnerable to global passive adversaries.&lt;/p>
+make the system vulnerable to global passive adversaries, as well as adversaries
+that are capable of monitoring the traffic of the set of wallets they are
+interested in.&lt;/p>
 &lt;h3 id="mixnets">Mixnets&lt;/h3>
 &lt;p>As argued by the reduction given above, a private money system fundamentally
 &lt;em>is&lt;/em> an anonymous messaging system. It therefore makes sense to look towards the
@@ -806,10 +827,10 @@ proven deployment in practice (&lt;a href="https://nymtech.net/">Nym&lt;/a> is o
 &lt;p>In this post I’ve surveyed different approaches to solving private money
 systems’ scalability problems. I&amp;rsquo;ve included those that I consider plausibly
 viable as well as those on existing projects&amp;rsquo; roadmaps. A common theme among
-many of them is that they are not really scaling solutions, only making
-constant-factor improvements or moving the processing elsewhere. Most of them
-don’t offer formal privacy guarantees or, worse, have known attacks that make
-them unsuitable for Internet money. Others, like mixnets, are expensive and
+many of them is that they are not asymptotic scaling solutions, only making
+constant-factor improvements or moving the processing to faster computers. Most
+of them don’t offer formal privacy guarantees or, worse, have known attacks that
+make them unsuitable for Internet money. Others, like mixnets, are expensive and
 risky to implement. There is no clear winner.&lt;/p>
 &lt;p>What &lt;em>is&lt;/em> clear, though, is that scaling private payments &lt;em>is&lt;/em> scaling anonymous
 messaging.&lt;/p>
@@ -821,6 +842,7 @@ implemented, that will solve all of our problems. We will need to make
 significant investments in anonymous communication science and engineering over
 the long term to make private money work. This is worth doing, because this way,
 we are embracing the real, unavoidable, problem that lies ahead of us.&lt;/p>
+&lt;p>(Some updates to this article were made on 2023-02-16.)&lt;/p>
 &lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
