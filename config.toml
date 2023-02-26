@@ -2,6 +2,7 @@ baseURL = 'https://zecsec.com/'
 languageCode = 'en-us'
 title = 'ZecSec: Zcash Ecosystem Security'
 theme = 'maverick'
+buildDrafts = true
 
 [permalinks]
   pages = "/:slug"
