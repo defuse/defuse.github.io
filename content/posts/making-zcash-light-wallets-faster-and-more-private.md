@@ -328,6 +328,28 @@ to decrypt the tags.  So, even when addresses are kept secret, quantum computers
 would be able to link transactions to wallet-specific tags within epochs. This
 is a *weakening* of Zcash's post-quantum privacy properties.
 
+### Weakness: Attackers can find out which server an address uses
+
+In this design, it is possible for an attacker to determine which detection
+server an address uses. The attacker can do this by guessing which detection
+server the address used, and then constructing an address for themselves using
+the process described above, except using the \\(S_r\\) from the victim's
+address. If the attacker's guess is correct, they will be able to receive a
+transaction sent to the constructed address at the hypothesized server.
+
+Another way to carry out this attack is to fetch a new \\(S_r\\) from the
+guessed server and send a transaction to the victim's address, except using the
+\\(S_r\\) that the attacker obtained. If the victim indicates the transaction
+was received (e.g. by shipping a product or delivering a service), the attacker
+learns that their guess was correct.
+
+This latter kind of attack is possible in general for any protocol, by DDoSing
+the guessed server and observing if that prevents the victim from receiving
+their transaction. However, using a DDoS attack to carry out the attack would be
+much more obvious than exploiting the weaknesses in this protocol.
+
+TODO: fix the protocol so that this attack isn't possible
+
 ## Considerations
 
 ### Address Unlinkability Privacy
