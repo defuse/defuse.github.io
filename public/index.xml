@@ -6,11 +6,165 @@
     <link>https://zecsec.com/</link>
     
     <language>en</language>
-    <copyright>Copyright 262626, Calvin Tran</copyright>
-    <lastBuildDate>Tue, 03 Jan 2023 11:08:00 -0700</lastBuildDate>
+    <copyright>Copyright 272727, Calvin Tran</copyright>
+    <lastBuildDate>Thu, 23 Feb 2023 19:00:00 -0700</lastBuildDate>
     <generator>Hugo - gohugo.io</generator>
     <docs>http://cyber.harvard.edu/rss/rss.html</docs>
     <atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/>
+    
+    <item>
+      <title>ZecSec&#39;s Q4 2022 Transparency Report</title>
+      <link>https://zecsec.com/posts/2022-q4-transparency-report/</link>
+      <description>&lt;p&gt;In order to ensure accountability and to help the Zcash community understand how
+its funds are being spent, the ZecSec project will be posting quarterly
+transparency reports.&lt;/p&gt;
+&lt;p&gt;Note that some of these reports may be delayed, and some information may be
+redacted, in order to prevent the disclosure of unresolved security bugs.&lt;/p&gt;
+&lt;p&gt;The currently-approved
+&lt;a href=&#34;https://forum.zcashcommunity.com/t/zcash-ecosystem-security-lead/42090&#34;&gt;grant&lt;/a&gt;
+allows me to bill $1000 USD per day, up to a maximum of $17,000 per month, up to
+12 total months. The sections below break down and explain my invoices for Q4
+2022.&lt;/p&gt;
+&lt;h2 id=&#34;september--october&#34;&gt;September &amp;amp; October&lt;/h2&gt;
+&lt;p&gt;In September and October my focus was on auditing Ywallet. Ywallet was a
+priority because it had not yet received any security review and it was one of
+the only wallets that functioned in the face of the high transaction load
+problem. The report from this audit is available &lt;a href=&#34;https://zecsec.com/posts/ywallet-audit-published/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+
+
+
+
+&lt;table class=&#34;table table-striped table-bordered&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Days&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Setting up build environments, skimming over grants/projects, staying up to date on the forums.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Reviewing various Zcash wallets for a potential DoS bug reported by ZingoLabs.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;Auditing Ywallet&amp;rsquo;s zcash-sync library.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;Auditing Ywallet itself.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Delivering the Ywallet audit report and answering questions.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;0.5&lt;/td&gt;
+&lt;td&gt;Setting up this website.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;0.5&lt;/td&gt;
+&lt;td&gt;Reviewing ZIP 317 for security and privacy.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+&lt;p&gt;Total days: 17, Total paid: $17,000.&lt;/p&gt;
+&lt;h2 id=&#34;november&#34;&gt;November&lt;/h2&gt;
+&lt;p&gt;In November, I audited zecwallet-lite-cli, the transaction processing library
+used by ZecWallet-Lite. This paves the way for a future audit of ZecWallet-Lite
+itself. I also looked at the customizations that were made to the version of
+lightwalletd that ZecWallet-Lite uses.&lt;/p&gt;
+
+
+
+
+
+&lt;table class=&#34;table table-striped table-bordered&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Days&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Catching up on forums, planning, setting up Calendly for office hours.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;Auditing zecwallet-lite-cli.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Reviewing changes to lightwalletd in aditapk00/lightwalletd.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;Helping debug zcashd v5.3.0 build issues and getting the Arch Linux package maintainer to update the package.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;0.5&lt;/td&gt;
+&lt;td&gt;Writing &lt;a href=&#34;https://zecsec.com/posts/scalable-private-money-needs-scalable-private-messaging/&#34;&gt;Scalable Private Money Needs Scalable Anonymous Messaging&lt;/a&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+&lt;p&gt;Total days: 11.5, Total paid: $11,500.&lt;/p&gt;
+&lt;h2 id=&#34;december&#34;&gt;December&lt;/h2&gt;
+&lt;p&gt;In December, I focused on planning for the new year. I quickly surveyed every
+Zcash-related project that I could find and collected a list of past security
+audits, research, and notable bugs. I published the first edition of the &lt;a href=&#34;https://zecsec.com/overview/&#34;&gt;Zcash Ecosystem Security Overview&lt;/a&gt; and a tentative &lt;a href=&#34;https://zecsec.com/posts/zecsec-roadmap-for-2023/&#34;&gt;roadmap for 2023&lt;/a&gt;.&lt;/p&gt;
+
+
+
+
+
+&lt;table class=&#34;table table-striped table-bordered&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Days&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;Surveying all Zcash-related projects, preparing the ecosystem security overview and roadmap.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;Checking the Ywallet bug fixes and publishing the Ywallet audit report.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+&lt;p&gt;Total days: 10, Total paid: $10,000.&lt;/p&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;In Q4 of 2022, I completed two major audits of Ywallet and zecwallet-lite-cli. I
+also contributed to a number of other security efforts such as performing
+shorter security reviews of various projects, helping to investigate bugs,
+collecting past security research, and writing up my research into options for
+privately scaling Zcash.&lt;/p&gt;
+&lt;p&gt;In total, I invoiced for 38.5 days and was paid $38,500 in ZEC.&lt;/p&gt;
+&lt;p&gt;If you have questions about the work that was done or have suggestions for
+future priorities, you can either email me at &lt;a href=&#34;mailto:zecsec@defuse.ca&#34;&gt;zecsec@defuse.ca&lt;/a&gt; or ask on &lt;a href=&#34;https://forum.zcashcommunity.com/t/zcash-ecosystem-security-lead/42090&#34;&gt;the
+grant&amp;rsquo;s forum
+thread&lt;/a&gt;.&lt;/p&gt;
+</description>
+      <author>trandcanh@gmail.com (Calvin Tran)</author>
+      <guid>https://zecsec.com/posts/2022-q4-transparency-report/</guid>
+      <pubDate>Fri, 27 Jan 2023 01:00:00 -0700</pubDate>
+    </item>
     
     <item>
       <title>ZecSec Roadmap for 2023</title>
@@ -645,10 +799,24 @@ messenger leaks metadata about message size (identifying the message as likely
 being a liberated payment) and who the message is coming from and going to, an
 adversary watching this metadata can tell approximately who is sending payments
 to who, breaking privacy guarantees that users expect.&lt;/p&gt;
-&lt;p&gt;Liberated payments would work well as a short-term workaround to wallet
-performance problems for a subset of users who already have a private means to
-communicate with each other, but it would not be a good long-term solution for
-the because of these two drawbacks.&lt;/p&gt;
+&lt;p&gt;Liberated payments would work great for use cases where users are making
+payments to a website, for example sending funds to an exchange, buying
+something from an online store, or donating to a charity. In this case, any
+attackers monitoring the user&amp;rsquo;s Internet connection are already aware that there
+is some kind of relationship between the user and the website they have visited.
+If the payment information is sent through the same encrypted connection that
+the user&amp;rsquo;s browser is already using to communicate with the website, the fact a
+payment is being made can be kept secret. If the payment information is sent
+through a separate connection (e.g. from the user&amp;rsquo;s smartphone wallet, with the
+payment being made by scanning a QR code in a desktop browser), the fact a
+payment was made will be leaked, but this might not matter for some use cases,
+like if the website is a store and the attacker is already pretty sure that the
+user is going to buy something.&lt;/p&gt;
+&lt;p&gt;So, liberated payments would work well as a workaround to wallet performance
+problems for payments to websites and for a subset of users who already have a
+private means to communicate with each other, but it may not be a good long-term
+solution because of the metadata-privacy weaknesses in existing private
+messengers and because it requires users to learn a new UX.&lt;/p&gt;
 &lt;h3 id=&#34;sgx-based-approaches&#34;&gt;SGX-based Approaches&lt;/h3&gt;
 &lt;p&gt;Another way to scale would be to use a trusted, private server. Using an actual
 trusted server would defeat the purpose of building a private money system (we’d
@@ -667,11 +835,16 @@ it can &lt;em&gt;only&lt;/em&gt; be a matter of &lt;em&gt;how hard&lt;/em&gt; it
 bits, and how much resources they need to expend to do so. It is conceivable
 that one day SGX will attain a state where all known attacks are practically
 infeasible, but that’s currently not the case, and we don’t know when (if ever)
-that will happen.&lt;/p&gt;
-&lt;p&gt;In my opinion, the best way to think about SGX’s security is&amp;hellip; “If the system’s
+that will happen. The &lt;em&gt;variety&lt;/em&gt; of methods that have recently been used to break
+SGX and alternatives like ARM TrustZone is good evidence that there are still
+more vulnerabilities waiting to be found, so we should expect researchers to
+develop more attacks in the coming years.&lt;/p&gt;
+&lt;p&gt;In my opinion, the best way to think about SGX’s security is: “If the system’s
 operators are mostly honest and aren’t too well-resourced, then you’re safe, but
 if the NSA breaks in, or anyone with serious resources wants to break the
-system, SGX will fail.” This is not a good long-term solution.&lt;/p&gt;
+system, SGX will fail.” This is not a good long-term solution, at least not
+until SGX or an equivalent technology has proven itself to resist all kinds of
+attacks for a number of years.&lt;/p&gt;
 &lt;h3 id=&#34;tor&#34;&gt;Tor&lt;/h3&gt;
 &lt;p&gt;Tor is by far the most widely-used anonymous communication system in existence
 today. Its focus is on providing low-latency connections at the expense of
@@ -698,15 +871,17 @@ adversary is situated close to the client user (e.g. at an ISP), and also close
 to the destination server (e.g. at an Amazon datacenter), they can collect
 enough packet-timing information to statistically infer who’s talking to who. It
 is well-known and accepted that Tor’s anonymity can be broken by global passive
-adversaries using attacks like this. A &lt;a href=&#34;https://ieeexplore.ieee.org/abstract/document/9471821&#34;&gt;recent paper
-surveys&lt;/a&gt; different kinds
-of de-anonymization attacks on Tor.&lt;/p&gt;
+adversaries, and adversaries situated at both endpoints, using attacks like
+this. A &lt;a href=&#34;https://ieeexplore.ieee.org/abstract/document/9471821&#34;&gt;recent paper&lt;/a&gt;
+surveys different kinds of de-anonymization attacks on Tor.&lt;/p&gt;
 &lt;p&gt;Tor’s privacy properties are heuristic and are weaker than those that come
 standard with projects like Zcash&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;; they are certainly insufficient for some use
 cases of private Internet money. Therefore, extreme care needs to be taken with
 any attempt to solve payment scalability problems with Tor. We must be mindful
 that relying on Tor will mean giving up on formal privacy guarantees and will
-make the system vulnerable to global passive adversaries.&lt;/p&gt;
+make the system vulnerable to global passive adversaries, as well as adversaries
+that are capable of monitoring the traffic of the set of wallets they are
+interested in.&lt;/p&gt;
 &lt;h3 id=&#34;mixnets&#34;&gt;Mixnets&lt;/h3&gt;
 &lt;p&gt;As argued by the reduction given above, a private money system fundamentally
 &lt;em&gt;is&lt;/em&gt; an anonymous messaging system. It therefore makes sense to look towards the
@@ -730,10 +905,10 @@ proven deployment in practice (&lt;a href=&#34;https://nymtech.net/&#34;&gt;Nym&
 &lt;p&gt;In this post I’ve surveyed different approaches to solving private money
 systems’ scalability problems. I&amp;rsquo;ve included those that I consider plausibly
 viable as well as those on existing projects&amp;rsquo; roadmaps. A common theme among
-many of them is that they are not really scaling solutions, only making
-constant-factor improvements or moving the processing elsewhere. Most of them
-don’t offer formal privacy guarantees or, worse, have known attacks that make
-them unsuitable for Internet money. Others, like mixnets, are expensive and
+many of them is that they are not asymptotic scaling solutions, only making
+constant-factor improvements or moving the processing to faster computers. Most
+of them don’t offer formal privacy guarantees or, worse, have known attacks that
+make them unsuitable for Internet money. Others, like mixnets, are expensive and
 risky to implement.  There is no clear winner.&lt;/p&gt;
 &lt;p&gt;What &lt;em&gt;is&lt;/em&gt; clear, though, is that scaling private payments &lt;em&gt;is&lt;/em&gt; scaling anonymous
 messaging.&lt;/p&gt;
@@ -745,6 +920,7 @@ implemented, that will solve all of our problems.  We will need to make
 significant investments in anonymous communication science and engineering over
 the long term to make private money work. This is worth doing, because this way,
 we are embracing the real, unavoidable, problem that lies ahead of us.&lt;/p&gt;
+&lt;p&gt;(Some updates to this article were made on 2023-02-16.)&lt;/p&gt;
 &lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
 &lt;hr&gt;
 &lt;ol&gt;

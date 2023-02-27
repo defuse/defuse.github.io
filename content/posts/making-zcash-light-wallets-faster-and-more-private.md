@@ -328,7 +328,7 @@ to decrypt the tags.  So, even when addresses are kept secret, quantum computers
 would be able to link transactions to wallet-specific tags within epochs. This
 is a *weakening* of Zcash's post-quantum privacy properties.
 
-### Weakness: Attackers can find out which server an address uses
+#### Weakness: Attackers can find out which server an address uses
 
 In this design, it is possible for an attacker to determine which detection
 server an address uses. The attacker can do this by guessing which detection
