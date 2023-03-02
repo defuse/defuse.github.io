@@ -289,6 +289,11 @@ lots of data when
 addresses that receive lots of transactions are identifiable by the amount of
 data the detection server sends to them.
 
+Only the detection server observes this leakage, not a global passive adversary,
+because the detection server always sends detected transactions over a
+constant-bandwidth protocol (e.g. in fixed-sized packets sent at regular
+intervals).
+
 *Open Question:* Can we prove that this limitation applies to all possible
 protocols?
 
@@ -352,12 +357,14 @@ address.
 
 #### Lack of post-quantum privacy
 
-The suggested protocol changes are *not* post-quantum private.
-Large-scale quantum computers would be able to reveal the connection between
-pre-mix and post-mix ciphertexts. Additionally, quantum computers would be able
-to decrypt the tags.  So, even when addresses are kept secret, quantum computers
-would be able to link transactions to wallet-specific tags within epochs. This
-is a *weakening* of Zcash's post-quantum privacy properties.
+The suggested protocol changes are *not* post-quantum private.  Large-scale
+quantum computers would be able to reveal the connection between pre-mix and
+post-mix ciphertexts. Additionally, quantum computers would be able to decrypt
+the tags.  So, even when addresses are kept secret, quantum computers would be
+able to link transactions to wallet-specific tags within epochs. In other words,
+a quantum attacker has the same capabilities as an attacker who had compromised
+all mix authorities and detection servers. This is a *weakening* of Zcash's
+post-quantum privacy properties.
 
 #### The need for \\(\pi\\) in step 4 of transaction generation
 
@@ -392,8 +399,6 @@ which requires senders to know which detection server ("providers" in their
 terminology) the recipient uses.
 
 ### Optimizations and Improvements
-
-It is probably safe to derive \\(K_{TT}\\) from \\(G_r\\) to save on address size.
 
 \\(s\\) and \\(r\\) can be combined by using \\(G_s = GroupHash(s)\\) instead of
 \\(G_r = GroupHash(r)\\). However, to do this, the address registration process
