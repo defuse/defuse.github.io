@@ -1,6 +1,6 @@
 ---
 title: "Making Zcash Light Wallets Faster and More Private"
-date: 2023-03-01T01:00:00-07:00
+date: 2023-03-02T01:00:00-07:00
 author: "Taylor Hornby"
 draft: true
 katex: true
@@ -8,8 +8,6 @@ _build:
     render: true
     list: false
 ---
-
-THIS IS A DRAFT PLZ DO NOT SHARE THE LINK PUBLICLY
 
 In this post, I'm going to sketch changes to the Zcash protocol that would allow
 light wallets to be both *much faster* and *more private* than they currently
@@ -54,7 +52,7 @@ properties:
 #### Performance Properties
 
 - The wallet must authenticate and sync the note commitment and nullifier sets.
-- Each time the wallet is launched, it has to download and trial-decrypt *at most
+- When the wallet is launched, it has to download and trial-decrypt *at most
 the current day's worth of transactions*. 
 - For all days previous to the current one, the wallet can fetch its
 transactions quickly from its Detection Server in a way that *does not require
@@ -91,13 +89,20 @@ wallet.
 When addresses are kept secret, the design also lets wallets granularly delegate
 detection authority, i.e. only grant detection authority for certain days, which
 further limits the effects of any server compromise that is detected and
-corrected. 
+corrected. Notably, when addresses are kept secret, even if the private state of
+all Mix Authorities and Detection Servers leaks, the attacker can group
+transactions by wallet but they still cannot tie those groups to wallets'
+identities[^1].
+
+[^1]: Assuming the Detection Server never logs users' IP addresses along with
+the tags users look up, and that the Detection Server's database retains no
+trace of the order in which tags are looked up.
 
 Although the performance-optimized protocol intentionally trades-off privacy and
 adds a dependency on "1-of-2" trusted servers for the sake of performance, its
 privacy properties are still much better than the reality today where the light
 wallet server can learn precisely which transactions belong to which wallets,
-confirm address ownership, and more[^1].
+confirm address ownership, and more[^2].
 
 The partially-trusted Mix Authorities can eventually be replaced by a
 multi-party computation protocol or by a proper mixnet, eliminating the need to
@@ -106,7 +111,7 @@ attackers to compromise multiple Mix Authorities rather than just one). One
 possibility is to get proof-of-stake validators to do the mixing in a future
 proof-of-stake protocol.
 
-[^1]: See the [Zcash Wallet App Threat
+[^2]: See the [Zcash Wallet App Threat
 Model](https://zcash.readthedocs.io/en/latest/rtd_pages/wallet_threat_model.html)
 for details about the current light wallet privacy weaknesses.
 
@@ -130,23 +135,23 @@ key.
 
 Then, the wallet obtains a verifiably-randomized public key from their Detection Server:
 
-1. The detection server publishes their public key \\(S = [ssk]G_1 \\) for all
+1. The Detection Server publishes their public key \\(S = [ssk]G_1 \\) for all
 users to see. Users check that they all see the same \\(S\\), e.g. using a
 public forum or by having it hard-coded into their wallets.
-2. The wallet sends \\(r\\) to the detection server.
-3. The detection server computes \\(G_r = GroupHash(r)\\) and \\(S_r =
+2. The wallet sends \\(r\\) to the Detection Server.
+3. The Detection Server computes \\(G_r = GroupHash(r)\\) and \\(S_r =
 [ssk]G_r\\) and sends these values to the wallet, along with a zero-knowledge
 proof that \\(S_r\\) was computed correctly.
 4. The wallet verifies the zero-knowledge proof.
 
 This allows the Detection Server to use its \\(ssk\\) to efficiently decrypt
 messages sent to any \\(S_r\\) generated through this process without letting
-the detection server determine *which* particular \\(S_r\\) the message was
+the Detection Server determine *which* particular \\(S_r\\) the message was
 encrypted to. (This is similar to how diversified addresses work, except we
-don't want the detection server to be able to know which "diversifier" was
+don't want the Detection Server to be able to know which "diversifier" was
 used.) This is done to ensure that we never give the Detection Server unlimited
 detection capabilities as long as the address is kept secret from them. Checking
-the consistency of \\(S\\) between users ensures that the detection server is
+the consistency of \\(S\\) between users ensures that the Detection Server is
 not using unique private keys in order to identify users.
 
 Next, the wallet generates two extra elements for their address:
@@ -175,7 +180,7 @@ the one used for Orchard note encryption, and \\(PRF^T, PRF^D\\) are
 collision-resistant PRFs.
 
 1. Let \\(C\\) be the usual note ciphertext and construct an additional note
-ciphertext \\(C^L\\) that uses a fresh random ephemeral key[^2].
+ciphertext \\(C^L\\) that uses a fresh random ephemeral key[^3].
 2. Generate an ephemeral keypair \\(esk, epk = [esk]G_r\\).
 3. Construct the transaction tag \\(T = PRF^{T}(K_{TT}, G_r\|\|e) \\).
 4. Construct a proof \\(\pi\\) that for public inputs \\(T, epk\\), the
@@ -192,7 +197,7 @@ The new note ciphertext is \\( (C, \\{C_i^{PrM}\\}) \\). All of the other
 transaction components are constructed as usual.
 
 
-[^2]: The format of \\(C^L\\) has to be a bit different than \\(C\\) because of
+[^3]: The format of \\(C^L\\) has to be a bit different than \\(C\\) because of
 [ZIP 212](https://zips.z.cash/zip-0212); changing rseed would change rcm, which
 we don't want, so the defenses in ZIP 212 need to be implemented differently for
 \\(C^L\\).
@@ -206,7 +211,7 @@ sorting and deduplicating the list, the Mix Authority makes it impossible for
 others to tell which pre-mix ciphertexts (outputs on the blockchain)
 correspond with which post-mix ciphertexts. In other words, without additional
 information, each post-mix ciphertext is hiding in an epoch-sized anonymity set
-of transaction outputs.
+of shielded outputs.
 
 
 The deduplication is necessary to prevent attackers from "tagging" ciphertexts
@@ -221,16 +226,16 @@ As long as *at least one* Mix Authority is online, the post-mix ciphertexts will
 become available. As long as *all* Mix Authorities are honest and uncompromised,
 the mapping between transactions and post-mix ciphertexts will remain secret.
 (These properties can be strengthened by onion-encrypting the pre-mix
-ciphertexts to follow different paths through multiple levels of mix
-authorities.)
+ciphertexts to follow different paths through multiple levels of Mix
+Authorities, as is done in a mixnet.)
 
 
-Once at least one of the mix authorities have published the list of post-mix
-ciphertexts, all of the detection servers obtain and authenticate the list of
-post-mix ciphertexts. Then, for each \\(C^{PoM}_i = (C^T_i, C^D_i, C^L_i)\\),
-they use their secret key \\(ssk\\) to try to decrypt \\(C^T_i\\). If this
-works, they obtain \\(T\\) and \\(\pi\\), and after checking \\(\pi\\), they enter
-\\(C^{L}_i\\) into their database indexed on \\(T\\).
+Once at least one of the Mix Authorities have published the list of post-mix
+ciphertexts, all of the Detection Servers obtain and authenticate the list.
+Then, for each \\(C^{PoM}_i = (C^T_i, C^D_i, C^L_i)\\), they use their secret
+key \\(ssk\\) to try to decrypt \\(C^T_i\\). If this works, they obtain \\(T\\)
+and \\(\pi\\), and after checking \\(\pi\\), they enter \\(C^{L}_i\\) into their
+database indexed on \\(T\\).
 
 ### Receiving Transactions
 
@@ -242,26 +247,26 @@ transactions in three different ways.
 
 First, the wallet can use its viewing key to trial-decrypt the regular note
 ciphertext \\(C \\) as is done currently. This remains possible even if all of
-the mix authorities and detection servers go offline.
+the Mix Authorities and Detection Servers go offline.
 
 #### 2. Indexed Detection
 
 Second, the fastest way for a wallet to obtain its transactions for an epoch
-\\(e\\) is to ask its detection server for a random nonce \\(n\\) and then
+\\(e\\) is to ask its Detection Server for a random nonce \\(n\\) and then
 prove in zero-knowledge, for public parameters \\(e, n, T\\), that it knows the
 secrets \\(s, r\\) such that \\(T = PRF^T(H(s), GroupHash(r)\|\|e)\\).
 
-The detection server authenticates the user by checking the zero-knowledge proof
+The Detection Server authenticates the user by checking the zero-knowledge proof
 and the freshness of the nonce and then provides the wallet with all of the
 \\(C^L\\) ciphertexts it has indexed on \\(T\\) using a constant-bandwidth protocol.
 
 #### 3. Non-Indexed Detection
 
-If the wallet's detection server has gone offline, the wallet has a third option
-for efficiently retrieving its transactions from a different detection server.
+If the wallet's Detection Server has gone offline, the wallet has a third option
+for efficiently retrieving its transactions from a different Detection Server.
 To do this, it constructs its epoch detection secret key \\(dsk + PRF^D(K_{TT},
-e)\\) and provides it and the epoch number \\(e\\) to the new detection server.
-The detection server uses this key to trial-decrypt each \\(C^D\\) in the epoch, and
+e)\\) and provides it and the epoch number \\(e\\) to the new Detection Server.
+The Detection Server uses this key to trial-decrypt each \\(C^D\\) in the epoch, and
 when decryption succeeds, it provides the wallet with the corresponding \\(C^L\\) over
 a constant-bandwidth protocol.
 
@@ -274,11 +279,11 @@ note commitment set at a position within the expected epoch.
 
 #### Address Unlinkability
 
-When a wallet's detection server knows the wallet's address, the detection
+When a wallet's Detection Server knows the wallet's address, the detection
 server can identify which of its users owns the wallet (e.g. by IP address).
 
 This seems unavoidable when the wallet doesn't download everything, because with
-the address known, the detection server can always send thousands of
+the address known, the Detection Server can always send thousands of
 transactions to the address. Assuming this doesn't cause *all* wallets to
 download thousands of transactions worth of data, the victim wallet then either has
 to make itself distinguishable from other wallets by downloading thousands of
@@ -287,10 +292,10 @@ suggesting a DoS attack on addresses is possible. Either *all* wallets download
 lots of data when
 *any* wallet needs to, DoS attacks on addresses are possible, or wallets with
 addresses that receive lots of transactions are identifiable by the amount of
-data the detection server sends to them.
+data the Detection Server sends to them.
 
-Only the detection server observes this leakage, not a global passive adversary,
-because the detection server always sends detected transactions over a
+Only the Detection Server observes this leakage, not a global passive adversary,
+because the Detection Server always sends detected transactions over a
 constant-bandwidth protocol (e.g. in fixed-sized packets sent at regular
 intervals).
 
@@ -299,55 +304,66 @@ protocols?
 
 #### Granular Delegation of Detection Authority
 
-When the detection server knows a wallet's address, it can perpetually find out
-which \\(C^L\\) belong to the wallet. This is because, knowing \\(G_r,
-K_{TT}\\), it can re-compute the address's tags for each epoch. This is always
-possible for any design that allows the detection server to "bucket"
-transactions for future retrieval by wallets: the detection server can send many
-transactions to the known address and watch which "bucket" grows. As long as the
-mix authorities are secure, even a detection server that knows a wallet's
-address will only learn *how many* transactions the wallet receives each day.
+When the user's chosen Detection Server knows their wallet's address, it can
+perpetually find out which \\(C^L\\) belong to the wallet. This is because,
+knowing \\(G_r, K_{TT}\\), it can re-compute the address's tags for each epoch.
+This is always possible for any design that allows the Detection Server to
+"bucket" transactions for future retrieval by wallets: the Detection Server can
+send many transactions to the known address and watch which "bucket" grows. As
+long as the Mix Authorities are secure, even a Detection Server that knows a
+wallet's address will only learn *how many* transactions the wallet receives
+each day.
 
-When the wallet's address is kept secret from the detection server, the
-detection server is unable to reliably detect transactions for the wallet in
+When the wallet's address is kept secret from the Detection Server, the
+Detection Server is unable to reliably detect transactions for the wallet in
 epochs other than the ones explicitly requested by the wallet. 
 
 In the indexed detection case, this is because given the epoch-specific tag \\(T
-= PRF^T(K_{TT}, G_r\|\|e)\\), the detection server cannot compute the tag for
-any other epoch without knowing \\(K_{TT}, G_r\\). For other epochs, the
-detection server only learns, "one of my users' wallets received \\(n\\)
+= PRF^T(K_{TT}, G_r\|\|e)\\), the Detection Server cannot compute the tag for
+any other epoch without knowing \\(K_{TT}\\). For other epochs, the
+Detection Server only learns, "one of my users' wallets received \\(n\\)
 transactions" but it does not know which wallet until the wallet reveals its tag
 for that epoch. The anonymity set is lower-bounded by wallets using the same
-detection server whose addresses are also secret and who have not provided their
-epoch-specific tags. This is especially useful if a detection server is known to
+Detection Server whose addresses are also secret and who have not provided their
+epoch-specific tags. This is especially useful if a Detection Server is known to
 be compromised and all users stop using it. Additionally, any user of the
-detection server can increase the size of the anonymity set by registering
+Detection Server can increase the size of the anonymity set by registering
 addresses to which they send random amounts of "dummy" transactions.
 
-In the non-indexed case, the detection server learns \\(dsk + PRF^D(K_{TT},
+Since the Detection Server only ever needs ephemeral access to the tags wallets
+request, the Detection Server can be careful to delete all trace of the
+relationship between wallets' identities and their requested tags after the
+requests have been served. This ensures that if the Detection Server's state
+gets leaked, it will be apparent how transactions are grouped together within
+epochs, but for addresses that were kept secret, those tags will not be tied to
+wallets' identities in any way.
+
+In the non-indexed case, the Detection Server learns \\(dsk + PRF^D(K_{TT},
 e)\\). Without knowing \\(K_{TT}\\), they cannot recover \\(dsk\\) or any of the
 other per-epoch detection secret keys. This is useful in case the user's main
-detection server goes down and they are forced to use a less-trustworthy one. As
-long as their address is kept secret, the new detection server is only granted
+Detection Server goes down and they are forced to use a less-trustworthy one. As
+long as their address is kept secret, the new Detection Server is only granted
 detection authority for a limited number of epochs.
 
-The non-indexed case can be improved so that it does not rely on address
-secrecy, using identity-based encryption. I am currently investigating the
-impact that would have on address sizes.
+Using Identity-Based Encryption (IBE), the non-indexed case can probably be improved
+so that it does not rely on address secrecy. I am currently investigating the
+impact IBE would have on address sizes.
 
 In all cases, it is impossible to link a pre-mix ciphertext to a post-mix
 ciphertext unless either you can decrypt a message encrypted to a mixing
 authority's public key key or you created the transaction yourself. This
-guarantees that even if the detection server learns a user's address, their true
-notes are still hiding in an epoch-sized anonymity set. At most, they
-learn how many notes the user receives in each epoch, and can identify
-the address owner (by IP address) when they connect and ask for their transactions.
+guarantees that even if the Detection Server learns a user's address, their true
+notes are still hiding in an epoch-sized anonymity set. At most, they learn how
+many notes the user receives in each epoch, and as explained earlier, can
+identify the address owner (by IP address) when they connect and ask for their
+transactions.
+
 
 #### Obfuscating the number of transactions received
 
-As long as the mix authorities are secure, wallets can send random amounts of
+As long as the Mix Authorities are secure, wallets can send random amounts of
 transactions to themselves to obscure the total number of transactions that they
-receive. The detection server is unable to tell which transactions are
+receive. The Detection Server is unable to tell which transactions are
 self-transactions, so they would see the distribution \\(R + F\\), where \\(R\\)
 is the distribution of real transactions the wallet receives and \\(F\\) is the
 distribution of fake transactions the wallet generates to itself. This would
@@ -361,33 +377,36 @@ The suggested protocol changes are *not* post-quantum private.  Large-scale
 quantum computers would be able to reveal the connection between pre-mix and
 post-mix ciphertexts. Additionally, quantum computers would be able to decrypt
 the tags.  So, even when addresses are kept secret, quantum computers would be
-able to link transactions to wallet-specific tags within epochs. In other words,
-a quantum attacker has the same capabilities as an attacker who had compromised
-all mix authorities and detection servers. This is a *weakening* of Zcash's
-post-quantum privacy properties.
+able to group transactions with identical tags within epochs. In other words, a
+quantum attacker has the same capabilities as an attacker who had compromised
+all Mix Authorities and Detection Servers. This is a *weakening* of Zcash's
+post-quantum privacy properties, since currently Zcash is conjectured to be
+post-quantum private when addresses are kept secret.
 
 #### The need for \\(\pi\\) in step 4 of transaction generation
 
-The Detection Server checks the proof \\(\pi\\) generated in step 4 in order to
-prevent the sender from being able to learn which detection server the address
-uses. An attacker could (a) use a *different* \\(G_{r*}\\)
-from the same server as the encryption base while still computing the tag with
-\\(G_r\\) and the victim would receive the transaction if and only if the attacker used
-the same server, or (b) could register their own address with the
-victim's server and send a transaction to themselves using the victim's
-\\(G_r\\) for both the encryption and \\(T\\); they would receive the transaction if and
-only if they used the same server.
+The Detection Server checks the proof \\(\pi\\) generated in step 4 and makes
+sure that wallets fetching tags know \\(r\\) in order to prevent senders from
+being able to learn which Detection Server an address uses. 
+
+Without these checks, an attacker (a) could use a *different* \\(G_{r*}\\) from
+the same server as the encryption base while still computing the tag with
+\\(G_r\\) and the victim would receive the transaction if and only if the
+attacker used the same server, or (b) could register their own address with the
+victim's server using the same \\(K_{TT}\\) then send a transaction to
+themselves using the victim's \\(G_r\\) for both the encryption and \\(T\\);
+they would receive the transaction if and only if they used the same server.
 
 In case (a), \\(\pi\\) ensures that the tag \\(T\\) is always computed using the
 same base as was used for the encryption, so if an attacker tried this, the the
 victim would not receive the transaction because they would never request the
 attacker-generated tags that use a different base. In case (b), the attacker is
 not able to look up tags constructed using the victim's \\(G_r\\) because the
-detection server requires them to prove knowledge of \\(r\\) when requesting a
+Detection Server requires them to prove knowledge of \\(r\\) when requesting a
 tag.
 
 This kind of attack is possible in general for any protocol by DDoSing a
-detection server and observing if that prevents the victim from receiving their
+Detection Server and observing if that prevents the victim from receiving their
 transaction. However, using a DDoS attack to carry out the attack would be much
 more obvious than exploiting the weaknesses that would exist without these
 checks.
@@ -395,7 +414,7 @@ checks.
 With these checks in place, the protocol has better privacy properties for receivers than the
 state-of-the-art mixnet design
 [Loopix](https://github.com/zcash/zcash/issues/288#issuecomment-658348272),
-which requires senders to know which detection server ("providers" in their
+which requires senders to know which Detection Server ("providers" in their
 terminology) the recipient uses.
 
 ### Optimizations and Improvements
@@ -407,14 +426,14 @@ it doesn't disclose \\(s\\)), and the wallet must prove in zero knowledge that
 \\(G_s = GroupHash(s)\\) (otherwise the registration API becomes a
 decryption oracle!).
 
-The same protocol can also be used for transaction inputs, so that wallets can
+The same protocol can also be used for transaction inputs so that wallets can
 detect their spends efficiently.
 
-Identity-based encryption could also potentially be used for detection servers'
+Identity-based encryption could also potentially be used for Detection Servers'
 public keys so that their private keys can be kept offline and only loaded onto
 the live server as needed, and old private keys can be deleted after they are no
 longer needed. This would provide stronger forward-security and
-backward-security properties in case a well-operated detection server is
+backward-security properties in case a well-operated Detection Server is
 compromised.
 
 Since, assuming address secrecy, indexed lookups across days cannot be linked,
@@ -422,9 +441,9 @@ wallets can perform each lookup over a fresh Tor circuit to further obfuscate
 the number of transactions their wallet receives over time. This would be vulnerable to
 global passive adversaries and to timing correlation attacks, however.
 
-If the additional privacy properties for the indexed detection case that rely on
-address secrecy are deemed not to be very useful, the protocol can be greatly
-simplified using [Daira Hopwood's detection key
+If the additional privacy and compromise-resistance properties for the indexed
+detection case that rely on address secrecy are deemed not to be very useful,
+the protocol can be greatly simplified using [Daira Hopwood's detection key
 design](https://github.com/zcash/zcash/issues/288#issuecomment-658348272).
 
 The Zcash consensus rules could require wallets to pay a fee to the mix
@@ -447,7 +466,7 @@ While the above design provides pretty good privacy for transaction receivers,
 it leaves open a privacy weakness for transaction senders.
 
 Suppose, for example, that a controversial charity publishes their viewing key
-for accounting purposes, and that a user wishes to donate to the charity.
+for accounting purposes and that a user wishes to donate to the charity.
 Alternatively, suppose that the viewing key was not published but was
 compromised by an attacker.
 
@@ -455,8 +474,11 @@ When the user's wallet broadcasts their donation transaction, the attacker can
 use the viewing key to try to decrypt the transaction and learn that the user is
 donating to the charity.
 
+In general, anyone who has compromised the light wallet server can find out who
+is sending transactions to them or to any address whose viewing key they know.
+
 To prevent this, we need to add sender anonymity. This could be done by re-using
-the same mix authorities to batch and shuffle transactions before they are
+the same Mix Authorities to batch and shuffle transactions before they are
 broadcast publicly into the blockchain, e.g. using [Loopix](https://www.usenix.org/conference/usenixsecurity17/technical-sessions/presentation/piotrowska)'s Poisson mixing strategy.
 
 Wallets can also use Loopix's concepts of "loop cover" and "drop cover" traffic
@@ -464,7 +486,7 @@ to respectively obscure the number of transactions received (as described above)
 and eliminate information leakage about how many transactions are sent.
 
 The "drop cover" traffic would never need to be added to the blockchain, and if
-the same mix authorities are used for sending and receiving, the "loop cover"
+the same Mix Authorities are used for sending and receiving, the "loop cover"
 traffic for obscuring receive counts need not be entered into the blockchain
 either.
 
