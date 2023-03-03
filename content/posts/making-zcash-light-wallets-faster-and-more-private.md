@@ -331,9 +331,12 @@ Since the Detection Server only ever needs ephemeral access to the tags wallets
 request, the Detection Server can be careful to delete all trace of the
 relationship between wallets' identities and their requested tags after the
 requests have been served. This ensures that if the Detection Server's state
-gets leaked, it will be apparent how transactions are grouped together within
-epochs, but for addresses that were kept secret, those tags will not be tied to
-wallets' identities in any way.
+gets leaked, it will be apparent how *mix-anonymized ciphertexts* are grouped
+together within epochs, but for addresses that were kept secret, those groupings
+(daily transaction counts) will not be tied to wallets' identities in any way.
+If Mix Authorities' keys are leaked too, it will be apparent how *transactions*
+are grouped daily, but those groups won't be linked to wallets' identities when
+addresses are kept secret.
 
 In the non-indexed case, the Detection Server learns \\(dsk + PRF^D(K_{TT},
 e)\\). Without knowing \\(K_{TT}\\), they cannot recover \\(dsk\\) or any of the
@@ -489,14 +492,16 @@ either.
 
 ## Conclusion; What's Next?
 
-By implementing something like the above protocol, Zcash light wallets could find
-their notes much faster while being much more private than they are
-today. The drawbacks to this design are that (a) address sizes and transaction
-sizes are increased, (b) the protocol relies on a permissioned set of mix
-authorities, and (c) the protocol needs three additional zero-knowledge proofs whose circuits
-need to be designed and implemented. Ideally, the permissioned set of mixes
-would eventually be replaced by a proper permissionless mixnet, e.g. with the
-mixing being done by proof-of-stake validators.
+By implementing something like the above protocol, Zcash light wallets could
+find their notes much faster while being much more private than they are today.
+The drawbacks to this design are that (a) address sizes and transaction sizes
+are increased, (b) the protocol relies on a permissioned set of mix authorities,
+(c) daily received-transaction-count data resides on Detection Servers and is
+vulnerable to being leaked, and (d) the protocol needs three additional
+zero-knowledge proofs whose circuits need to be designed and implemented.
+Ideally, the permissioned set of mixes would eventually be replaced by a proper
+permissionless mixnet, e.g. with the mixing being done by proof-of-stake
+validators.
 
 The next steps for me are to,
 
