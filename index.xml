@@ -70,8 +70,8 @@ detection authority, i.e. only grant detection authority for certain days, which
 further limits the effects of any server compromise that is detected and
 corrected. Notably, when addresses are kept secret, even if the private state of
 all Mix Authorities and Detection Servers leaks, the attacker can group
-transactions by wallet but they still cannot tie those groups to wallets'
-identities&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>.&lt;/p>
+transactions within a day by wallet, but they still cannot tie those groups to
+wallets&amp;rsquo; identities&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup> or connect the groups from different days.&lt;/p>
 &lt;p>Although the performance-optimized protocol intentionally trades-off privacy and
 adds a dependency on &amp;ldquo;1-of-2&amp;rdquo; trusted servers for the sake of performance, its
 privacy properties are still much better than the reality today where the light
@@ -271,8 +271,8 @@ detection authority for a limited number of epochs.&lt;/p>
 so that it does not rely on address secrecy. I am currently investigating the
 impact IBE would have on address sizes.&lt;/p>
 &lt;p>In all cases, it is impossible to link a pre-mix ciphertext to a post-mix
-ciphertext unless either you can decrypt a message encrypted to a mixing
-authority&amp;rsquo;s public key key or you created the transaction yourself. This
+ciphertext unless either you can decrypt a message encrypted to a Mix
+Authority&amp;rsquo;s public key key or you created the transaction yourself. This
 guarantees that even if the Detection Server learns a user&amp;rsquo;s address, their true
 notes are still hiding in an epoch-sized anonymity set. At most, they learn how
 many notes the user receives in each epoch, and as explained earlier, can
@@ -305,12 +305,12 @@ being able to learn which Detection Server an address uses.&lt;/p>
 &lt;p>Without these checks, an attacker (a) could use a &lt;em>different&lt;/em> \(G_{r*}\) from
 the same server as the encryption base while still computing the tag with
 \(G_r\) and the victim would receive the transaction if and only if the
-attacker used the same server, or (b) could register their own address with the
-victim&amp;rsquo;s server using the same \(K_{TT}\) then send a transaction to
-themselves using the victim&amp;rsquo;s \(G_r\) for both the encryption and \(T\);
-they would receive the transaction if and only if they used the same server.&lt;/p>
+attacker used the same server, or (b) could send a transaction to themselves (a
+\(K_{TT}\) for which they know \(s\)) using the victim&amp;rsquo;s \(G_r\) for both
+the encryption and \(T\); they would receive the transaction if and only if
+they used the same server.&lt;/p>
 &lt;p>In case (a), \(\pi\) ensures that the tag \(T\) is always computed using the
-same base as was used for the encryption, so if an attacker tried this, the the
+same base as was used for the encryption, so if an attacker tried this, the
 victim would not receive the transaction because they would never request the
 attacker-generated tags that use a different base. In case (b), the attacker is
 not able to look up tags constructed using the victim&amp;rsquo;s \(G_r\) because the
