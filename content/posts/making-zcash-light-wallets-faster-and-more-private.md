@@ -88,8 +88,8 @@ detection authority, i.e. only grant detection authority for certain days, which
 further limits the effects of any server compromise that is detected and
 corrected. Notably, when addresses are kept secret, even if the private state of
 all Mix Authorities and Detection Servers leaks, the attacker can group
-transactions by wallet but they still cannot tie those groups to wallets'
-identities[^1].
+transactions within a day by wallet, but they still cannot tie those groups to
+wallets' identities[^1] or connect the groups from different days.
 
 [^1]: Assuming the Detection Server never logs users' IP addresses along with
 the tags users look up, and that the Detection Server's database retains no
@@ -347,8 +347,8 @@ so that it does not rely on address secrecy. I am currently investigating the
 impact IBE would have on address sizes.
 
 In all cases, it is impossible to link a pre-mix ciphertext to a post-mix
-ciphertext unless either you can decrypt a message encrypted to a mixing
-authority's public key key or you created the transaction yourself. This
+ciphertext unless either you can decrypt a message encrypted to a Mix
+Authority's public key key or you created the transaction yourself. This
 guarantees that even if the Detection Server learns a user's address, their true
 notes are still hiding in an epoch-sized anonymity set. At most, they learn how
 many notes the user receives in each epoch, and as explained earlier, can
@@ -389,13 +389,13 @@ being able to learn which Detection Server an address uses.
 Without these checks, an attacker (a) could use a *different* \\(G_{r*}\\) from
 the same server as the encryption base while still computing the tag with
 \\(G_r\\) and the victim would receive the transaction if and only if the
-attacker used the same server, or (b) could register their own address with the
-victim's server using the same \\(K_{TT}\\) then send a transaction to
-themselves using the victim's \\(G_r\\) for both the encryption and \\(T\\);
-they would receive the transaction if and only if they used the same server.
+attacker used the same server, or (b) could send a transaction to themselves (a
+\\(K_{TT}\\) for which they know \\(s\\)) using the victim's \\(G_r\\) for both
+the encryption and \\(T\\); they would receive the transaction if and only if
+they used the same server.
 
 In case (a), \\(\pi\\) ensures that the tag \\(T\\) is always computed using the
-same base as was used for the encryption, so if an attacker tried this, the the
+same base as was used for the encryption, so if an attacker tried this, the
 victim would not receive the transaction because they would never request the
 attacker-generated tags that use a different base. In case (b), the attacker is
 not able to look up tags constructed using the victim's \\(G_r\\) because the
