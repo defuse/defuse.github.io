@@ -258,9 +258,12 @@ addresses to which they send random amounts of &amp;ldquo;dummy&amp;rdquo; trans
 request, the Detection Server can be careful to delete all trace of the
 relationship between wallets&amp;rsquo; identities and their requested tags after the
 requests have been served. This ensures that if the Detection Server&amp;rsquo;s state
-gets leaked, it will be apparent how transactions are grouped together within
-epochs, but for addresses that were kept secret, those tags will not be tied to
-wallets&amp;rsquo; identities in any way.&lt;/p>
+gets leaked, it will be apparent how &lt;em>mix-anonymized ciphertexts&lt;/em> are grouped
+together within epochs, but for addresses that were kept secret, those groupings
+(daily transaction counts) will not be tied to wallets&amp;rsquo; identities in any way.
+If Mix Authorities&amp;rsquo; keys are leaked too, it will be apparent how &lt;em>transactions&lt;/em>
+are grouped daily, but those groups won&amp;rsquo;t be linked to wallets&amp;rsquo; identities when
+addresses are kept secret.&lt;/p>
 &lt;p>In the non-indexed case, the Detection Server learns \(dsk + PRF^D(K_{TT},
 e)\). Without knowing \(K_{TT}\), they cannot recover \(dsk\) or any of the
 other per-epoch detection secret keys. This is useful in case the user&amp;rsquo;s main
@@ -382,14 +385,16 @@ the same Mix Authorities are used for sending and receiving, the &amp;ldquo;loop
 traffic for obscuring receive counts need not be entered into the blockchain
 either.&lt;/p>
 &lt;h2 id="conclusion-whats-next">Conclusion; What&amp;rsquo;s Next?&lt;/h2>
-&lt;p>By implementing something like the above protocol, Zcash light wallets could find
-their notes much faster while being much more private than they are
-today. The drawbacks to this design are that (a) address sizes and transaction
-sizes are increased, (b) the protocol relies on a permissioned set of mix
-authorities, and (c) the protocol needs three additional zero-knowledge proofs whose circuits
-need to be designed and implemented. Ideally, the permissioned set of mixes
-would eventually be replaced by a proper permissionless mixnet, e.g. with the
-mixing being done by proof-of-stake validators.&lt;/p>
+&lt;p>By implementing something like the above protocol, Zcash light wallets could
+find their notes much faster while being much more private than they are today.
+The drawbacks to this design are that (a) address sizes and transaction sizes
+are increased, (b) the protocol relies on a permissioned set of mix authorities,
+(c) daily received-transaction-count data resides on Detection Servers and is
+vulnerable to being leaked, and (d) the protocol needs three additional
+zero-knowledge proofs whose circuits need to be designed and implemented.
+Ideally, the permissioned set of mixes would eventually be replaced by a proper
+permissionless mixnet, e.g. with the mixing being done by proof-of-stake
+validators.&lt;/p>
 &lt;p>The next steps for me are to,&lt;/p>
 &lt;ol>
 &lt;li>learn about identity-based encryption to see if it&amp;rsquo;s reasonable to eliminate
