@@ -1,4 +1,53 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZecSec: Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 141414, Calvin Tran</copyright><lastBuildDate>Fri, 10 Mar 2023 01:00:00 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>Risk Analysis of Intel's SGX and Other TEEs</title><link>https://zecsec.com/posts/risk-analysis-of-intel-sgx-and-other-tees/</link><description>&lt;p>Intel&amp;rsquo;s &lt;a href="https://www.intel.com/content/www/us/en/developer/tools/software-guard-extensions/overview.html">Software Guard eXtensions (SGX)&lt;/a> is a Trusted Execution Environment (TEE) technology built into some Intel CPUs. It is a special mode of operation that the processor can be put into that intends to allow for integrity-protected and confidentiality-protected processing, even under the assumption that the machine is fully compromised (i.e. the attacker has root access).&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZecSec: Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 151515, Calvin Tran</copyright><lastBuildDate>Sat, 15 Apr 2023 00:00:00 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>A Simple Threat Model for Zcash Shielded Hardware Wallets</title><link>https://zecsec.com/posts/threat-model-for-zcash-hardware-wallets/</link><description>&lt;p>In this post, we&amp;rsquo;ll share a simple threat model for Zcash shielded hardware
+wallets. This is useful for informing users about which security and privacy
+properties they can expect to rely on when using a shielded hardware wallet and
+to help security auditors understand what counts as a &amp;ldquo;security bug.&amp;rdquo;&lt;/p>
+&lt;p>To define a threat model for Zcash shielded hardware wallets, we consider the
+following scenario:&lt;/p>
+&lt;ol>
+&lt;li>The user initially sets up their hardware wallet using a PC or smartphone
+which is fully compromised by the attacker. The user is careful to back up their
+seed phrase and never enter it into the compromised PC/phone.&lt;/li>
+&lt;li>The user sends funds to their hardware wallet, using the addresses displayed
+on its dedicated screen.&lt;/li>
+&lt;li>The user spends funds, carefully checking the transaction details displayed
+on the dedicated screen are correct, and only approving the transaction on the
+device when all details are as expected.&lt;/li>
+&lt;/ol>
+&lt;p>Within this scenario, we define the threat model in terms of what expectations
+the user has regarding the attacker who has compromised their PC/phone,
+following the process of &lt;a href="https://github.com/defuse/ictm">Invariant-Centric Threat
+Modelling&lt;/a>.&lt;/p>
+&lt;p>We expect that the attacker &lt;em>CAN&lt;/em>:&lt;/p>
+&lt;ol>
+&lt;li>Prevent the user from using their wallet on that compromised PC (but not
+others).&lt;/li>
+&lt;li>Steal viewing keys which let the attacker permanently compromise the privacy
+of the wallet&amp;rsquo;s addresses.&lt;/li>
+&lt;li>Cause funds being spent by the user to be stolen, if the user did not
+carefully verify the transaction details on the device&amp;rsquo;s screen.&lt;/li>
+&lt;li>Cause funds that the user is receiving to be stolen, if they did not verify
+their address on the device&amp;rsquo;s screen or if they used the compromised PC/phone to
+transmit their address (e.g. the attacker could replace the user&amp;rsquo;s address with
+their own after the user pastes it into an exchange&amp;rsquo;s website).&lt;/li>
+&lt;li>Cause transactions to be generated in a way that weakens privacy (e.g. by
+causing randomized signatures to not be randomized, or by tagging transactions
+such that the sender&amp;rsquo;s identity is revealed on the public blockchain).&lt;/li>
+&lt;/ol>
+&lt;p>The user expects that the attacker &lt;em>CANNOT&lt;/em>:&lt;/p>
+&lt;ol>
+&lt;li>Obtain the spend authority keys for any of the user&amp;rsquo;s addresses.&lt;/li>
+&lt;li>Cause the user&amp;rsquo;s funds to become unspendable.&lt;/li>
+&lt;li>Spend the user&amp;rsquo;s funds without physical approval on the hardware device.&lt;/li>
+&lt;li>Change the destination of funds being spent without that being visible in the on-device approval process.&lt;/li>
+&lt;li>Add or remove transaction components, making the transaction different than exactly what was confirmed through the device&amp;rsquo;s display.&lt;/li>
+&lt;li>Cause the hardware wallet to display, as its own address, any other address, such as one an attacker controls.&lt;/li>
+&lt;li>Permanently prevent the hardware wallet from functioning on another uncompromised PC.&lt;/li>
+&lt;/ol>
+&lt;p>In addition to these specialized considerations for shielded hardware wallets, a
+PC or smartphone wallet app that interfaces with a shielded hardware wallet is
+expected to fall under the scope of the &lt;a href="https://zcash.readthedocs.io/en/latest/rtd_pages/wallet_threat_model.html">Zcash Wallet App Threat
+Model&lt;/a>.&lt;/p></description><author>trandcanh@gmail.com (Calvin Tran)</author><guid>https://zecsec.com/posts/threat-model-for-zcash-hardware-wallets/</guid><pubDate>Sat, 15 Apr 2023 00:00:00 -0700</pubDate></item><item><title>Risk Analysis of Intel's SGX and Other TEEs</title><link>https://zecsec.com/posts/risk-analysis-of-intel-sgx-and-other-tees/</link><description>&lt;p>Intel&amp;rsquo;s &lt;a href="https://www.intel.com/content/www/us/en/developer/tools/software-guard-extensions/overview.html">Software Guard eXtensions (SGX)&lt;/a> is a Trusted Execution Environment (TEE) technology built into some Intel CPUs. It is a special mode of operation that the processor can be put into that intends to allow for integrity-protected and confidentiality-protected processing, even under the assumption that the machine is fully compromised (i.e. the attacker has root access).&lt;/p>
 &lt;p>Using cryptographic keys baked into the sillicon, SGX intends to allow the processor to remotely &amp;ldquo;attest&amp;rdquo; to its secure execution state, so that clients can be assured that they are interacting with safe code (the &amp;ldquo;enclave&amp;rdquo;) and can provide secrets to that code without them being vulnerable to theft even by root users of the system.&lt;/p>
 &lt;p>In recent years, researchers have produced attacks that result in a complete breakage of SGX&amp;rsquo;s security guarantees. The variety of methods used in the attacks and the frequency with which new bugs are being discovered in Intel processors calls into question SGX&amp;rsquo;s ability to provide a secure Trusted Execution Environment.&lt;/p>
 &lt;p>&lt;em>What are these attacks, and are there any alternative TEE designs that fare better?&lt;/em>&lt;/p>
