@@ -28,7 +28,7 @@ Modelling](https://github.com/defuse/ictm).
 
 We expect that the attacker *CAN*:
 
-1. Prevent the user from using their wallet on that compromised PC (but not
+1. Prevent the user from using their wallet on that compromised PC/phone (but not
 others).
 2. Steal viewing keys which let the attacker permanently compromise the privacy
 of the wallet's addresses.
@@ -47,10 +47,10 @@ The user expects that the attacker *CANNOT*:
 1. Obtain the spend authority keys for any of the user's addresses.
 2. Cause the user's funds to become unspendable.
 3. Spend the user's funds without physical approval on the hardware device.
-4. Change the destination of funds being spent without that being visible in the on-device approval process.
-5. Add or remove transaction components, making the transaction different than exactly what was confirmed through the device's display.
-6. Cause the hardware wallet to display, as its own address, any other address, such as one an attacker controls.
-7. Permanently prevent the hardware wallet from functioning on another uncompromised PC.
+4. Produce a transaction whose semantics are different in any way from what was approved through the device's display, including changing the destination of funds being spent, the amount of funds being spent, or the fee amount.
+5. Cause the hardware wallet to display, as its own address, any other address, such as one an attacker controls.
+6. Cause an official-looking message to be displayed on the hardware wallet's display (which could be used for phishing).
+7. Permanently prevent the hardware wallet from functioning with another uncompromised PC/phone.
 
 In addition to these specialized considerations for shielded hardware wallets, a
 PC or smartphone wallet app that interfaces with a shielded hardware wallet is
