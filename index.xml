@@ -20,7 +20,7 @@ following the process of &lt;a href="https://github.com/defuse/ictm">Invariant-C
 Modelling&lt;/a>.&lt;/p>
 &lt;p>We expect that the attacker &lt;em>CAN&lt;/em>:&lt;/p>
 &lt;ol>
-&lt;li>Prevent the user from using their wallet on that compromised PC (but not
+&lt;li>Prevent the user from using their wallet on that compromised PC/phone (but not
 others).&lt;/li>
 &lt;li>Steal viewing keys which let the attacker permanently compromise the privacy
 of the wallet&amp;rsquo;s addresses.&lt;/li>
@@ -39,10 +39,10 @@ such that the sender&amp;rsquo;s identity is revealed on the public blockchain).
 &lt;li>Obtain the spend authority keys for any of the user&amp;rsquo;s addresses.&lt;/li>
 &lt;li>Cause the user&amp;rsquo;s funds to become unspendable.&lt;/li>
 &lt;li>Spend the user&amp;rsquo;s funds without physical approval on the hardware device.&lt;/li>
-&lt;li>Change the destination of funds being spent without that being visible in the on-device approval process.&lt;/li>
-&lt;li>Add or remove transaction components, making the transaction different than exactly what was confirmed through the device&amp;rsquo;s display.&lt;/li>
+&lt;li>Produce a transaction whose semantics are different in any way from what was approved through the device&amp;rsquo;s display, including changing the destination of funds being spent, the amount of funds being spent, or the fee amount.&lt;/li>
 &lt;li>Cause the hardware wallet to display, as its own address, any other address, such as one an attacker controls.&lt;/li>
-&lt;li>Permanently prevent the hardware wallet from functioning on another uncompromised PC.&lt;/li>
+&lt;li>Cause an official-looking message to be displayed on the hardware wallet&amp;rsquo;s display (which could be used for phishing).&lt;/li>
+&lt;li>Permanently prevent the hardware wallet from functioning with another uncompromised PC/phone.&lt;/li>
 &lt;/ol>
 &lt;p>In addition to these specialized considerations for shielded hardware wallets, a
 PC or smartphone wallet app that interfaces with a shielded hardware wallet is
