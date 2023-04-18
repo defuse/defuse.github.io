@@ -247,7 +247,7 @@ what its security properties will be.
 
 ### Quiet (formerly known as Zbay)
 
-[https://www.tryquiet.org/](Quiet), formerly known as Zbay, was a project that
+[Quiet](https://www.tryquiet.org/), formerly known as Zbay, was a project that
 attempted to use the memo field as a secure communication layer. The project
 ended up moving to Tor out of a need for better performance.
 
