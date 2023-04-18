@@ -1,4 +1,130 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZecSec: Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 151515, Calvin Tran</copyright><lastBuildDate>Sat, 15 Apr 2023 00:00:00 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>A Simple Threat Model for Zcash Shielded Hardware Wallets</title><link>https://zecsec.com/posts/threat-model-for-zcash-hardware-wallets/</link><description>&lt;p>In this post, we&amp;rsquo;ll share a simple threat model for Zcash shielded hardware
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZecSec: Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 181818, Calvin Tran</copyright><lastBuildDate>Tue, 18 Apr 2023 01:00:00 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>ZecSec's Q1 2023 Transparency Report</title><link>https://zecsec.com/posts/2023-q1-transparency-report/</link><description>&lt;p>The ZecSec project publishes quarterly transparency reports in order to ensure
+accountability and to help the Zcash community understand how its funds are
+being spent. This is the report for Q1 of 2023.&lt;/p>
+&lt;p>Note that some of these reports may be delayed, and some information may be
+redacted or slightly modified, in order to prevent the disclosure of unresolved
+security bugs.&lt;/p>
+&lt;p>The current
+&lt;a href="https://forum.zcashcommunity.com/t/zcash-ecosystem-security-lead/42090">grant&lt;/a>
+allows me to bill $1000 USD per day, up to a maximum of $17,000 per month, up to
+12 total months. The sections below break down and explain my invoices for Q1
+2023. The previous transparency report, for Q4 2022, can be found
+&lt;a href="https://zecsec.com/posts/2022-q4-transparency-report/">here&lt;/a>.&lt;/p>
+&lt;h2 id="january">January&lt;/h2>
+&lt;p>In January, the bulk of my time went into a security audit of
+&lt;a href="https://github.com/zcash/lightwalletd">lightwalletd&lt;/a>. I also did a quick review
+of &lt;a href="https://zgo.cash/">ZGo&lt;/a> and did some research on secure messaging
+cryptography, thinking about how Zcash&amp;rsquo;s memo field could be extended to better
+support messaging use cases.&lt;/p>
+&lt;table class="table table-striped table-bordered">
+&lt;thead>
+&lt;tr>
+&lt;th>Days&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>12&lt;/td>
+&lt;td>Security audit of lightwalletd&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>1&lt;/td>
+&lt;td>Secure messaging cryptography research&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>2&lt;/td>
+&lt;td>Quick security review of ZGo&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>2&lt;/td>
+&lt;td>Miscellaneous time including office hours, PR review, and preparing the last transparency report&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Total days: 17, Total paid: $17,000.&lt;/p>
+&lt;h2 id="february">February&lt;/h2>
+&lt;p>In February, the main item I spent time on was thinking about how we could
+&lt;a href="https://zecsec.com/posts/making-zcash-light-wallets-faster-and-more-private/">change the Zcash protocol to make transaction syncing more performant and
+scalable&lt;/a>.
+I was also put in touch with some SGX/ORAM researchers interested in using the
+technology to help solve Zcash&amp;rsquo;s performance issues, which led me to writing a
+&lt;a href="https://zecsec.com/posts/risk-analysis-of-intel-sgx-and-other-tees/">risk analysis of SGX and other Trusted Execution
+Environments&lt;/a>.&lt;/p>
+&lt;table class="table table-striped table-bordered">
+&lt;thead>
+&lt;tr>
+&lt;th>Days&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>2&lt;/td>
+&lt;td>lightwalletd audit remediation coordination/assistance&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>3&lt;/td>
+&lt;td>SGX / TEE / ORAM research leading to the &lt;a href="https://zecsec.com/posts/risk-analysis-of-intel-sgx-and-other-tees/">risk analysis blog post&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>6&lt;/td>
+&lt;td>&lt;a href="https://zecsec.com/posts/making-zcash-light-wallets-faster-and-more-private/">Scalable transaction detection protocol design&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>3&lt;/td>
+&lt;td>Quick security audit of free2z&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>3&lt;/td>
+&lt;td>Helping investigate disclosed &lt;a href="https://electriccoin.co/blog/new-releases-remediate-memory-exhaustion-vulnerability-in-zcash/">memory exhaustion bugs&lt;/a> in zcashd&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Total days: 17, Total paid: $17,000.&lt;/p>
+&lt;h2 id="march">March&lt;/h2>
+&lt;p>In March, I audited &lt;a href="https://github.com/Zondax/ledger-zcash">Zondax&amp;rsquo;s shielded hardware wallet
+code&lt;/a>. I also reviewed the ZIPs for
+&lt;a href="https://github.com/zcash/zips/pull/680">Zcash Shielded Assets&lt;/a> (note that I
+missed &lt;a href="https://forum.zcashcommunity.com/t/grant-update-zcash-shielded-assets-monthly-updates/41153/42?u=earthrise">a
+bug&lt;/a>!).&lt;/p>
+&lt;table class="table table-striped table-bordered">
+&lt;thead>
+&lt;tr>
+&lt;th>Days&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>12&lt;/td>
+&lt;td>Security audit of Zondax&amp;rsquo;s shielded Zcash Ledger app code&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>1&lt;/td>
+&lt;td>Researching Identity-Based Encryption for scalable protocol designs&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>3&lt;/td>
+&lt;td>ZSA ZIPs review&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>1&lt;/td>
+&lt;td>Office hours and other miscellaneous items&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Total days: 17, Total paid: $17,000.&lt;/p>
+&lt;h2 id="conclusion">Conclusion&lt;/h2>
+&lt;p>In Q1 of 2023, I completed two major audits (of lightwalletd and Zondax&amp;rsquo;s
+shielded hardware wallet), several quick audits (of ZGo, free2z, and the ZSA
+ZIPs), and published research on a scalable protocol design and an analysis of
+the risks of using SGX/ORAM to fix Zcash&amp;rsquo;s performance issues.&lt;/p>
+&lt;p>In total, I invoiced 51 days and received $51,000 paid in ZEC.&lt;/p>
+&lt;p>If you have questions about the work that was done or have suggestions for
+future priorities, you can either email me at &lt;a href="mailto:zecsec@defuse.ca">zecsec@defuse.ca&lt;/a> or reply on &lt;a href="https://forum.zcashcommunity.com/t/zcash-ecosystem-security-lead/42090">the
+grant&amp;rsquo;s forum
+thread&lt;/a>.&lt;/p></description><author>trandcanh@gmail.com (Calvin Tran)</author><guid>https://zecsec.com/posts/2023-q1-transparency-report/</guid><pubDate>Tue, 18 Apr 2023 01:00:00 -0700</pubDate></item><item><title>A Simple Threat Model for Zcash Shielded Hardware Wallets</title><link>https://zecsec.com/posts/threat-model-for-zcash-hardware-wallets/</link><description>&lt;p>In this post, we&amp;rsquo;ll share a simple threat model for Zcash shielded hardware
 wallets. This is useful for informing users about which security and privacy
 properties they can expect to rely on when using a shielded hardware wallet and
 to help security auditors understand what counts as a &amp;ldquo;security bug.&amp;rdquo;&lt;/p>
