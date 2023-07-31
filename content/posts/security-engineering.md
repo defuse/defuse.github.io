@@ -1,6 +1,6 @@
 ---
 title: "Security Engineering: Learning from Safety-Critical Disciplines"
-date: 2023-07-31T01:00:00-07:00
+date: 2023-07-30T01:00:00-07:00
 author: "Taylor Hornby"
 draft: false
 ---
