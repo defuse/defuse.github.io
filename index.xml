@@ -1,4 +1,18 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZecSec: Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 111111, Calvin Tran</copyright><lastBuildDate>Fri, 11 Aug 2023 01:00:00 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>If you used libbitcoin-explorer (bx) to generate your seed phrase, rotate it ASAP!</title><link>https://zecsec.com/posts/milk-sad/</link><description>&lt;p>A critical vulnerability has been discovered in &lt;code>libbitcoin-explorer&lt;/code>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZecSec: Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 2022, Calvin Tran</copyright><lastBuildDate>Sat, 02 Sep 2023 01:00:00 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>Zcash Ecosystem Security Transition</title><link>https://zecsec.com/posts/zcash-security-transition/</link><description>&lt;p>Beginning in August, I will be stepping away from my role as Zcash&amp;rsquo;s &lt;a href="https://forum.zcashcommunity.com/t/zcash-ecosystem-security-lead/42090">Ecosystem Security Lead&lt;/a> to start sabbatical year focusing my hobbies outside of the cryptocurrency world.&lt;/p>
+&lt;p>In my &lt;a href="https://zecsec.com/posts/security-engineering/">talk on Security Engineering at Zcon4&lt;/a>, I surveyed the results that I&amp;rsquo;ve produced for
+this project over the last year: 81 bugs discovered, 41 of which I rated as
+&amp;ldquo;medium&amp;rdquo;-severity or higher.&lt;/p>
+&lt;p>The Zcash community clearly benefits from the kind of security support that I&amp;rsquo;ve
+been providing, so I&amp;rsquo;ve recommended that the Zcash Community Grants committee
+(a) post an RFP for a similar role to perform audits and provide general
+security support, and (b) post RFPs for auditing individual projects when the
+need arises.&lt;/p>
+&lt;p>I will put links to those RFPs here once they appear.&lt;/p>
+&lt;p>Posting RFPs for individual audits should have the added bonus of attracting
+more diverse security engineering talent into the Zcash ecosystem. This,
+combined with support from an individual or organization in a similar security
+lead/coordinator role will ensure that the Zcash community and its projects have
+excellent security coverage.&lt;/p></description><author>trandcanh@gmail.com (Calvin Tran)</author><guid>https://zecsec.com/posts/zcash-security-transition/</guid><pubDate>Sat, 02 Sep 2023 01:00:00 -0700</pubDate></item><item><title>If you used libbitcoin-explorer (bx) to generate your seed phrase, rotate it ASAP!</title><link>https://zecsec.com/posts/milk-sad/</link><description>&lt;p>A critical vulnerability has been discovered in &lt;code>libbitcoin-explorer&lt;/code>
 (command-line tool &lt;code>bx&lt;/code>), known as &lt;a href="https://milksad.info/">&amp;ldquo;milk sad&amp;rdquo;&lt;/a>.&lt;/p>
 &lt;p>&lt;strong>If at any point in the past, you may have used the &lt;code>bx seed&lt;/code> tool to generate
 your crypto wallet&amp;rsquo;s seed phrase, you must IMMEDIATELY generate a new seed
@@ -15,9 +29,18 @@ writeup&lt;/a>. If you used those wallets, I
 recommend re-generating a new seed phrase as well.&lt;/p>
 &lt;p>As far as I know, other wallets are not affected by this bug. To protect
 yourself against these kinds of bugs, be sure to only use a wallet which has
-undergone an independent security review.&lt;/p></description><author>trandcanh@gmail.com (Calvin Tran)</author><guid>https://zecsec.com/posts/milk-sad/</guid><pubDate>Fri, 11 Aug 2023 01:00:00 -0700</pubDate></item><item><title>Security Engineering: Learning from Safety-Critical Disciplines</title><link>https://zecsec.com/posts/security-engineering/</link><description>&lt;p>Here&amp;rsquo;s a link to the slides for my Zcon4 talk: &lt;a href="https://docs.google.com/presentation/d/1gq-JOhLkmvlebkh5RBCTZBZwNBoxZ_ioVmgAsMKkC1Q/edit?usp=sharing">&amp;ldquo;Security Engineering: Zcash
-Ecosystem Security and Learning from Safety-Critical
-Disciplines&amp;rdquo;&lt;/a>.&lt;/p></description><author>trandcanh@gmail.com (Calvin Tran)</author><guid>https://zecsec.com/posts/security-engineering/</guid><pubDate>Sun, 30 Jul 2023 01:00:00 -0700</pubDate></item><item><title>ZecSec's Q1 2023 Transparency Report</title><link>https://zecsec.com/posts/2023-q1-transparency-report/</link><description>&lt;p>The ZecSec project publishes quarterly transparency reports in order to ensure
+undergone an independent security review.&lt;/p></description><author>trandcanh@gmail.com (Calvin Tran)</author><guid>https://zecsec.com/posts/milk-sad/</guid><pubDate>Fri, 11 Aug 2023 01:00:00 -0700</pubDate></item><item><title>Security Engineering: Learning from Safety-Critical Disciplines</title><link>https://zecsec.com/posts/security-engineering/</link><description>&lt;p>At Zcon4, I gave a talk that summarizes the results of my Zcash ecosystem
+security grant and provides an overview of security engineering, drawing on
+knowledge from safety-critical industries such as aviation.&lt;/p>
+&lt;p>This talk should be useful to anyone working to set up a security program in
+their organization or looking to improve their team&amp;rsquo;s security practices.
+Experienced security engineers may be interested in the safety engineering
+concepts that also apply to security engineering.&lt;/p>
+&lt;h2 id="the-talk">The Talk&lt;/h2>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube.com/embed/fgkFrxiB14g" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;p>You can also &lt;a href="https://docs.google.com/presentation/d/1gq-JOhLkmvlebkh5RBCTZBZwNBoxZ_ioVmgAsMKkC1Q/edit?usp=sharing">view the slides here&lt;/a>.&lt;/p></description><author>trandcanh@gmail.com (Calvin Tran)</author><guid>https://zecsec.com/posts/security-engineering/</guid><pubDate>Sun, 30 Jul 2023 01:00:00 -0700</pubDate></item><item><title>ZecSec's Q1 2023 Transparency Report</title><link>https://zecsec.com/posts/2023-q1-transparency-report/</link><description>&lt;p>The ZecSec project publishes quarterly transparency reports in order to ensure
 accountability and to help the Zcash community understand how its funds are
 being spent. This is the report for Q1 of 2023.&lt;/p>
 &lt;p>Note that some of these reports may be delayed, and some information may be
