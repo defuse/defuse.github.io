@@ -6,7 +6,7 @@ draft: false
 ---
 
 Below you will find a link to the results of my audit of
-[Free2Z](https://free2z.com/).
+[Free2Z](https://free2z.com/), which occurred in February, 2023.
 
 The audit found one cross-site scripting bug which could have been used to run
 arbitrary JavaScript code in users' browsers. I also noted a privacy risk, which
