@@ -9,7 +9,7 @@ been used to get tuzi tokens for free.&lt;/p>
 &lt;p>The cross-site scripting bug has been fixed, the potential privacy leakage has
 been documented, and the tuzi token issues were fixed. All other bugs found were
 minor.&lt;/p>
-&lt;p>&lt;a href="https://zecsec.com/audits/YWalletAuditReport-FINALv3.pdf">&lt;strong>Free2Z Audit Report (PDF)&lt;/strong>&lt;/a>&lt;/p></description><author>trandcanh@gmail.com (Calvin Tran)</author><guid>https://zecsec.com/posts/free2z-security-audit/</guid><pubDate>Thu, 14 Sep 2023 01:00:00 -0700</pubDate></item><item><title>If you used libbitcoin-explorer (bx) to generate your seed phrase, rotate it ASAP!</title><link>https://zecsec.com/posts/milk-sad/</link><description>&lt;p>A critical vulnerability has been discovered in &lt;code>libbitcoin-explorer&lt;/code>
+&lt;p>[&lt;strong>Free2Z Audit Report (PDF)&lt;/strong>](/audits/Free2Z Mini Audit-Final.pdf)&lt;/p></description><author>trandcanh@gmail.com (Calvin Tran)</author><guid>https://zecsec.com/posts/free2z-security-audit/</guid><pubDate>Thu, 14 Sep 2023 01:00:00 -0700</pubDate></item><item><title>If you used libbitcoin-explorer (bx) to generate your seed phrase, rotate it ASAP!</title><link>https://zecsec.com/posts/milk-sad/</link><description>&lt;p>A critical vulnerability has been discovered in &lt;code>libbitcoin-explorer&lt;/code>
 (command-line tool &lt;code>bx&lt;/code>), known as &lt;a href="https://milksad.info/">&amp;ldquo;milk sad&amp;rdquo;&lt;/a>.&lt;/p>
 &lt;p>&lt;strong>If at any point in the past, you may have used the &lt;code>bx seed&lt;/code> tool to generate
 your crypto wallet&amp;rsquo;s seed phrase, you must IMMEDIATELY generate a new seed
