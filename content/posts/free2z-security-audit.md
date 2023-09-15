@@ -19,4 +19,4 @@ The cross-site scripting bug has been fixed, the potential privacy leakage has
 been documented, and the tuzi token issues were fixed. All other bugs found were
 minor.
 
-[**Free2Z Audit Report (PDF)**]("/audits/Free2Z Mini Audit-Final.pdf")
+[**Free2Z Audit Report (PDF)**](/audits/Free2Z%20Min%20Audit-Final.pdf)
