@@ -16,7 +16,7 @@ bugs were found in the implementation of Free2Z's "tuzi" token, which could have
 been used to get tuzi tokens for free.
 
 The cross-site scripting bug has been fixed, the potential privacy leakage has
-been documented, and the tuzi token issues were fixed. The Other bugs found were
+been documented, and the tuzi token issues were fixed. All other bugs found were
 minor.
 
 [**Free2Z Audit Report (PDF)**](/audits/YWalletAuditReport-FINALv3.pdf)
