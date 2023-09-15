@@ -7,7 +7,7 @@ attacker could potentially use to track visits to their pages on Free2Z. Some
 bugs were found in the implementation of Free2Z&amp;rsquo;s &amp;ldquo;tuzi&amp;rdquo; token, which could have
 been used to get tuzi tokens for free.&lt;/p>
 &lt;p>The cross-site scripting bug has been fixed, the potential privacy leakage has
-been documented, and the tuzi token issues were fixed. The Other bugs found were
+been documented, and the tuzi token issues were fixed. All other bugs found were
 minor.&lt;/p>
 &lt;p>&lt;a href="https://zecsec.com/audits/YWalletAuditReport-FINALv3.pdf">&lt;strong>Free2Z Audit Report (PDF)&lt;/strong>&lt;/a>&lt;/p></description><author>trandcanh@gmail.com (Calvin Tran)</author><guid>https://zecsec.com/posts/free2z-security-audit/</guid><pubDate>Thu, 14 Sep 2023 01:00:00 -0700</pubDate></item><item><title>If you used libbitcoin-explorer (bx) to generate your seed phrase, rotate it ASAP!</title><link>https://zecsec.com/posts/milk-sad/</link><description>&lt;p>A critical vulnerability has been discovered in &lt;code>libbitcoin-explorer&lt;/code>
 (command-line tool &lt;code>bx&lt;/code>), known as &lt;a href="https://milksad.info/">&amp;ldquo;milk sad&amp;rdquo;&lt;/a>.&lt;/p>
