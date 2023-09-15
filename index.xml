@@ -1,5 +1,5 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZecSec: Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 151515, Calvin Tran</copyright><lastBuildDate>Thu, 14 Sep 2023 01:00:00 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>Free2Z Security Audit Results</title><link>https://zecsec.com/posts/free2z-security-audit/</link><description>&lt;p>Below you will find a link to the results of my audit of
-&lt;a href="https://free2z.com/">Free2Z&lt;/a>.&lt;/p>
+&lt;a href="https://free2z.com/">Free2Z&lt;/a>, which occurred in February, 2023.&lt;/p>
 &lt;p>The audit found one cross-site scripting bug which could have been used to run
 arbitrary JavaScript code in users&amp;rsquo; browsers. I also noted a privacy risk, which
 is that Free2Z allows embedding content from third-party domains, which an
