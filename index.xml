@@ -1,4 +1,15 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZecSec: Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 2022, Calvin Tran</copyright><lastBuildDate>Fri, 11 Aug 2023 01:00:00 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>If you used libbitcoin-explorer (bx) to generate your seed phrase, rotate it ASAP!</title><link>https://zecsec.com/posts/milk-sad/</link><description>&lt;p>A critical vulnerability has been discovered in &lt;code>libbitcoin-explorer&lt;/code>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZecSec: Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 151515, Calvin Tran</copyright><lastBuildDate>Thu, 14 Sep 2023 01:00:00 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>Free2Z Security Audit Results</title><link>https://zecsec.com/posts/free2z-security-audit/</link><description>&lt;p>Below you will find a link to the results of my audit of
+&lt;a href="https://free2z.com/">Free2Z&lt;/a>.&lt;/p>
+&lt;p>The audit found one cross-site scripting bug which could have been used to run
+arbitrary JavaScript code in users&amp;rsquo; browsers. I also noted a privacy risk, which
+is that Free2Z allows embedding content from third-party domains, which an
+attacker could potentially use to track visits to their pages on Free2Z. Some
+bugs were found in the implementation of Free2Z&amp;rsquo;s &amp;ldquo;tuzi&amp;rdquo; token, which could have
+been used to get tuzi tokens for free.&lt;/p>
+&lt;p>The cross-site scripting bug has been fixed, the potential privacy leakage has
+been documented, and the tuzi token issues were fixed. The Other bugs found were
+minor.&lt;/p>
+&lt;p>&lt;a href="https://zecsec.com/audits/YWalletAuditReport-FINALv3.pdf">&lt;strong>Free2Z Audit Report (PDF)&lt;/strong>&lt;/a>&lt;/p></description><author>trandcanh@gmail.com (Calvin Tran)</author><guid>https://zecsec.com/posts/free2z-security-audit/</guid><pubDate>Thu, 14 Sep 2023 01:00:00 -0700</pubDate></item><item><title>If you used libbitcoin-explorer (bx) to generate your seed phrase, rotate it ASAP!</title><link>https://zecsec.com/posts/milk-sad/</link><description>&lt;p>A critical vulnerability has been discovered in &lt;code>libbitcoin-explorer&lt;/code>
 (command-line tool &lt;code>bx&lt;/code>), known as &lt;a href="https://milksad.info/">&amp;ldquo;milk sad&amp;rdquo;&lt;/a>.&lt;/p>
 &lt;p>&lt;strong>If at any point in the past, you may have used the &lt;code>bx seed&lt;/code> tool to generate
 your crypto wallet&amp;rsquo;s seed phrase, you must IMMEDIATELY generate a new seed
