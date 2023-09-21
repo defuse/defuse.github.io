@@ -66,7 +66,7 @@ has more total work.
 Rolling back transactions could be used for theft. For example, the attacker
 could make a transaction that sends tokens to an exchange, sell those tokens for
 cash, and then roll back the transaction so that the exchange does not receive
-the tokens. The attacker leaves with both their origial tokens and the cash they
+the tokens. The attacker leaves with both their original tokens and the cash they
 "sold" them for.
 
 As Coinbase pointed out, ViaBTC, controlling more than 50% of Zcash's hashrate,
@@ -87,7 +87,7 @@ to halt.
 The halting behavior ensures that any large 51% attack will be detected and can
 be responded-to by the engineers maintaining Zcash. This means that a user can
 reduce their risk of losing funds through a 51% attack by waiting for at least
-100 confirmations. If they are then 51%-attacked, the alternative chain is not
+100 confirmations. If they are then 51%-attacked, the alternate chain is not
 likely to become the main chain, and a manual response and resolution by the
 engineers maintaining Zcash is likely.
 
