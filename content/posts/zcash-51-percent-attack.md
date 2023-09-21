@@ -53,7 +53,7 @@ This makes it hard to reverse transactions that have been mined to a sufficient
 depth. For example, suppose a transaction has been mined into a block, and 10
 more blocks have been mined after that one. For an attacker to roll back the
 transaction, they would have to out-compete all of the other miners, producing
-an alternative chain, which doesn't include transaction they want to roll back,
+an alternative chain, which doesn't include the transaction they want to roll back,
 and that has more total work applied to it than was required to produce the 10
 blocks on the original chain.  So, as long as no one controls a majority of the
 network's hashrate, transactions cannot be rolled back.
@@ -84,7 +84,7 @@ not automatically be detected, a 51% attack that attempted to roll back more
 blocks would either not propagate through the network or would cause the network
 to halt.
 
-The halting behavior ensures that any large 51% attack will be detected, and can
+The halting behavior ensures that any large 51% attack will be detected and can
 be responded-to by the engineers maintaining Zcash. This means that a user can
 reduce their risk of losing funds through a 51% attack by waiting for at least
 100 confirmations. If they are then 51%-attacked, the alternative chain is not
