@@ -1,4 +1,121 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZecSec: Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 151515, Calvin Tran</copyright><lastBuildDate>Thu, 14 Sep 2023 01:00:00 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>Free2Z Security Audit Results</title><link>https://zecsec.com/posts/free2z-security-audit/</link><description>&lt;p>Below you will find a link to the results of my audit of
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZecSec: Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 212121, Calvin Tran</copyright><lastBuildDate>Thu, 21 Sep 2023 01:00:00 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>Mitigating 51% Attack Risk on the Zcash Network</title><link>https://zecsec.com/posts/zcash-51-percent-attack/</link><description>&lt;p>Recently, &lt;a href="https://www.coinbase.com/blog/security-psa-observed-risks-in-zcash-mining-pool-distribution">Coinbase
+observed&lt;/a>
+that a mining pool called ViaBTC currently controls over 50% of Zcash&amp;rsquo;s hashrate, putting
+the network at risk of a &amp;ldquo;51% attack&amp;rdquo;.&lt;/p>
+&lt;h2 id="tldr">tl;dr&lt;/h2>
+&lt;ul>
+&lt;li>So far, no 51% attack has been observed on the Zcash network.&lt;/li>
+&lt;li>If you&amp;rsquo;re a ZEC miner using the ViaBTC pool, switching to a different pool
+will help prevent a possible 51% attack, protecting the
+value of your mining rewards.&lt;/li>
+&lt;li>If you&amp;rsquo;re a Zcash user and want to protect yourself from any future 51%
+attack, wait for more than 100 confirmations.&lt;/li>
+&lt;li>Zcash nodes will halt if they see a rollback of 100 blocks or more, giving
+developers time to investigate and respond to any 51% attack that attempts to
+roll back that many blocks.&lt;/li>
+&lt;li>Electric Coin Company is working on transitioning Zcash from proof of work to
+proof of stake, which should help decentralize the network&amp;rsquo;s consensus,
+lessening the risk of 51% attacks in the future.&lt;/li>
+&lt;/ul>
+&lt;h2 id="what-is-a-51-attack">What is a 51% attack?&lt;/h2>
+&lt;p>In a proof-of-work blockchain like Zcash, the network reaches a consensus on the
+inclusion and ordering of transactions through a process of mining &amp;ldquo;blocks&amp;rdquo;.&lt;/p>
+&lt;p>Miners assemble outstanding transactions into a block and then compete to be
+the first to solve a crypto-puzzle related to their proposed block. The first
+miner to find a solution gets rewarded for their efforts: their block becomes
+the next block in the block chain, and they receive a portion of the new funds
+created by their block. Miners solve these puzzles by brute-force guessing, and
+the rate at which they can try guesses is known as the &amp;ldquo;hashrate.&amp;rdquo;&lt;/p>
+&lt;p>As miners carry out this process, there can be competing &amp;ldquo;branches&amp;rdquo; of the block
+chain. For example, if two miners find a solution around the same time, it&amp;rsquo;s
+ambiguous which of their blocks is the actual next block. When this happens,
+other miners decide which branch to continue mining on, usually choosing the
+first branch they receive so that they can continue mining as quickly as
+possible.&lt;/p>
+&lt;p>Nodes of the network decide which branch of the chain to follow by adding up the
+total amount of work it took to solve all of the crypto-puzzles along the
+branch. Eventually, any ambiguity about which branch to follow gets resolved
+when one branch clearly has the most work applied to it.&lt;/p>
+&lt;p>This makes it hard to reverse transactions that have been mined to a sufficient
+depth. For example, suppose a transaction has been mined into a block, and 10
+more blocks have been mined after that one. For an attacker to roll back the
+transaction, they would have to out-compete all of the other miners, producing
+an alternative chain, which doesn&amp;rsquo;t include transaction they want to roll back,
+and that has more total work applied to it than was required to produce the 10
+blocks on the original chain. So, as long as no one controls a majority of the
+network&amp;rsquo;s hashrate, transactions cannot be rolled back.&lt;/p>
+&lt;p>When a single miner or colluding group of miners controls more than 50% of the
+hashrate, they have the power to roll back transactions. This is because they
+&lt;em>can&lt;/em> out-compete all of the other miners and produce an alternate chain that
+has more total work.&lt;/p>
+&lt;p>Rolling back transactions could be used for theft. For example, the attacker
+could make a transaction that sends tokens to an exchange, sell those tokens for
+cash, and then roll back the transaction so that the exchange does not receive
+the tokens. The attacker leaves with both their origial tokens and the cash they
+&amp;ldquo;sold&amp;rdquo; them for.&lt;/p>
+&lt;p>As Coinbase pointed out, ViaBTC, controlling more than 50% of Zcash&amp;rsquo;s hashrate,
+is in a position where they could carry out such an attack.&lt;/p>
+&lt;h2 id="what-defenses-does-zcash-have-against-51-attacks">What defenses does Zcash have against 51% attacks?&lt;/h2>
+&lt;p>Zcash nodes each implement &lt;a href="https://github.com/zcash/zcash/blob/c908d4bb9ae3be92da14c81ff7a6ddec904c9226/src/main.cpp#L6045-L6061">a
+rule&lt;/a>
+whereby the node will shut down if a new chain with more total work appears that
+would roll back 100 blocks or more.&lt;/p>
+&lt;p>This means that, while a 51% attack that rolled back 99 blocks or fewer would
+not automatically be detected, a 51% attack that attempted to roll back more
+blocks would either not propagate through the network or would cause the network
+to halt.&lt;/p>
+&lt;p>The halting behavior ensures that any large 51% attack will be detected, and can
+be responded-to by the engineers maintaining Zcash. This means that a user can
+reduce their risk of losing funds through a 51% attack by waiting for at least
+100 confirmations. If they are then 51%-attacked, the alternative chain is not
+likely to become the main chain, and a manual response and resolution by the
+engineers maintaining Zcash is likely.&lt;/p>
+&lt;h2 id="what-can-we-do-to-reduce-the-risk-of-51-attacks">What can we do to reduce the risk of 51% attacks?&lt;/h2>
+&lt;p>As mentioned above, Zcash users can reduce their risk of losing funds due to a
+51% attack by waiting for 100 or more confirmations. Advanced users can also
+detect large rollbacks of fewer than 100 blocks, after they happen, by examining
+the output of the &lt;code>getchaintips&lt;/code> command on their node.&lt;/p>
+&lt;p>Zcash miners using ViaBTC can immediately reduce the risk of a 51% attack by
+switching pools. Doing so will reduce the amount of hashrate controlled by
+ViaBTC and increase the hashrate controlled by other pools, reducing ViaBTC&amp;rsquo;s
+ability to carry out an attack. Miners have incentive to do this, since
+protecting Zcash against 51% attacks is also protecting the value of their
+mining rewards.&lt;/p>
+&lt;p>It&amp;rsquo;s also worth noting that ViaBTC is incentivized to &lt;em>not&lt;/em> 51%-attack the Zcash
+network, since if they do, it will likely be discovered, and they risk
+tarnishing their brand and losing miners for all of the other blockchains that
+they support. That said, Zcash&amp;rsquo;s security should be grounded more soundly than
+relying on any one organization&amp;rsquo;s incentives.&lt;/p>
+&lt;p>As a more thorough solution, Electric Coin Company is &lt;a href="https://electriccoin.co/blog/the-trailing-finality-layer-a-stepping-stone-to-proof-of-stake-in-zcash/">researching and
+developing&lt;/a>
+a transition to proof of stake for the Zcash network.&lt;/p>
+&lt;p>Proof of stake is an alternative to proof of work where consensus is no longer
+determined by the speed of solving crypto-puzzles, but by validators, selected
+according to the amount of funds that have been entrusted to them (&amp;ldquo;staked&amp;rdquo;).
+Misbehaving validators have their funds &amp;ldquo;slashed&amp;rdquo;, so users are incentivized to
+delegate their funds only to trustworthy validators.&lt;/p>
+&lt;p>Proof of stake consensus algorithms can also suffer from centralization risks.
+Attacks similar to 51% attacks are possible against a proof of stake blockchain
+when a single entity controls a majority of the network&amp;rsquo;s
+validators. Even so, proof of stake should be an improvement over proof of
+work, since it opens the door to more users participating in the network&amp;rsquo;s
+consensus.&lt;/p>
+&lt;p>To participate in consensus on a proof of work blockchain, you need to own or
+rent expensive mining hardware. Not everyone can do this. With proof of stake,
+on the other hand, any ZEC holder will be able to delegate their tokens to a
+validator to stake. With the barrier to participating in consensus lowered, more
+people will be able to participate, which should increase decentralization and
+improve Zcash&amp;rsquo;s security against such attacks.&lt;/p>
+&lt;h2 id="conclusion">Conclusion&lt;/h2>
+&lt;p>To summarize, the mining pool ViaBTC currently controls more than 50% of Zcash&amp;rsquo;s
+hashrate, enabling them to 51%-attack the network if they choose to do so. So
+far, no attack has been observed.&lt;/p>
+&lt;p>Users can protect themselves from thefts by waiting for more than 100
+confirmations, and Zcash miners using ViaBTC can protect the value of their
+mining rewards by switching pools.&lt;/p>
+&lt;p>Electric Coin Company is working on transitioning Zcash to proof of stake, which
+should allow for easier participation in the network&amp;rsquo;s consensus, thereby
+increasing Zcash&amp;rsquo;s decentralization and security.&lt;/p></description><author>trandcanh@gmail.com (Calvin Tran)</author><guid>https://zecsec.com/posts/zcash-51-percent-attack/</guid><pubDate>Thu, 21 Sep 2023 01:00:00 -0700</pubDate></item><item><title>Free2Z Security Audit Results</title><link>https://zecsec.com/posts/free2z-security-audit/</link><description>&lt;p>Below you will find a link to the results of my audit of
 &lt;a href="https://free2z.com/">Free2Z&lt;/a>, which occurred in February, 2023.&lt;/p>
 &lt;p>The audit found one cross-site scripting bug which could have been used to run
 arbitrary JavaScript code in users&amp;rsquo; browsers. I also noted a privacy risk, which
