@@ -1,4 +1,60 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZecSec: Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 212121, Calvin Tran</copyright><lastBuildDate>Thu, 21 Sep 2023 01:00:00 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>Mitigating 51% Attack Risk on the Zcash Network</title><link>https://zecsec.com/posts/zcash-51-percent-attack/</link><description>&lt;p>Recently, &lt;a href="https://www.coinbase.com/blog/security-psa-observed-risks-in-zcash-mining-pool-distribution">Coinbase
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZecSec: Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 212121, Calvin Tran</copyright><lastBuildDate>Thu, 21 Sep 2023 01:01:00 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>Results of Auditing Hanh's Shielded Zcash Ledger App</title><link>https://zecsec.com/posts/security-audit-of-hanhs-ledger-app/</link><description>&lt;p>In May and June of this year, I reviewed Hanh Huynh Huu&amp;rsquo;s Ledger app supporting
+shielded Zcash. The full audit report is available at the link below.&lt;/p>
+&lt;h2 id="summary-of-results">Summary of Results&lt;/h2>
+&lt;p>The main issues uncovered by the audit were the following:&lt;/p>
+&lt;h3 id="side-channel-leakage">Side-Channel Leakage&lt;/h3>
+&lt;p>The algorithm for producing transaction signatures is not constant-time,
+therefore it may be possible to leak the user&amp;rsquo;s signing keys through a
+side-channel attack. This will be fixed by making the code constant-time.&lt;/p>
+&lt;h3 id="incompatibility-with-zip-32">Incompatibility with ZIP 32&lt;/h3>
+&lt;p>There is an incompatibility between &lt;a href="https://zips.z.cash/zip-0032">ZIP 32&lt;/a>
+and the key-derivation API currently provided on Ledger devices.&lt;/p>
+&lt;p>ZIP 32 derives a chain of keys from the user&amp;rsquo;s root seed. Ledger&amp;rsquo;s API does not
+support ZIP 32 key derivation, and there is no way for an app to access the root
+seed to do the derivation itself, since allowing an app to access the seed would
+be a security risk. The Ledger app therefore needed to generate its keys in a
+way that is not compatible with ZIP 32.&lt;/p>
+&lt;p>Given the current implementations of standard Zcash wallets and the Ledger app,
+it would not be possible to import a standard wallet&amp;rsquo;s seed phrase into a Ledger
+and access shielded funds through the app. Vice-versa, importing a Ledger seed
+phrase into a standard Zcash wallet would require the wallet to perform twice
+the scanning effort to find all of the user&amp;rsquo;s shielded funds.&lt;/p>
+&lt;p>The most-compatible way to resolve this issue would be for Ledger to add support
+for ZIP 32 to their devices&amp;rsquo; operating systems.&lt;/p>
+&lt;p>Failing that, ZIP 32 could be amended to be compatible with hardware wallets'
+existing APIs; this would make seed phrases compatible between standard wallets
+and the Ledger app, at the cost of needing to do twice the scanning effort when
+importing old wallets.&lt;/p>
+&lt;p>Another potential solution is to develop a tool for deriving individual shielded
+signing keys from a Ledger seed phrase, so that they can be manually imported
+into a standard shielded wallet. Unfortunately this approach would still not
+allow a standard seed phrase with shielded funds to be imported into a Ledger.&lt;/p>
+&lt;h3 id="burning-funds-via-invalid-ciphertext">Burning Funds via Invalid Ciphertext&lt;/h3>
+&lt;p>When a user&amp;rsquo;s wallet receives a shielded Zcash transaction, it needs to receive
+some additional information in order to spend the funds. This information is
+put, by the sender, into the &lt;em>note ciphertext&lt;/em>, which only the recipient&amp;rsquo;s
+wallet can decrypt.&lt;/p>
+&lt;p>A hardware wallet must ensure that these ciphertexts are produced honestly,
+otherwise malware on the host computer could &amp;ldquo;burn&amp;rdquo; funds being sent by
+replacing the ciphertext with junk data, preventing the recipient from accessing
+the information needed to spend their funds.&lt;/p>
+&lt;p>The Ledger app is missing this ciphertext verification. It will be fixed by
+having the hardware wallet compute (or re-compute and verify) the ciphertext,
+rather than trusting the value provided by the host.&lt;/p>
+&lt;h3 id="other">Other&lt;/h3>
+&lt;p>Several other minor issues were found, including an issue where unified
+addresses were not correctly displayed to the user; see the audit report for
+full details.&lt;/p>
+&lt;h3 id="gaps-in-coverage">Gaps in Coverage&lt;/h3>
+&lt;p>While all of the ledger app&amp;rsquo;s code was reviewed to some degree, there was not
+enough time to thoroughly review some security-critical cryptographic code, like
+the elliptic curve implementations. More review is needed in those areas; this
+is discussed further in the report.&lt;/p>
+&lt;p>After the audit, we found that an implementation of one of the curves was using
+an incomplete addition formula, when it should have been using a complete
+addition formula. This issue has been reported separately.&lt;/p>
+&lt;h2 id="the-audit-report">The Audit Report&lt;/h2>
+&lt;p>&lt;a href="https://zecsec.com/audits/zcash-ledger-audit-report-v2.pdf">&lt;strong>Shielded Zcash Ledger App Audit Report (PDF)&lt;/strong>&lt;/a>&lt;/p></description><author>trandcanh@gmail.com (Calvin Tran)</author><guid>https://zecsec.com/posts/security-audit-of-hanhs-ledger-app/</guid><pubDate>Thu, 21 Sep 2023 01:01:00 -0700</pubDate></item><item><title>Mitigating 51% Attack Risk on the Zcash Network</title><link>https://zecsec.com/posts/zcash-51-percent-attack/</link><description>&lt;p>Recently, &lt;a href="https://www.coinbase.com/blog/security-psa-observed-risks-in-zcash-mining-pool-distribution">Coinbase
 observed&lt;/a>
 that a mining pool called ViaBTC currently controls over 50% of Zcash&amp;rsquo;s hashrate, putting
 the network at risk of a &amp;ldquo;51% attack&amp;rdquo;.&lt;/p>
