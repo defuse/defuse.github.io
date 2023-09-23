@@ -1,4 +1,22 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZecSec: Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 212121, Calvin Tran</copyright><lastBuildDate>Thu, 21 Sep 2023 01:01:00 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>Results of Auditing Hanh's Shielded Zcash Ledger App</title><link>https://zecsec.com/posts/security-audit-of-hanhs-ledger-app/</link><description>&lt;p>In May and June of this year, I reviewed Hanh Huynh Huu&amp;rsquo;s Ledger app supporting
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZecSec: Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 232323, Calvin Tran</copyright><lastBuildDate>Sat, 23 Sep 2023 01:01:00 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>Security Audit of zecwallet-lite-cli</title><link>https://zecsec.com/posts/zecwallet-lite-cli-security-audit/</link><description>&lt;p>In November of 2022, I audited
+&lt;a href="https://github.com/adityapk00/zecwallet-light-cli">zecwallet-lite-cli&lt;/a>, which
+is both a command-line Zcash wallet and the library backing &lt;a href="https://zecwallet.co/">ZecWallet
+Lite&lt;/a>.&lt;/p>
+&lt;p>It appears that zecwallet-lite-cli is no longer being actively maintained,
+therefore the security issues found by this audit &lt;em>have not been fixed.&lt;/em> I
+recommend that users of ZecWallet Lite switch to
+&lt;a href="https://www.zingolabs.org/">Zingo&lt;/a>, &lt;a href="https://ywallet.app/">Ywallet&lt;/a>, or
+&lt;a href="https://nighthawkwallet.com/">Nighthawk&lt;/a>, which are actively maintained.&lt;/p>
+&lt;p>The most notable security issue was found was in zecwallet-lite-cli&amp;rsquo;s
+auto-shielding behavior. By default, the wallet will auto-shield any transparent
+funds opportunistically each time the user sends a shielded transaction. This
+means that if an attacker knows the user&amp;rsquo;s transparent address, they can
+continually send small amounts of ZEC there to maintain the user&amp;rsquo;s transparent
+balance, and then all of the user&amp;rsquo;s shielded transactions will be deanonymized,
+since they will include a component that spends the user&amp;rsquo;s transparent funds.&lt;/p>
+&lt;p>Several other issues of low to moderate impact were also found. See the full
+report for details.&lt;/p>
+&lt;p>&lt;a href="https://zecsec.com/audits/zecwallet-lite-cli-audit-report-v2.pdf">&lt;strong>Security Audit of zecwallet-lite-cli&lt;/strong>&lt;/a>&lt;/p></description><author>trandcanh@gmail.com (Calvin Tran)</author><guid>https://zecsec.com/posts/zecwallet-lite-cli-security-audit/</guid><pubDate>Sat, 23 Sep 2023 01:01:00 -0700</pubDate></item><item><title>Results of Auditing Hanh's Shielded Zcash Ledger App</title><link>https://zecsec.com/posts/security-audit-of-hanhs-ledger-app/</link><description>&lt;p>In May and June of this year, I reviewed Hanh Huynh Huu&amp;rsquo;s Ledger app supporting
 shielded Zcash. The full audit report is available at the link below.&lt;/p>
 &lt;h2 id="summary-of-results">Summary of Results&lt;/h2>
 &lt;p>The main issues uncovered by the audit were the following:&lt;/p>
