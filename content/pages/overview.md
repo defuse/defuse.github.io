@@ -132,6 +132,10 @@ The work done for this grant is to be repurposed to support BTCPay instead.
 
 - https://forum.zcashcommunity.com/t/coinpayments-integration/39094 (superseded by the BTCPay grant)
 
+### Edge
+
+The [Edge Wallet](https://edge.app/) supports shielded Zcash.
+
 ### Electric Coin Company Projects
 
 Electric Coin Company maintains many essential parts of the Zcash ecosystem:
@@ -254,6 +258,10 @@ ended up moving to Tor out of a need for better performance.
 #### Approved Grants
 
 - https://forum.zcashcommunity.com/t/zbay-applied-for-a-zf-grant-any-feedback-on-our-proposal/36584
+
+### react-native-zcash
+
+The ZcashLightClientKit SDK is packaged into a React Native library [here](https://github.com/EdgeApp/react-native-zcash).
 
 ### renZEC
 
