@@ -1,6 +1,6 @@
 ---
 title: "ZGo Security Audit Results"
-date: 2024-01-05T07:00:00-07:00
+date: 2024-01-05T00:00:00-07:00
 author: "Taylor Hornby"
 draft: false
 ---
