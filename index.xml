@@ -1,4 +1,18 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZecSec: Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 5055, Calvin Tran</copyright><lastBuildDate>Sun, 24 Sep 2023 01:00:00 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>The Future of Zcash Ecosystem Security</title><link>https://zecsec.com/posts/future-of-zcash-ecosystem-security/</link><description>&lt;p>Starting in October, I will be stepping away from my role as the Zcash
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZecSec: Zcash Ecosystem Security</title><description>Zcash Ecosystem Security Support</description><link>https://zecsec.com/</link><language>en</language><copyright>Copyright 5055, Calvin Tran</copyright><lastBuildDate>Fri, 05 Jan 2024 00:00:00 -0700</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://zecsec.com//atom.xml" rel="self" type="application/atom+xml"/><item><title>ZGo Security Audit Results</title><link>https://zecsec.com/posts/zgo-security-audit/</link><description>&lt;p>In April of last year, I performed a security audit of &lt;a href="https://zgo.cash/">ZGo&lt;/a>,
+a payment processing platform built on Zcash. The report is linked below.&lt;/p>
+&lt;p>My review found several critical security vulnerabilities. For example, one
+vulnerability allowed an attacker to intercept and steal Zcash funds as they
+were being sent by users to pay for their ZGo orders. It was also possible to
+mark ZGo orders as paid without actually paying, and there were several issues
+that compromised user privacy.&lt;/p>
+&lt;p>The ZGo team quickly fixed the issues. At the present time, all significant
+issues have been verified as fixed.&lt;/p>
+&lt;p>The audit report and vulnerabilities described therein should be of independent
+interest to Zcash developers, since they highlight some (perhaps common)
+difficulties of working with the &lt;code>zcashd&lt;/code> API to build a payment processing
+platform. By making API improvements, perhaps some of these issues could be
+avoided.&lt;/p>
+&lt;p>&lt;a href="https://zecsec.com/audits/ZGo-Security-Audit-v1.1.pdf">&lt;strong>Security and Privacy Analysis of ZGo (PDF)&lt;/strong>&lt;/a>&lt;/p></description><author>trandcanh@gmail.com (Calvin Tran)</author><guid>https://zecsec.com/posts/zgo-security-audit/</guid><pubDate>Fri, 05 Jan 2024 00:00:00 -0700</pubDate></item><item><title>The Future of Zcash Ecosystem Security</title><link>https://zecsec.com/posts/future-of-zcash-ecosystem-security/</link><description>&lt;p>Starting in October, I will be stepping away from my role as the Zcash
 community&amp;rsquo;s resident security auditor and entering a sabbatical year to give
 more of my time to friends and family and to work on some hobbies outside of the
 cryptocurrency world.&lt;/p>
